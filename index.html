@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<style>
+
+    .teamx{
+        color: blue;
+    }
+    .teamo{
+        color: red;
+    }
+</style>   
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;+
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 800px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br>
+<br>
+Full Name: {{firstName + " " + lastName}}
+<hr>
+<button ng-click="pass('x',1,0)">Pass x ></button>    
+<button ng-click="pass('x',1,1)">Pass x >v</button>    
+<button ng-click="pass('x',0,1)">Pass x v</button>    
+<button ng-click="pass('x',-1,1)">Pass x &lt;v </button>    
+<button ng-click="pass('x',-1,0)">Pass x &lt;</button>    
+<button ng-click="pass('x',-1,-1)">Pass x &lt;^</button>    
+<button ng-click="pass('x',0,-1)">Pass x ^</button>  
+<button ng-click="pass('x',1,-1)">Pass x ^></button>  
+<hr>
+<button ng-click="pass('o',1,0)">Pass o ></button>    
+<button ng-click="pass('o',1,1)">Pass o >v</button>    
+<button ng-click="pass('o',0,1)">Pass o v</button>    
+<button ng-click="pass('o',-1,1)">Pass o &lt;v </button>    
+<button ng-click="pass('o',-1,0)">Pass o &lt;</button>    
+<button ng-click="pass('o',-1,-1)">Pass o &lt;^</button>    
+<button ng-click="pass('o',0,-1)">Pass o ^</button>   
+<button ng-click="pass('o',1,-1)">Pass o ^></button>   
+<div>
+    log:
+    <ul>
+        <li>{{msg}}</li>
+    </ul>    
+</div>    
+<hr>    
+    displayableField.ballholder.id:{{displayableField.ballholder.id}}
+<table style="width: 200px; height: 300px" border = "1">
+	<tbody>
+		<tr>
+			<td>
+                <span ng-repeat="player in displayableField.field[0]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>
+			<td>
+                <span ng-repeat="player in displayableField.field[1]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>
+        </tr>
+		<tr>
+			<td>
+                <span ng-repeat="player in displayableField.field[2]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>
+			<td>
+                <span ng-repeat="player in displayableField.field[3]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>            
+		</tr>
+		<tr>			<td>
+                <span ng-repeat="player in displayableField.field[4]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>			<td>
+                <span ng-repeat="player in displayableField.field[5]" >
+                    <div class="tooltip">
+                        <span ng-class="{'teamx': player.team == 'x', 'teamo': player.team == 'o'}">
+                            {{player.number}} <span ng-show="displayableField.ballholder.id == player.id">.</span>
+                        </span>
+                        <span class="tooltiptext">{{player}}</span>
+                    </div> 
+                </span> 
+            </td>
+		</tr>
+	</tbody>
+</table>
+running : {{displayableField}}
+<hr>
+found: {{game}}
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+var game = {};
+    
+    
+function rand(n){
+    return Math.floor(Math.random() * n);
+}    
+
+function createTestGame(){
+    
+    
+    
+    var field = [];
+    
+    for (let i = 1; i <= 11; ++i){
+        var player2 = { 
+                            number: i,
+                            defense:rand(10), 
+                            pass:rand(10), 
+                            attack:rand(10), 
+                            team:"o", 
+                            sector:rand(6),
+                            id: rand(100)*rand(100)
+                        };
+        field.push(player2);
+    }
+    for (let i = 1; i <= 11; ++i){
+        var player2 = { 
+                            number: i,
+                            defense:rand(10), 
+                            pass:rand(10), 
+                            attack:rand(10), 
+                            team:"x", 
+                            sector:rand(6),
+                            id: rand(100)*rand(100)                            
+                        };
+        field.push(player2);
+    }
+    
+    
+    game.ballholder = field[rand(20)];
+    game.field = field;
+    return game;
+}
+
+function displayField(game){
+    
+    var field = [[],[],[],[],[],[]];
+    game.field.forEach(function(item){
+        console.log("teste: " + item.sector)
+        field[item.sector].push(item); 
+    });
+    var displayable = {};
+    displayable.field = field;
+    displayable.ballholder = game.ballholder;
+    return displayable;
+}    
+    
+function processTick(game, commandP1, commandP2, scope){
+    /*console.log("Processing:")
+    console.log(game);
+    console.log(commandP1);
+    console.log(commandP2);
+    */
+    return displayField(game);
+    
+}
+    
+    function passGetDestinationPlayer(destSector) {
+        var destPlayer = false;
+        game.field.forEach(function(player){
+            if(player.sector == destSector && player.team == game.ballholder.team){
+                destPlayer = player;    
+            }
+            if(!destPlayer && player.sector == destSector && player.team != game.ballholder.team){
+                destPlayer = player;    
+            }
+        });
+        return destPlayer;
+    }
+
+    app.controller('myCtrl', function($scope/*, $interval*/) {
+   
+    game = createTestGame();
+    
+    var passGetDestinationSector = function(sector, axisx, axisy) {
+        if(axisx > 0 && axisy > 0) {
+            if(sector == 0) {return 3}
+            if(sector == 2) {return 5}
+        }
+        if(axisx == 0 && axisy > 0) {
+            if(sector == 0) {return 2}
+            if(sector == 1) {return 3}
+            if(sector == 2) {return 4}
+            if(sector == 3) {return 5}
+        }
+        if(axisx < 0 && axisy > 0) {
+            if(sector == 1) {return 2}
+            if(sector == 3) {return 4}
+        }
+        if(axisx < 0 && axisy == 0) {
+            if(sector == 1) {return 0}
+            if(sector == 3) {return 2}
+            if(sector == 5) {return 4}            
+        }
+        if(axisx < 0 && axisy < 0) {
+            if(sector == 3) {return 0}
+            if(sector == 5) {return 2}        
+        }
+        if(axisx == 0 && axisy < 0) {
+            if(sector == 2) {return 0}
+            if(sector == 3) {return 1}
+            if(sector == 4) {return 2}
+            if(sector == 5) {return 3}
+        }
+        if(axisx > 0 && axisy < 0) {
+            if(sector == 2) {return 1}
+            if(sector == 4) {return 3}
+        }
+        if(axisx > 0 && axisy == 0) {
+            if(sector == 0) {return 1}
+            if(sector == 2) {return 3}
+            if(sector == 4) {return 5}
+        }
+        return sector;        
+    }
+    
+    var checkPassBoundaries = function(sector, axisx, axisy){
+        console.log("sector: " + sector + " axisx: " + axisx +" axisy: " + axisy)
+        if(axisx < 0){
+            if(sector == 0 || sector == 2 || sector == 4) {
+                return false;
+            }
+        }
+        if(axisx > 0){
+            if(sector == 1 || sector == 3 || sector == 5) {
+                return false;
+            }
+        }
+        if(axisy < 0){
+            if(sector == 0 || sector == 1) {
+                return false;
+            }
+        }
+        if(axisy > 0){
+            if(sector == 4 || sector == 5) {
+                return false;
+            }
+        }
+        return true;
+    }
+    $scope.pass = function(team, axisx, axisy){      
+        if(game.ballholder.team == team) {
+            console.log("Vai passar do: " +  game.ballholder.sector + " para: " + passGetDestinationSector(game.ballholder.sector, axisx, axisy));
+            console.log(game.field[game.ballholder.sector])
+            if (checkPassBoundaries(game.ballholder.sector, axisx, axisy)){
+                var destSector = passGetDestinationSector(game.ballholder.sector, axisx, axisy);
+                var destPlayer = passGetDestinationPlayer(destSector);
+                
+                console.log("Passe vai para: ")
+                console.log(destPlayer)
+                if(!destPlayer) {
+                    var chance = 0.5;
+                    chance = chance + (game.ballholder.pass/10);
+                    console.log("chance: " + chance + " game.ballholder.pass: " + game.ballholder.pass +  "(game.ballholder.pass/10): " + (game.ballholder.pass/10))
+                
+                    
+                } else {
+                    console.log("Passe pra ninguem. Lateral pro outro time.");
+                }
+                
+            } else {
+                console.log("Passe pra fora do campo");                
+            }
+        } else {
+            console.log("Nao posso passar pq nao estou com a bola. game.ballholder.team: " + game.ballholder.team + " team: "+team);
+            console.log(game.ballholder);
+            
+        }
+        
+        console.log("fim pass");
+    }
+    
+    var commandP1 = "pass to joao";
+    var commandP2 = "mark joao";
+    
+    
+  //  $interval(function(){$scope.displayableField = processTick(game, commandP1, commandP2), 10000, 1})
+    $scope.displayableField = processTick(game, commandP1, commandP2);
+    //setInterval(function(){$scope.displayableField = "samba"}, 900);
+    
+//    /processTick(createTestGame(), commandP1, commandP2)
+    
+});
+    
+    
+</script>
+
+</body>
+</html>
