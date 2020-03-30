@@ -5,7 +5,10 @@
 <script src="pass.js"></script>
 <script src="shot.js"></script>
 <script src="dibre.js"></script>
+<script src="touch.js"></script>
+<script src="cmd.js"></script>
 
+    
 <style>
 
     .teamx{
@@ -64,6 +67,20 @@
   visibility: visible;
 }
 </style>
+    
+<!--touc -->
+<style>
+    body {
+        padding: 50px;
+        font-family: sans-serif;
+    }
+
+    #box {
+        width:  100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl">
@@ -74,6 +91,15 @@ Last Name: <input type="text" ng-model="lastName"><br>
 Full Name: {{firstName + " " + lastName}}
 <hr>
 
+<canvas id="canvas" width="400" height="400" style="border:solid black 1px;">
+  You really badly need to use a different browser.
+</canvas>
+<br>
+<button onclick="window.startup();">Initialize</button>
+<button onclick="window.initcmd();">Initialize</button>
+<br>
+Log: <pre id="log" style="border: 1px solid #ccc;"></pre>
+    
 
 <hr>
 <hr>
