@@ -8,17 +8,29 @@ function startup() {
   log("initialized.");
 }
 
-
+var startX = -1;
+var startY = -1;
+var endX = -1;
+var endY = -1;
 var maxX = -1;
 var maxY = -1;
 var minX = 99999;
 var minY = 99999;
+var incrX = true;
+var incrY = true;
 
 function resetMinMax(){
+    startX = -1;
+    startY = -1;
+    endX = -1;
+    endY = -1;
     maxX = -1;
     maxY = -1;
     minX = 99999;
     minY = 99999;
+    incrX = true;
+    incrY = true;
+    
 }
 
 var ongoingTouches = new Array;
@@ -37,6 +49,15 @@ function handleStart(evt) {
       if(touches[i].clientX-offset.x >0 && touches[i].clientX-offset.x < parseFloat(el.width) && touches[i].clientY-offset.y >0 && touches[i].clientY-offset.y < parseFloat(el.height)){
             evt.preventDefault();
     log("touchstart:" + i + "...");
+    
+    if(startX == -1){ //
+        startX = touches[i].clientX;
+    }
+    if(startY == -1){ //
+        startY = touches[i].clientY;
+    }
+          
+          
     ongoingTouches.push(copyTouch(touches[i]));
     var color = colorForTouch(touches[i]);
     ctx.beginPath();
@@ -62,10 +83,22 @@ function handleMove(evt) {
     
     if (idx >= 0) {
     
-      if(touches[i].clientX > maxX) {maxX = touches[i].clientX}    
-      if(touches[i].clientY > maxY) {maxY = touches[i].clientY}    
-      if(touches[i].clientX < minX) {minX = touches[i].clientX}    
-      if(touches[i].clientY < minY) {minY = touches[i].clientY}    
+      if(touches[i].clientX > maxX) {
+          maxX = touches[i].clientX
+          incrX = true;
+      }    
+      if(touches[i].clientY > maxY) {
+          maxY = touches[i].clientY
+          incrY = true;
+      }    
+      if(touches[i].clientX < minX) {
+          minX = touches[i].clientX
+          incrX = false;
+      }    
+      if(touches[i].clientY < minY) {
+          minY = touches[i].clientY
+          incrY = false;
+      }    
         
         
       log("continuing touch " + idx);
@@ -97,6 +130,16 @@ function handleEnd(evt) {
   for (var i = 0; i < touches.length; i++) {
               if(touches[i].clientX-offset.x >0 && touches[i].clientX-offset.x < parseFloat(el.width) && touches[i].clientY-offset.y >0 && touches[i].clientY-offset.y < parseFloat(el.height)){
                     evt.preventDefault();
+                  
+                  
+                    if(endX == -1){ //
+                        endX = touches[i].clientX;
+                    }
+                    if(endY == -1){ //
+                        endY = touches[i].clientY;
+                    }
+                  
+                  
     var color = colorForTouch(touches[i]);
     var idx = ongoingTouchIndexById(touches[i].identifier);
         
@@ -115,7 +158,20 @@ function handleEnd(evt) {
         }
     
     // Create the event
-    var event = new CustomEvent("cmdinput", { "detail": {"maxX": maxX, "minX": minX, "maxY": maxY, "minY": minY }});
+    var event = new CustomEvent("rawcmdinput", 
+                                { "detail": 
+                                 {"maxX": maxX, 
+                                  "minX": minX, 
+                                  "maxY": maxY, 
+                                  "minY": minY,
+                                  "incrX": incrX,
+                                  "incrY": incrY,
+                                  "startX": startX,
+                                  "startY": startY,
+                                  "endX": endX,
+                                  "endY": endY
+                                 }
+                                });
 
     // Dispatch/Trigger/Fire the event
     document.dispatchEvent(event);

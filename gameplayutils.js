@@ -45,7 +45,39 @@ function getPlayer(sector, team) {
 }
 
 function resetOffPlayers(){
-    game.playersdown = [];
-     console.log("reset: " + game.playersdown.length)
-       
+    game.playersdown = [];       
 }
+
+function runCommand(evt, team){
+    if(evt.detail.cmd == "pass"){
+        console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
+        
+        actionResult = passProcess(team, evt.detail.axisx, evt.detail.axisy);
+        if(actionResult.newBallholder){
+            game.ballholder = actionResult.newBallholder;
+        }
+        resetOffPlayers();
+        return actionResult;
+        
+    } else if (evt.detail.cmd == "shot"){
+        console.log("cmdinput shot: " + team)
+        
+        actionResult = shotProcess(team);
+        game.scoreo = actionResult.scoreo;
+        game.scorex = actionResult.scorex;
+        game.ballholder = actionResult.newBallholder;
+        resetOffPlayers();
+        return actionResult;
+        
+    } else  if (evt.detail.cmd == "dibre"){
+        console.log("cmdinput dibre: " + team)
+        
+        actionResult = dibreProcess(team);
+        game.ballholder = actionResult.newBallholder;
+        if(actionResult.playerdown){
+            game.playersdown.push(actionResult.playerdown);
+        }
+        return actionResult;
+    }
+}
+

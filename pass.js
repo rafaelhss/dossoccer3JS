@@ -78,14 +78,12 @@
         return true;
     }
     var passProcess = function(team, axisx, axisy){ 
-        var actionResult = {};
+        var actionResult = {"team":team};
         actionResult.messages = [];
-        actionResult.messages.push("Tentativa de passe");
+        actionResult.events = [];
         actionResult.chance = 0;
         
         if(game.ballholder.team == team) {
-            //console.log("Vai passar do: " +  game.ballholder.sector + " para: " + passGetDestinationSector(game.ballholder.sector, axisx, axisy));
-            //console.log(game.field[game.ballholder.sector])
             if (checkPassBoundaries(game.ballholder.sector, axisx, axisy)){
                 var destSector = passGetDestinationSector(game.ballholder.sector, axisx, axisy);
                 var destPlayer = getPlayer(destSector, game.ballholder.team);
@@ -93,8 +91,6 @@
                     destPlayer = getPlayer(destSector, getOpposingTeam(game.ballholder.team));
                 }
                 
-                //console.log("Passe vai para: ")
-                //console.log(destPlayer)
                 if(destPlayer) {
                     if(destPlayer.team == game.ballholder.team){
                         var passerPass = game.ballholder.pass;
@@ -119,41 +115,71 @@
                         
                         //console.log(defenders)
                         if(success){
-                            actionResult.messages.push("Passe com sucesso")
+                            actionResult.success = true;
+                            
+                            actionResult.events.push({
+                                "command": ACTION_PASS,
+                                "status": ACTION_SUCCESS,
+                                "actor":game.ballholder,
+                                "actor2": destPlayer
+                            });
                             actionResult.newBallholder = destPlayer;                                
                         } else {
-                            actionResult.messages.push("Passe interceptado")
+                            var event = {
+                                "command": ACTION_PASS,
+                                "status": ACTION_UNSUCCESS,
+                                "actor":game.ballholder,
+                                "detail":[ACTION_PASS_INTERCEPTED]
+                            };
+                            
                             if(defenders.length > 0){
                                 actionResult.newBallholder = defenders[0];
-                                actionResult.messages.push("Bola com " + defenders[0].number)
+                                event.actor2 = defenders[0];
                             }
                             
+                            actionResult.events.push(event);
                         }
                         
                         
 
                     } else {
+                        actionResult.events.push({
+                            "command": ACTION_PASS,
+                            "status": ACTION_UNSUCCESS,
+                            "actor":game.ballholder,
+                            "actor2": destPlayer,
+                            "detail":[ACTION_PASS_NOTEAMATE]
+                        });
                         actionResult.newBallholder = destPlayer;
-                        actionResult.messages.push("Passe errado. bola com outro time.");
                         //console.log("Passe errado. bola com outro time."); 
                     }
                 } else {
+                    actionResult.events.push({
+                        "command": ACTION_PASS,
+                        "status": ACTION_UNSUCCESS,
+                        "actor":game.ballholder,
+                        "detail":[ACTION_PASS_NOBODY]
+                    });
                     actionResult.newBallholder = game.keeper[getOpposingTeam(game.ballholder.team)];
-                    actionResult.messages.push("Passe pra ninguem. Lateral pro outro time.");
+                    
                     //console.log("Passe pra ninguem. Lateral pro outro time.");
                 }
                 
             } else {
+                actionResult.events.push({
+                    "command": ACTION_PASS,
+                    "status": ACTION_UNSUCCESS,
+                    "actor":game.ballholder,
+                    "detail":[ACTION_PASS_OFFBOUNDS]
+                });
                 actionResult.newBallholder = game.keeper[getOpposingTeam(game.ballholder.team)];
-                //console.log("Passe pra fora do campo");                
+                //console.log("Passe pra fora do campo");
             }
         } else {
-            //console.log("Nao posso passar pq nao estou com a bola. game.ballholder.team: " + game.ballholder.team + " team: "+team);
+         //   console.log("Nao posso passar pq nao estou com a bola. game.ballholder.team: " + game.ballholder.team + " team: "+team);
             //console.log(game.ballholder);
-            
         }
         
-        //console.log("fim pass");
         return actionResult;
     }
     

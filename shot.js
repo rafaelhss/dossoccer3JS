@@ -29,7 +29,7 @@ function shotGetSectorsAhead(){
 }
 
 function shotProcess(team){
-        var actionResult = {};
+        var actionResult = {"team":team};
         actionResult.messages = [];
         actionResult.messages.push("Tentativa de shot");
         actionResult.scoreo = game.scoreo;

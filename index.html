@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="consts.js"></script>    
 <script src="gameplayutils.js"></script>
+<script src="output.js"></script>
 <script src="pass.js"></script>
 <script src="shot.js"></script>
 <script src="dibre.js"></script>
@@ -85,31 +87,23 @@
 
 <div ng-app="myApp" ng-controller="myCtrl">
 
-First Name: <input type="text" ng-model="firstName"><br>
-Last Name: <input type="text" ng-model="lastName"><br>
-<br>
-Full Name: {{firstName + " " + lastName}}
+<input type="radio" id="teamx" ng-model="playerteam" ng-value="TEAMX">
+<label for="teamx" class="teamx">Team X</label><br>
+<input type="radio" id="teamo" ng-model="playerteam" ng-value="TEAMO">
+<label for="teamo" class="teamo">Team O</label><br>
+playerteam: {{playerteam}}    
 <hr>
 
-<canvas id="canvas" width="400" height="400" style="border:solid black 1px;">
-  You really badly need to use a different browser.
-</canvas>
+
 <br>
-<button onclick="window.startup();">Initialize</button>
 <button onclick="window.initcmd();">Initialize</button>
 <br>
-Log: <pre id="log" style="border: 1px solid #ccc;"></pre>
+
+   
     
 
 <hr>
-<hr>
 
-<div>
-    log:
-    <ul>
-        <li>{{msg}}</li>
-    </ul>    
-</div> 
 <div>
     <h1>
         <table border="0">
@@ -125,12 +119,16 @@ Log: <pre id="log" style="border: 1px solid #ccc;"></pre>
 </div>
 <hr>    
     displayableField.ballholder.id:{{displayableField.ballholder.id}}
-<table style="width: 800px; height: 300px" border = "1">
+<table style="width: 1200px; height: 300px" border = "1">
 	<tbody>
-        <tr>
+        <tr><td>
+            <canvas id="canvas" width="400" height="400" style="border:solid black 1px;">
+  You really badly need to use a different browser.
+</canvas>
+            </td>
             <td>
                 <span >
-                    <button class="buttonx button" ng-click="pass('x',-1,-1)">&nwarr; ({{displayableField.chancesx[0]}})</button>    
+                        <button class="buttonx button" ng-click="pass('x',-1,-1)">&nwarr; ({{displayableField.chancesx[0]}})</button>    
                     <button class="buttonx button" ng-click="pass('x',0,-1)">&uarr;({{displayableField.chancesx[1]}}%)</button>  
                     <button class="buttonx button" ng-click="pass('x',1,-1)">&nearr;({{displayableField.chancesx[2]}}%)</button>  
                     <br>
@@ -264,18 +262,35 @@ Log: <pre id="log" style="border: 1px solid #ccc;"></pre>
             </td>
         </tr>
     </tbody>
+</table>
+
+    
+
+<button ng-click="showlog = !showlog" ng-init="showlog=false">showlog</button>    
+<span ng-show="showlog">
+    Log: <pre id="log" style="border: 1px solid #ccc;"></pre>
+</span> 
+
+    
+    <table style="width: 800px; height: 300px" border = "1">
+        <tbody>
+            <tr id="actionmsgtable">
+
+            </tr>
+        </tbody>
     </table>
-running : {{displayableField}}
-<hr>
-found: {{chances}}
-
 </div>
-
 <script>
+
+  
+    
+    
+    
 var app = angular.module('myApp', []);
 var game = {};
-var TEAMX = "x";
-var TEAMO = "o";
+
+
+
 
     
     
@@ -294,6 +309,7 @@ function createTestGame(){
     
     for (let i = 2; i <= 11; ++i){
         var player2 = { 
+                            name: i,
                             number: i,
                             defense:rand(10), 
                             pass:rand(10), 
@@ -306,6 +322,7 @@ function createTestGame(){
     }
     for (let i = 2; i <= 11; ++i){
         var player2 = { 
+                            name:i,
                             number: i,
                             defense:rand(10), 
                             pass:rand(10), 
@@ -325,6 +342,7 @@ function createTestGame(){
     game.scoreo = 0;
     game.keeper = [];
     game.keeper[TEAMX] = { 
+                            name: 1,
                             number: 1,
                             pass: 10,
                             defense:rand(10), 
@@ -333,6 +351,7 @@ function createTestGame(){
                             id: rand(100)*rand(100)                            
                         };
     game.keeper[TEAMO] = { 
+                            name: 1,
                             number: 1,
                             pass: 10,
                             defense:rand(10), 
@@ -360,8 +379,8 @@ function displayField(game){
     displayable.field = field;
     displayable.ballholder = game.ballholder;
     displayable.keeper = [];
-    displayable.keeper['x'] = game.keeper[TEAMX]
-    displayable.keeper['o'] = game.keeper[TEAMO]
+    displayable.keeper[TEAMX] = game.keeper[TEAMX]
+    displayable.keeper[TEAMO] = game.keeper[TEAMO]
     
     displayable.scoreo = game.scoreo;
     displayable.scorex = game.scorex;
@@ -404,41 +423,49 @@ function processTick(game, commandP1, commandP2, scope){
 }
     
     
+    
+    
     app.controller('myCtrl', function($scope/*, $interval*/) {
    
-    game = createTestGame();
-    
+    $scope.TEAMX = TEAMX;
+    $scope.TEAMO = TEAMO;
+    game = createTestGame();        
+        
+    document.addEventListener("cmdinput", function(evt){
+        var actionResult = runCommand(evt, $scope.playerteam);
+        processActionResult(actionResult);
+        
+        
+        //isso pode sair quando nao for usar mais angular
+        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.$apply();
+    });
         
     $scope.pass = function(team, axisx, axisy){
-        var actionResult = passProcess(team, axisx, axisy);
-        if(actionResult.newBallholder){
-            game.ballholder = actionResult.newBallholder;
-            actionResult.messages.forEach(function(msg){console.log("ACTION MSG: " + msg)})
-            $scope.displayableField = processTick(game, commandP1, commandP2);
-        }
-        resetOffPlayers();
+        console.log("paaas: " + "team: " + team + " axisx: " + axisx + " axisy: " + axisy);
+
+        var actionResult = runCommand(new CustomEvent("cmdinput", { "detail": {"cmd": "pass", "axisx": axisx, "axisy": axisy}}), team);
+        processActionResult(actionResult);
+        
+        
+        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.$apply();
     }
     
     $scope.shot = function(team) {
-        var actionResult = shotProcess(team);
-        game.scoreo = actionResult.scoreo;
-        game.scorex = actionResult.scorex;
-        game.ballholder = actionResult.newBallholder;
-            
-        actionResult.messages.forEach(function(msg){console.log("ACTION MSG: " + msg)})
+        var actionResult = runCommand(new CustomEvent("cmdinput", { "detail": {"cmd": "shot"}}), team);
+        processActionResult(actionResult);
+        
         $scope.displayableField = processTick(game, commandP1, commandP2);
-        resetOffPlayers();
+        $scope.$apply();
     }
     
     $scope.dibre = function(team) {
-        var actionResult = dibreProcess(team);
-        game.ballholder = actionResult.newBallholder;
-        if(actionResult.playerdown){
-            game.playersdown.push(actionResult.playerdown);
-        }
+        var actionResult = runCommand(new CustomEvent("cmdinput", { "detail": {"cmd": "dibre"}}), team);
+        processActionResult(actionResult);
         
-        actionResult.messages.forEach(function(msg){console.log("ACTION MSG: " + msg)})
         $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.$apply();
     }
     
     var commandP1 = "pass to joao";

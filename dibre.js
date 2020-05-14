@@ -1,5 +1,5 @@
 function dibreProcess(team){
-        var actionResult = {};
+        var actionResult = {"team":team};
         actionResult.messages = [];
         actionResult.messages.push("Tentativa de dibre");
         actionResult.newBallholder = game.ballholder;
