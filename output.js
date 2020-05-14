@@ -8,44 +8,62 @@ function speak(text){
 
 function processActionResult(actionResult){
     console.log(actionResult);
-    actionResult.events.forEach(function(evt){
-    
-        var currentdate = new Date(); 
-        var datetime = currentdate.getHours() + ":"  
-            + currentdate.getMinutes() + ":" 
-            + currentdate.getSeconds();
+    if(actionResult.events){
+        actionResult.events.forEach(function(evt){
 
-        var spantag = "<span class=\"teamx\">";
-        if(actionResult.team == TEAMO) {
-            spantag = "<span class=\"teamo\">";
-        }
+            var currentdate = new Date(); 
+            var datetime = currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
 
-        var sucesstag = "";
-        if(actionResult.success) {
-            sucesstag = "<img width=\"8px\" height=\"8px\" src=\"https://www.clipartsfree.net/vector/small/49491-small-green-dot-icon.png\">";
-        }
-        
-        msg = getText(evt, actionResult);
-        speak(msg);
-        
-        document.getElementById("actionmsgtable").innerHTML = datetime +
-           spantag +  msg + "</span>" + 
-            sucesstag + 
-            "<br>" + document.getElementById("actionmsgtable").innerHTML 
-    })
+            var spantag = "<span class=\"teamx\">";
+            if(actionResult.team == TEAMO) {
+                spantag = "<span class=\"teamo\">";
+            }
+
+            var sucesstag = "";
+            if(actionResult.success) {
+                sucesstag = "<img width=\"8px\" height=\"8px\" src=\"https://www.clipartsfree.net/vector/small/49491-small-green-dot-icon.png\">";
+            }
+
+            msg = getText(evt, actionResult);
+            speak(msg);
+
+            document.getElementById("actionmsgtable").innerHTML = datetime +
+               spantag +  msg + "</span>" + 
+                sucesstag + 
+                "<br>" + document.getElementById("actionmsgtable").innerHTML 
+        })
+    }
 } 
 function getText(evt, action){
+    var txt = "estou sem palavra";
     console.log(action);
-    console.log(evt.command)
-    console.log(evt.status)
-    
-    console.log(evt.command == ACTION_PASS)
-    console.log(evt.status == ACTION_SUCCESS)
-    
+    console.log(evt);
+
     var text = "";
     if (evt.command == ACTION_PASS){
         if(evt.status == ACTION_SUCCESS){
-            return "Belo passe de " + evt.actor.name + " pro " + evt.actor2.name + "!";
+            txt = "Belo passe de " + evt.actor.name + " pro " + evt.actor2.name + "!";
         }   
     }
+    
+    console.log("evt.detail: " + evt.detail);
+    if(evt.detail){
+        evt.detail.forEach(function(dtl){
+            if(dtl == ACTION_PASS_INTERCEPTED){
+                txt = evt.actor.name + " do " + evt.actor.team + " tenta o passe mas " + evt.actor2.name + " intercepta! Bola do time " + evt.actor.team ;
+            }
+            if(dtl == ACTION_PASS_NOTEAMATE){
+                txt = "A bola vai direto para os pés de " + evt.actor2.name + ". Nenhum jogador do " + evt.actor.team + " nesse setor.";
+            }
+            if(dtl == ACTION_PASS_NOBODY){
+                txt = "Nenhum jogador nessa area do campo. " + evt.actor.name + " desperdiça a posse de bola.";
+            }
+            if(dtl == ACTION_PASS_OFFBOUNDS){
+                txt = "a tentativa de passe de " + evt.actor.name + " vai para a lateral. O time " + evt.actor.team + " perde a posse de bola.";
+            }
+        });
+    }
+    return txt;
 }
