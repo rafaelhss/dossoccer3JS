@@ -79,7 +79,6 @@
     }
     var passProcess = function(team, axisx, axisy){ 
         var actionResult = {"team":team};
-        actionResult.messages = [];
         actionResult.events = [];
         actionResult.chance = 0;
         

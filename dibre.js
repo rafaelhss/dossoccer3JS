@@ -1,7 +1,6 @@
 function dibreProcess(team){
         var actionResult = {"team":team};
-        actionResult.messages = [];
-        actionResult.messages.push("Tentativa de dibre");
+        actionResult.events = [];
         actionResult.newBallholder = game.ballholder;
         actionResult.playerdown = false;
         actionResult.chance = 0;
@@ -23,18 +22,31 @@ function dibreProcess(team){
                 
                 if(success) {
                     actionResult.playerdown = defender;
-                    actionResult.messages.push("Dibrou. Oleee.");        
+                    actionResult.events.push({
+                        "command": ACTION_DIBRE,
+                        "status": ACTION_SUCCESS,
+                        "actor":game.ballholder,
+                        "actor2": defender
+                    });
                 } else {
                     actionResult.newBallholder = defender; 
-                    actionResult.messages.push("Perdeu a bola");    
-                }
-                
-                
+                    actionResult.events.push({
+                        "command": ACTION_DIBRE,
+                        "status": ACTION_UNSUCCESS,
+                        "actor":game.ballholder,
+                        "actor2": defender
+                    });
+                }                
             } else {
-                actionResult.messages.push("Para de firula. Nao tem ninguem pra dibrar.");    
+                actionResult.events.push({
+                    "command": ACTION_DIBRE,
+                    "status": ACTION_UNSUCCESS,
+                    "actor":game.ballholder,
+                    "detail":[ACTION_DIBRE_NODEFENDER]
+                });
             }
         } else {
-            actionResult.messages.push("Voce nao pode dibrar pq nao tem a bola");
+            console.log("Voce nao pode dibrar pq nao tem a bola");
         }     
         return actionResult;
         

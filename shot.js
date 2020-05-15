@@ -30,8 +30,7 @@ function shotGetSectorsAhead(){
 
 function shotProcess(team){
         var actionResult = {"team":team};
-        actionResult.messages = [];
-        actionResult.messages.push("Tentativa de shot");
+        actionResult.events = [];
         actionResult.scoreo = game.scoreo;
         actionResult.scorex = game.scorex;
         actionResult.newBallholder = game.ballholder;
@@ -64,7 +63,13 @@ function shotProcess(team){
             //console.log("passou: " + (random < chance))
             
             if(success) {
-                actionResult.messages.push("GOL");
+                actionResult.events.push({
+                    "command": ACTION_SHOT,
+                    "status": ACTION_SUCCESS,
+                    "actor":game.ballholder,
+                    "actor2": game.keeper[getOpposingTeam(game.ballholder.team)]
+                });
+                
                 if(game.ballholder.team == TEAMO) {
                     actionResult.scoreo = actionResult.scoreo + 1 
                 }
@@ -72,11 +77,16 @@ function shotProcess(team){
                     actionResult.scorex = actionResult.scorex + 1
                 }                 
             } else {
-                actionResult.messages.push("Nas maos do goleiro");
+                actionResult.events.push({
+                    "command": ACTION_SHOT,
+                    "status": ACTION_UNSUCCESS,
+                    "actor":game.ballholder,
+                    "actor2": game.keeper[getOpposingTeam(game.ballholder.team)]
+                });
             }
             actionResult.newBallholder = game.keeper[getOpposingTeam(game.ballholder.team)];
         } else {
-            actionResult.messages.push("Voce nao esta com a bola e nao pode bater no gol");
+            console.log("Voce nao esta com a bola e nao pode bater no gol");
         }
         return actionResult;
     }
