@@ -9,6 +9,8 @@
 <script src="dibre.js"></script>
 <script src="touch.js"></script>
 <script src="cmd.js"></script>
+<script src="ia.js"></script>
+<script src="utils.js"></script>    
 
     
 <style>
@@ -385,22 +387,6 @@ function displayField(game){
     displayable.scoreo = game.scoreo;
     displayable.scorex = game.scorex;
     
-    var getchances = function(team){
-        return [(passProcess(team,-1,-1).chance * 100).toFixed(2),
-                      (passProcess(team,0,-1).chance * 100).toFixed(2),
-                      (passProcess(team,1,-1).chance * 100).toFixed(2),
-                      (passProcess(team,-1,0).chance * 100).toFixed(2),
-                      
-                      (dibreProcess(team).chance * 100).toFixed(2),
-                      
-                      (passProcess(team,1,0).chance * 100).toFixed(2),
-                      (passProcess(team,-1,1).chance * 100).toFixed(2),
-                      (passProcess(team,0,1).chance * 100).toFixed(2),
-                      (passProcess(team,1,1).chance * 100).toFixed(2),
-                      
-                      (shotProcess(team,-1,0).chance * 100).toFixed(2)
-                      ]
-    }
     
     displayable.chanceso = getchances(TEAMO);
     displayable.chancesx = getchances(TEAMX);    
@@ -412,7 +398,7 @@ function displayField(game){
     return displayable;
 }    
     
-function processTick(game, commandP1, commandP2, scope){
+function processTick(game){
     /*console.log("Processing:")
     console.log(game);
     console.log(commandP1);
@@ -430,6 +416,8 @@ function processTick(game, commandP1, commandP2, scope){
     $scope.TEAMX = TEAMX;
     $scope.TEAMO = TEAMO;
     game = createTestGame();        
+    game.playerteam = $scope.playerteam;
+        
         
     document.addEventListener("cmdinput", function(evt){
         var actionResult = runCommand(evt, $scope.playerteam);
@@ -437,7 +425,7 @@ function processTick(game, commandP1, commandP2, scope){
         
         
         //isso pode sair quando nao for usar mais angular
-        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.displayableField = processTick(game);
         $scope.$apply();
     });
         
@@ -448,7 +436,7 @@ function processTick(game, commandP1, commandP2, scope){
         processActionResult(actionResult);
         
         
-        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.displayableField = processTick(game);
         $scope.$apply();
     }
     
@@ -456,7 +444,7 @@ function processTick(game, commandP1, commandP2, scope){
         var actionResult = runCommand(new CustomEvent("cmdinput", { "detail": {"cmd": "shot"}}), team);
         processActionResult(actionResult);
         
-        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.displayableField = processTick(game);
         $scope.$apply();
     }
     
@@ -464,17 +452,20 @@ function processTick(game, commandP1, commandP2, scope){
         var actionResult = runCommand(new CustomEvent("cmdinput", { "detail": {"cmd": "dibre"}}), team);
         processActionResult(actionResult);
         
-        $scope.displayableField = processTick(game, commandP1, commandP2);
+        $scope.displayableField = processTick(game);
         $scope.$apply();
     }
     
-    var commandP1 = "pass to joao";
-    var commandP2 = "mark joao";
-    
     
   //  $interval(function(){$scope.displayableField = processTick(game, commandP1, commandP2), 10000, 1})
-    $scope.displayableField = processTick(game, commandP1, commandP2);
-    //setInterval(function(){$scope.displayableField = "samba"}, 900);
+    $scope.displayableField = processTick(game);
+    
+        setInterval(function(){
+            processActionResult(tickOpponent());
+            //isso pode sair quando nao for usar mais angular
+            $scope.displayableField = processTick(game);
+            $scope.$apply();
+        }, 1500);
     
 //    /processTick(createTestGame(), commandP1, commandP2)
     

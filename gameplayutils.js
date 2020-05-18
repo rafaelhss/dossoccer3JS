@@ -48,35 +48,48 @@ function resetOffPlayers(){
     game.playersdown = [];       
 }
 
+function applyActionResult(actionResult){
+    if(actionResult.newBallholder){
+        game.ballholder = actionResult.newBallholder;
+    }
+    if(!isNaN(actionResult.scoreo)){
+        game.scoreo = actionResult.scoreo;
+    }
+    if(!isNaN(actionResult.scorex)){
+        game.scorex = actionResult.scorex;
+    }
+        
+    if(actionResult.playerdown){
+        game.playersdown.push(actionResult.playerdown);
+    } else {
+        resetOffPlayers();
+    }
+}
+
 function runCommand(evt, team){
     if(evt.detail.cmd == "pass"){
         console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
         
         actionResult = passProcess(team, evt.detail.axisx, evt.detail.axisy);
-        if(actionResult.newBallholder){
-            game.ballholder = actionResult.newBallholder;
-        }
-        resetOffPlayers();
+        
+        applyActionResult(actionResult);
+        
         return actionResult;
         
     } else if (evt.detail.cmd == "shot"){
         console.log("cmdinput shot: " + team)
         
         actionResult = shotProcess(team);
-        game.scoreo = actionResult.scoreo;
-        game.scorex = actionResult.scorex;
-        game.ballholder = actionResult.newBallholder;
-        resetOffPlayers();
+        applyActionResult(actionResult)
         return actionResult;
         
     } else  if (evt.detail.cmd == "dibre"){
         console.log("cmdinput dibre: " + team)
         
         actionResult = dibreProcess(team);
-        game.ballholder = actionResult.newBallholder;
-        if(actionResult.playerdown){
-            game.playersdown.push(actionResult.playerdown);
-        }
+        
+        applyActionResult(actionResult);
+        
         return actionResult;
     }
 }

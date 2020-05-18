@@ -38,8 +38,6 @@ function shotProcess(team){
         
         if(game.ballholder.team == team) {
             var sectors = shotGetSectorsAhead();
-            //console.log("sectors");
-            //console.log(sectors);
             var deff = 0;
                 
             sectors.forEach(function(sector){
@@ -49,19 +47,23 @@ function shotProcess(team){
                 })
             })
             var keeperDeff = game.keeper[getOpposingTeam(game.ballholder.team)].defense;
+            
+           // console.log(game.ballholder);
+        //    console.log(team);
             var att = game.ballholder.attack;
 
             var chance = (att)/(att + keeperDeff + keeperDeff + deff)
             actionResult.chance = chance;
             var random = Math.random();
             var success = (random < chance);
-            //console.log("keeperDeff: " + keeperDeff)
-            //console.log("deff: " + deff)
-            //console.log("att: " + att)
-            //console.log("chance: " + chance)
-            //console.log("random: " + random)
-            //console.log("passou: " + (random < chance))
-            
+          
+            /*console.log("keeperDeff: " + keeperDeff)
+            console.log("deff: " + deff)
+            console.log("att: " + att)
+            console.log("chance: " + chance)
+            console.log("random: " + random)
+            console.log("passou: " + (random < chance))
+            */
             if(success) {
                 actionResult.events.push({
                     "command": ACTION_SHOT,

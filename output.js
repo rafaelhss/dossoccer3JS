@@ -1,4 +1,4 @@
-var su = new SpeechSynthesisUtterance();    
+var su = new SpeechSynthesisUtterance(); 
 su.lang = "pt";
     
 function speak(text){
