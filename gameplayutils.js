@@ -54,9 +54,11 @@ function applyActionResult(actionResult){
     }
     if(!isNaN(actionResult.scoreo)){
         game.scoreo = actionResult.scoreo;
+        window.localStorage.setItem("scoreo", actionResult.scoreo)
     }
     if(!isNaN(actionResult.scorex)){
         game.scorex = actionResult.scorex;
+        window.localStorage.setItem("scorex", actionResult.scorex)
     }
         
     if(actionResult.playerdown){
@@ -93,4 +95,51 @@ function runCommand(evt, team){
         return actionResult;
     }
 }
+
+
+
+    
+    
+function rand(n){
+    return Math.floor(Math.random() * n);
+}  
+function createTestGame(){
+    
+
+    
+    var field = [];
+    
+    var playerfield = window.localStorage.getItem("playerfield");
+    playerfield = JSON.parse(playerfield);
+    playerfield.forEach(function(player2){
+                            field.push(player2);
+                        })   
+    
+    var versusfield = window.localStorage.getItem("versusfield");
+    versusfield = JSON.parse(versusfield);
+    versusfield.forEach(function(player2){
+                            field.push(player2);
+                        })   
+
+    
+    
+    game.playersdown = [];
+    game.ballholder = field[rand(20)];
+    game.field = field;
+    game.scorex = 0;
+    game.scoreo = 0;
+    window.localStorage.setItem("scorex", game.scorex)
+    window.localStorage.setItem("scoreo", game.scoreo)
+    game.keeper = [];
+    
+    var playerkeeper =  JSON.parse(window.localStorage.getItem("playerkeeper"));
+    game.keeper[playerkeeper.team] = playerkeeper;
+    
+    var versuskeeper =  JSON.parse(window.localStorage.getItem("versuskeeper"));
+    game.keeper[versuskeeper.team] = versuskeeper;
+    
+    
+    return game;
+}
+
 

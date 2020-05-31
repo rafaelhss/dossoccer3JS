@@ -4,13 +4,15 @@
 <script src="consts.js"></script>    
 <script src="gameplayutils.js"></script>
 <script src="output.js"></script>
+<script src="kickoff.js"></script>
 <script src="pass.js"></script>
 <script src="shot.js"></script>
 <script src="dibre.js"></script>
 <script src="touch.js"></script>
 <script src="cmd.js"></script>
 <script src="ia.js"></script>
-<script src="utils.js"></script>    
+<script src="utils.js"></script>  
+<script src="gameover.js"></script>
 
     
 <style>
@@ -98,6 +100,14 @@ playerteam: {{playerteam}}
 
 
 <br>
+<label for="matchtime">matchtime(sec) :</label>
+<input ng-model="matchtime" type="number" id="matchtime" name="quantity" min="10" max="120">
+<br>
+<button class="teamo" ng-click="go()">
+VAAAAAAAAAAAAI
+</button>
+
+<br>
 <button onclick="window.initcmd();">Initialize</button>
 <br>
 
@@ -124,7 +134,7 @@ playerteam: {{playerteam}}
 <table style="width: 1200px; height: 300px" border = "1">
 	<tbody>
         <tr><td>
-            <canvas id="canvas" width="400" height="400" style="border:solid black 1px;">
+<canvas id="canvas" width="400" height="400" style="border:solid black 1px;">
   You really badly need to use a different browser.
 </canvas>
             </td>
@@ -294,76 +304,11 @@ var game = {};
 
 
 
-    
-    
-function rand(n){
-    return Math.floor(Math.random() * n);
-}   
+ 
     
     
     
 
-function createTestGame(){
-    
-
-    
-    var field = [];
-    
-    for (let i = 2; i <= 11; ++i){
-        var player2 = { 
-                            name: i,
-                            number: i,
-                            defense:rand(10), 
-                            pass:rand(10), 
-                            attack:rand(10), 
-                            team: TEAMX, 
-                            sector:rand(6),
-                            id: rand(100)*rand(100)
-                        };
-        field.push(player2);
-    }
-    for (let i = 2; i <= 11; ++i){
-        var player2 = { 
-                            name:i,
-                            number: i,
-                            defense:rand(10), 
-                            pass:rand(10), 
-                            attack:rand(10), 
-                            team: TEAMO, 
-                            sector:rand(6),
-                            id: rand(100)*rand(100)                            
-                        };
-        field.push(player2);
-    }
-    
-    
-    game.playersdown = [];
-    game.ballholder = field[rand(20)];
-    game.field = field;
-    game.scorex = 0;
-    game.scoreo = 0;
-    game.keeper = [];
-    game.keeper[TEAMX] = { 
-                            name: 1,
-                            number: 1,
-                            pass: 10,
-                            defense:rand(10), 
-                            team: TEAMX, 
-                            sector:-1,
-                            id: rand(100)*rand(100)                            
-                        };
-    game.keeper[TEAMO] = { 
-                            name: 1,
-                            number: 1,
-                            pass: 10,
-                            defense:rand(10), 
-                            team: TEAMO, 
-                            sector:-2,
-                            id: rand(100)*rand(100)                            
-                        };
-    
-    return game;
-}
 
 function displayField(game){
     
@@ -399,14 +344,9 @@ function displayField(game){
 }    
     
 function processTick(game){
-    /*console.log("Processing:")
-    console.log(game);
-    console.log(commandP1);
-    console.log(commandP2);
-    */
-    return displayField(game);
-    
+    return displayField(game);    
 }
+        
     
     
     
@@ -415,9 +355,11 @@ function processTick(game){
    
     $scope.TEAMX = TEAMX;
     $scope.TEAMO = TEAMO;
+    $scope.matchtime = 60;
+        
     game = createTestGame();        
     game.playerteam = $scope.playerteam;
-        
+            
         
     document.addEventListener("cmdinput", function(evt){
         var actionResult = runCommand(evt, $scope.playerteam);
@@ -428,6 +370,10 @@ function processTick(game){
         $scope.displayableField = processTick(game);
         $scope.$apply();
     });
+        
+        
+        
+        
         
     $scope.pass = function(team, axisx, axisy){
         console.log("paaas: " + "team: " + team + " axisx: " + axisx + " axisy: " + axisy);
@@ -460,12 +406,37 @@ function processTick(game){
   //  $interval(function(){$scope.displayableField = processTick(game, commandP1, commandP2), 10000, 1})
     $scope.displayableField = processTick(game);
     
+      
+        
+    $scope.go = function(){
+        var actionResult = kickoff(game);
+        processActionResult(actionResult);
+
         setInterval(function(){
             processActionResult(tickOpponent());
             //isso pode sair quando nao for usar mais angular
             $scope.displayableField = processTick(game);
             $scope.$apply();
         }, 1500);
+        
+        setInterval(function(){
+            
+            $scope.matchtime = $scope.matchtime - 1;
+            console.log("matchtime: " + $scope.matchtime)
+            
+            if($scope.matchtime == 0 ) {
+                var actionResult = gameover(game);
+                processActionResult(actionResult);   
+                
+                setTimeout(function(){
+                    window.location.replace("gameover.html");
+                },3000)
+                
+            }
+        }, 1000 )
+
+    }    
+    
     
 //    /processTick(createTestGame(), commandP1, commandP2)
     

@@ -1,0 +1,98 @@
+<html>
+    <script src="consts.js"></script>
+    <script src="gameplayutils.js"></script>
+    <style>
+        .teamx{
+            color: blue;
+        }
+        .teamo{
+            color: red;
+        }
+        .playeroff {
+            text-decoration: line-through;
+        }
+    </style>    
+    <script>
+        function rand(n){
+            return Math.floor(Math.random() * n);
+        } 
+        function choseteam(team){
+            var field = [];
+            for (let i = 2; i <= 11; ++i){
+                var player2 = { 
+                                    name: "joao" + i,
+                                    number: i,
+                                    defense:rand(10), 
+                                    pass:rand(10), 
+                                    attack:rand(10), 
+                                    team: team, 
+                                    sector:rand(6),
+                                    id: rand(100)*rand(100)
+                                };
+                field.push(player2);
+            }
+            window.localStorage.setItem("playerfield", JSON.stringify(field));
+            
+            field = []; 
+            var oposingTeam = getOpposingTeam(team);
+            for (let i = 2; i <= 11; ++i){
+                var player2 = { 
+                                    name: "jose" + i,
+                                    number: i,
+                                    defense:rand(10), 
+                                    pass:rand(10), 
+                                    attack:rand(10), 
+                                    team: oposingTeam, 
+                                    sector:rand(6),
+                                    id: rand(100)*rand(100)
+                                };
+                field.push(player2);
+            }
+            window.localStorage.setItem("versusfield", JSON.stringify(field));
+            
+            window.localStorage.setItem("playerkeeper",JSON.stringify( 
+                                                            { 
+                                                                name: 1,
+                                                                number: 1,
+                                                                pass: 10,
+                                                                defense:rand(10), 
+                                                                team: team, 
+                                                                sector:-1,
+                                                                id: rand(100)*rand(100)                            
+                                                            })
+                                       );
+            
+            window.localStorage.setItem("versuskeeper",JSON.stringify( 
+                                                            { 
+                                                                name: 1,
+                                                                number: 1,
+                                                                pass: 10,
+                                                                defense:rand(10), 
+                                                                team: oposingTeam, 
+                                                                sector:-1,
+                                                                id: rand(100)*rand(100)                            
+                                                            })
+                                       );
+            
+            
+            
+            
+            
+            
+            
+            window.localStorage.setItem("playerteamname","Jotape Senior");
+            window.localStorage.setItem("opposingteamname","Jotape Junior");
+            
+            window.location.replace("index.html");
+        }
+    </script>
+    <h1>Escolha seu time</h1>
+    <center>
+        <button class="teamo" onclick="choseteam('o')">
+            TEAM O
+        </button>
+        <button class="teamx" onclick="choseteam('x')">
+            TEAM X
+        </button>
+    </center>
+</html>

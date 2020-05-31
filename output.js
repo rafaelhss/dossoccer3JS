@@ -75,6 +75,18 @@ function getText(evt, action){
         }
     }
     
+    if(evt.command == ACTION_KICKOFF){
+        var txtteams = "";
+        if(evt.detail){
+            txtteams = "Hoje joga " + evt.detail[0] + " contra " + evt.detail[1] + "!";
+        }
+        txt = "Vai comecar a peleja!" + txtteams;
+    }
+    
+    if(evt.command == ACTION_GAMEOVER){
+        txt = "Nao ha tempo pra mais na a a a a da!";
+    }    
+    
     if(evt.command == ACTION_DIBRE){
         if(evt.status == ACTION_SUCCESS){
             txt = "ô ô ô ô ô lê ê ê!! " + evt.actor.name + " deixa " + evt.actor2.name + " no chao!";
