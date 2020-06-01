@@ -1,0 +1,185 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="consts.js"></script>    
+        <script src="gameplayutils.js"></script>
+        <script src="output.js"></script>
+        <script src="kickoff.js"></script>
+        <script src="pass.js"></script>
+        <script src="shot.js"></script>
+        <script src="dibre.js"></script>
+        <script src="touch.js"></script>
+        <script src="cmd.js"></script>
+        <script src="ia.js"></script>
+        <script src="utils.js"></script>  
+        <script src="gameover.js"></script>
+        <script src="game.js"></script>
+        <script src="angularinterface.js"></script>
+        
+        
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #004d00;
+            }
+            .area{                
+                width: 100%;
+                text-align:center;
+            }
+            #info {
+                width: 100%;
+                width: 100vw;
+                height: 18.5vw;
+                height: 18.5%;
+                border-radius: 25px;
+                display: flex;
+                padding: 0px 10px;
+                /*box-shadow: inset 0 0 2em #777777, 0 0 2em #777777;*/
+            }
+            #terminal {
+                width: 100%;
+                width: 100vw;
+                height: 28.5vw;
+                height: 28.5%;
+                background-color: #002200;
+                /*
+                box-shadow: inset 0 0 2em #777777, 0 0 2em #777777;
+                border-color: #BBBBBB;
+                
+                border-radius: 25px;
+                border-style: solid;
+                border-bottom: none;*/
+                
+            }
+            .actionmsgtable{
+                height: auto;
+                font-size: 300%;
+                text-align:left;
+                color: #BBBBBB;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 15px;
+                    
+                
+            }
+            #canvas {
+                display: inline;
+                box-shadow: inset 0 0 2em #777777, 0 0 2em #777777;
+                background-color: #006600;
+            }
+            
+            #holder{
+                background-color: aquamarine;
+                height: 100%;
+                width: 33%;
+            }
+            .field{
+                background-color: #2a6600;
+                height: 80%;
+                width: 18%;
+                float: left;
+                margin: auto;
+                box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
+            }
+            .fieldrow{
+                display: flex;
+                height: 30%;
+            }
+            .sector{
+                box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
+                width: 50%;
+                height: 100%;
+            }
+            .sectorunselect{
+                background-color: floralwhite;
+            }
+            .sectorselect{
+                background-color: deeppink;
+            }
+            .keeperrow{
+                box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
+                height: 5%;
+            }
+            
+        </style>
+        <script>
+            $(function () {
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                var canvasOffset = $("#canvas").offset();
+                var offsetX = canvasOffset.left;
+                var offsetY = canvasOffset.top;
+
+                canvas.width = window.innerWidth * 0.98;
+                canvas.height = window.innerHeight * 0.45;
+                
+                
+            });
+        </script>
+    </head>
+    <body>
+        <div ng-app="myApp" ng-controller="myCtrl">
+            <div ng-hide="gameon">
+                <div class="area">
+                    <div>{{playerteamname}}</div>
+                    <div>VS</div>
+                    <div>{{opposingteamname}}</div>
+                    <div>
+                        <button class="teamo" ng-click="go()">
+                            VAAAAAAAAAAAAI
+                        </button>  
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div ng-show="gameon">
+                <div class="area">
+                    <div id="info">
+                        <div id="holder">
+                            opa
+                        </div>
+                        <div id="field" class="field">
+                            <div class="keeperrow" id="keeperx">.</div>
+                            <div class="fieldrow">
+                                <div class="sector sectorunselect" id="sector0">.</div>
+                                <div class="sector sectorunselect" id="sector1">.</div>
+                            </div>
+                            <div class="fieldrow">
+                                <div class="sector sectorunselect" id="sector2">.</div>
+                                <div class="sector sectorunselect" id="sector3">.</div>
+                            </div>
+                            <div class="fieldrow">
+                                <div class="sector sectorunselect" id="sector4">.</div>
+                                <div class="sector sectorunselect" id="sector5">.</div>
+                            </div>
+                            <div class="keeperrow" id="keepero">.</div>
+                        </div>
+                        
+                        <div id="holder">
+                            opa
+                        </div>
+                    </div>    
+                </div>
+                <div class="area">
+                    <div id="terminal">
+                        <div class="actionmsgtable" id="actionmsgtable1"></div>
+                        <div class="actionmsgtable" id="actionmsgtable2"></div>
+                        <div class="actionmsgtable" id="actionmsgtable3"></div>
+                        <div class="actionmsgtable" id="actionmsgtable4"></div>
+                        <div class="actionmsgtable" id="actionmsgtable5"></div>
+                        <div class="actionmsgtable" id="actionmsgtable6"></div>
+                    </div>
+                </div>
+                <div class="area">
+                    <canvas id="canvas">
+                      You really badly need to use a different browser.
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

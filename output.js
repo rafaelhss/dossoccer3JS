@@ -6,8 +6,68 @@ function speak(text){
     speechSynthesis.speak(su);
 }  
 
+
+function updateField(ballholder){
+    var sector = "";
+    console.log("ballholder");
+    console.log(ballholder);
+    
+    var sectors = document.getElementsByClassName("sector");
+    Array.from(sectors).forEach((el) => {
+    // Do stuff here
+        console.log(el.tagName);
+        el.className = "sector sectorunselect";
+    });
+    
+    
+    var keeperrows = document.getElementsByClassName("keeperrow");
+    Array.from(keeperrows).forEach((el) => {
+    // Do stuff here
+        console.log(el.tagName);
+        el.className = "keeperrow sectorunselect";
+    });
+    
+    
+    if(Number(ballholder.sector) < 0) {
+        if(ballholder.team = TEAMX){
+            sector = "keeperx";   
+        } else {
+            sector = "keepero";    
+        }
+        var sec = document.getElementById(sector);
+        sec.className = "keeperrow sectorselect";
+        console.log(sec)
+    } else {
+            switch (Number(ballholder.sector)) {
+              case  0:
+                sector = "sector0";
+                break;
+              case 1:
+                sector = "sector1";
+                break;
+              case 2:
+                sector = "sector2";
+                break;
+              case 3:
+                sector = "sector3";
+                break;
+              case 4:
+                sector = "sector4";
+                break;
+              case 5:
+                sector = "sector5";
+                break;
+            }
+        var sec = document.getElementById(sector);
+        sec.className = "sector sectorselect";
+    }
+            
+            
+}
+
 function processActionResult(actionResult){
-    console.log(actionResult);
+    updateField(game.ballholder);
+    
     if(actionResult.events){
         actionResult.events.forEach(function(evt){
 
@@ -28,11 +88,20 @@ function processActionResult(actionResult){
 
             msg = getText(evt, actionResult);
             speak(msg);
-
-            document.getElementById("actionmsgtable").innerHTML = datetime +
+            
+            document.getElementById("actionmsgtable6").innerHTML = document.getElementById("actionmsgtable5").innerHTML;
+            
+            document.getElementById("actionmsgtable5").innerHTML = document.getElementById("actionmsgtable4").innerHTML;
+            
+            document.getElementById("actionmsgtable4").innerHTML = document.getElementById("actionmsgtable3").innerHTML;
+            
+            document.getElementById("actionmsgtable3").innerHTML = document.getElementById("actionmsgtable2").innerHTML;
+            
+            document.getElementById("actionmsgtable2").innerHTML = document.getElementById("actionmsgtable1").innerHTML;
+            
+            document.getElementById("actionmsgtable1").innerHTML = datetime + "  " +
                spantag +  msg + "</span>" + 
-                sucesstag + 
-                "<br>" + document.getElementById("actionmsgtable").innerHTML 
+                sucesstag; 
         })
     }
 } 

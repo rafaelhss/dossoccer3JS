@@ -212,8 +212,13 @@ function ongoingTouchIndexById(idToFind) {
   return -1; // not found
 }
 function log(msg) {
-  var p = document.getElementById('log');
-  p.innerHTML = msg + "\n" + p.innerHTML;
+  try {
+    var p = document.getElementById('log');
+    p.innerHTML = msg + "\n" + p.innerHTML;
+  }
+  catch(err) {
+    console.log("Log touch: " + msg)
+  } 
 }
  
 function findPos (obj) {
