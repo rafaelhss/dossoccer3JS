@@ -24,6 +24,12 @@
                 padding: 0;
                 background-color: #004d00;
             }
+            .footer{
+                width: 100%;
+                text-align:center;
+                font-size: 300%;
+                padding-top: 10px;
+            }
             .area{                
                 width: 100%;
                 text-align:center;
@@ -167,17 +173,24 @@
                     </canvas>
                 </div>
             </div>
+            <div class="footer">
+                <ion-icon name="volume-high" ng-click="voice(false)" ng-show="sound"></ion-icon>
+                <ion-icon name="volume-mute" ng-click="voice(true)" ng-hide="sound"></ion-icon>
+            </div>
         </div>
+        
+        <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var canvasOffset = $("#canvas").offset();
+            var offsetX = canvasOffset.left;
+            var offsetY = canvasOffset.top;
+
+            canvas.width = window.innerWidth * 0.98;
+            canvas.height = window.innerHeight * 0.45;
+
+        </script>
     </body>
-    <script>
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-        var canvasOffset = $("#canvas").offset();
-        var offsetX = canvasOffset.left;
-        var offsetY = canvasOffset.top;
-
-        canvas.width = window.innerWidth * 0.98;
-        canvas.height = window.innerHeight * 0.45;
-
-    </script>
 </html>

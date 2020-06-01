@@ -2,8 +2,11 @@ var su = new SpeechSynthesisUtterance();
 su.lang = "pt";
     
 function speak(text){
-    su.text = text;
-    speechSynthesis.speak(su);
+    if(sound){
+        su.text = text;
+        speechSynthesis.speak(su);    
+    }
+    
 }  
 
 

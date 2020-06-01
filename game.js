@@ -1,4 +1,5 @@
 var game = {};
+var sound = true;
 function rungame(){
     initcmd();
     

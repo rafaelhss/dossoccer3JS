@@ -14,5 +14,10 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
         $scope.gameon = true;
         rungame();
     }    
+    $scope.voice = function(voiceon){
+        sound = voiceon;
+        $scope.sound = voiceon;
+        console.log(voiceon)
+    }
 })
    
