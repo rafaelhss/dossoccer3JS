@@ -217,7 +217,7 @@ function log(msg) {
     p.innerHTML = msg + "\n" + p.innerHTML;
   }
   catch(err) {
-    console.log("Log touch: " + msg)
+    console.log("Log catch touch: " + msg)
   } 
 }
  
