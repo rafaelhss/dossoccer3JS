@@ -84,12 +84,6 @@
                 box-shadow: inset 0 0 2em #777777, 0 0 2em #777777;
                 background-color: #006600;
             }
-            
-            #holder{
-                background-color: aquamarine;
-                height: 100%;
-                width: 33%;
-            }
             .field{
                 background-color: #2a6600;
                 height: 80%;
@@ -121,6 +115,45 @@
                 box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
                 height: 5%;
             }
+            #holder{
+                background-color: #004d00;
+                height: 100%;
+                width: 33%;
+            }
+            #name{
+                height: 20%;
+                width: auto;
+                font-size: 300%;
+                color: #CCCCCC;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+                border-radius: 5%;
+            }
+            #holderinfo{
+                height: 70%;
+                width: auto; 
+                width: 100%;
+                padding-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #avatar{
+                font-size: 1200%;
+            }
+            .stats{
+                box-shadow: inset 0.1em 0.1em 1em #CCCCCC, 0.5em 0.5em 0em #2a8000;
+                border-radius: 10%;
+                padding: 10px;
+            }
+            .stat{
+                width: 100%;
+                color: #CCCCCC;
+                text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+                font-size: 300%;
+            }
             
         </style>
 
@@ -146,7 +179,17 @@
                 <div class="area">
                     <div id="info">
                         <div id="holder">
-                            opa
+                            <div id="holderinfo">
+                                <div id="avatar">
+                                    <ion-icon name="walk"></ion-icon>
+                                </div>
+                                <div class="stats">
+                                    <div class="stat"><ion-icon name="football"></ion-icon><span id="att"></span></div>
+                                    <div class="stat"><ion-icon name="shield"></ion-icon><span id="def"></span></div>
+                                    <div class="stat"><ion-icon name="swap-horizontal"></ion-icon><span id="pass"></span></div>
+                                </div>
+                            </div>
+                            <div id="name">Frubbao 2</div>
                         </div>
                         <div id="field" class="field">
                             <div class="keeperrow" id="keeperx">.</div>

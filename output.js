@@ -61,6 +61,20 @@ function updateField(ballholder){
         sec.className = "sector sectorselect";
     }
             
+    var avatar = document.getElementById("avatar");
+    if(ballholder.team == TEAMX) {
+        avatar.className = "teamx";   
+    } else {
+        avatar.className = "teamo";           
+    } 
+    
+    document.getElementById("name").innerHTML = ballholder.name + " " + ballholder.number;
+    document.getElementById("att").innerHTML = Number(ballholder.attack);
+    document.getElementById("def").innerHTML = Number(ballholder.defense);
+    document.getElementById("pass").innerHTML = Number(ballholder.pass);
+    
+    
+    
             
 }
 
