@@ -2,9 +2,12 @@ var su = new SpeechSynthesisUtterance();
 su.lang = "pt";
     
 function speak(text){
-    if(sound){
+    console.log("sound: " + sound + " speechSynthesis.speaking: "+ speechSynthesis.speaking);
+    if(sound && !speechSynthesis.speaking){
+        console.log("speak: " + text)
         su.text = text;
         speechSynthesis.speak(su);    
+        
     }
     
 }  
@@ -12,21 +15,15 @@ function speak(text){
 
 function updateField(ballholder){
     var sector = "";
-    console.log("ballholder");
-    console.log(ballholder);
     
     var sectors = document.getElementsByClassName("sector");
     Array.from(sectors).forEach((el) => {
-    // Do stuff here
-        console.log(el.tagName);
         el.className = "sector sectorunselect";
     });
     
     
     var keeperrows = document.getElementsByClassName("keeperrow");
     Array.from(keeperrows).forEach((el) => {
-    // Do stuff here
-        console.log(el.tagName);
         el.className = "keeperrow sectorunselect";
     });
     
@@ -39,7 +36,6 @@ function updateField(ballholder){
         }
         var sec = document.getElementById(sector);
         sec.className = "keeperrow sectorselect";
-        console.log(sec)
     } else {
             switch (Number(ballholder.sector)) {
               case  0:
@@ -110,9 +106,7 @@ function processActionResult(actionResult){
 } 
 function getText(evt, action){
     var txt = "estou sem palavra";
-    console.log(action);
-    console.log(evt);
-
+    
     var text = "";
     if (evt.command == ACTION_PASS){
         if(evt.status == ACTION_SUCCESS){
@@ -120,7 +114,7 @@ function getText(evt, action){
         }   
     
     
-        console.log("evt.detail: " + evt.detail);
+       // console.log("evt.detail: " + evt.detail);
         if(evt.detail){
             evt.detail.forEach(function(dtl){
                 if(dtl == ACTION_PASS_INTERCEPTED){

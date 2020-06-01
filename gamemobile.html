@@ -24,6 +24,15 @@
                 padding: 0;
                 background-color: #004d00;
             }
+            .teamx{
+                color: blue;
+            }
+            .teamo{
+                color: red;
+            }
+            .playeroff {
+                text-decoration: line-through;
+            }
             .footer{
                 width: 100%;
                 text-align:center;
@@ -97,12 +106,16 @@
                 box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
                 width: 50%;
                 height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 150%;
             }
             .sectorunselect{
-                background-color: floralwhite;
+                background-color: #009933;
             }
             .sectorselect{
-                background-color: deeppink;
+                background-color: #33cc33;
             }
             .keeperrow{
                 box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
@@ -138,16 +151,16 @@
                         <div id="field" class="field">
                             <div class="keeperrow" id="keeperx">.</div>
                             <div class="fieldrow">
-                                <div class="sector sectorunselect" id="sector0">.</div>
-                                <div class="sector sectorunselect" id="sector1">.</div>
+                                <div class="sector sectorunselect" id="sector0"></div>
+                                <div class="sector sectorunselect" id="sector1"></div>
                             </div>
                             <div class="fieldrow">
-                                <div class="sector sectorunselect" id="sector2">.</div>
-                                <div class="sector sectorunselect" id="sector3">.</div>
+                                <div class="sector sectorunselect" id="sector2"></div>
+                                <div class="sector sectorunselect" id="sector3"></div>
                             </div>
                             <div class="fieldrow">
-                                <div class="sector sectorunselect" id="sector4">.</div>
-                                <div class="sector sectorunselect" id="sector5">.</div>
+                                <div class="sector sectorunselect" id="sector4"></div>
+                                <div class="sector sectorunselect" id="sector5"></div>
                             </div>
                             <div class="keeperrow" id="keepero">.</div>
                         </div>

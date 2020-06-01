@@ -1,4 +1,23 @@
 function kickoff(){
+    
+    game.field.forEach(function(player){
+        console.log(player)
+        var secname = "sector" + player.sector;
+        var sector = document.getElementById(secname);
+        var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
+        if(player.team == TEAMX){
+           tag = tag.replace("@@CLASS@@","teamx");
+        } else {
+            tag = tag.replace("@@CLASS@@","teamo");
+        }
+        
+        console.log(tag);
+        sector.innerHTML = sector.innerHTML + tag;
+               
+    })
+    
+    
+    
     var actionResult = {};
     actionResult.events = [];
     actionResult.chance = 1;

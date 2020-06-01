@@ -4,7 +4,7 @@ function initcmd(){
 }
 function handleCmd(evt){
      
-    
+   /* 
     console.log("startX: " + evt.detail.startX 
                + " endX: " + evt.detail.endX
                + " minX: " + evt.detail.minX 
@@ -15,7 +15,7 @@ function handleCmd(evt){
                + " minY: " + evt.detail.minY 
                + " maxY: " + evt.detail.maxY)
     
-    
+    */
     
     //Kick V 
     if(((evt.detail.startY > evt.detail.endY) && (evt.detail.startY < evt.detail.maxY)) ||

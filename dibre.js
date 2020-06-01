@@ -46,7 +46,7 @@ function dibreProcess(team){
                 });
             }
         } else {
-            console.log("Voce nao pode dibrar pq nao tem a bola");
+            //console.log("Voce nao pode dibrar pq nao tem a bola");
         }     
         return actionResult;
         

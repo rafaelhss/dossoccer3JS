@@ -70,7 +70,7 @@ function applyActionResult(actionResult){
 
 function runCommand(evt, team){
     if(evt.detail.cmd == "pass"){
-        console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
+       // console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
         
         actionResult = passProcess(team, evt.detail.axisx, evt.detail.axisy);
         

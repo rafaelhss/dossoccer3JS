@@ -88,7 +88,7 @@ function shotProcess(team){
             }
             actionResult.newBallholder = game.keeper[getOpposingTeam(game.ballholder.team)];
         } else {
-            console.log("Voce nao esta com a bola e nao pode bater no gol");
+           // console.log("Voce nao esta com a bola e nao pode bater no gol");
         }
         return actionResult;
     }
