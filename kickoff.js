@@ -3,11 +3,12 @@ function kickoff(){
     game.field.forEach(function(player){
         var secname = "sector" + player.sector;
         var sector = document.getElementById(secname);
-        var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
+        //var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
+        var tag = "<span class=\"player @@CLASS@@\" name=\"person\">"+ player.number +"</span><p>";
         if(player.team == TEAMX){
-           tag = tag.replace("@@CLASS@@","teamx");
+           tag = tag.replace("@@CLASS@@","playerx");
         } else {
-            tag = tag.replace("@@CLASS@@","teamo");
+            tag = tag.replace("@@CLASS@@","playero");
         }
         
         sector.innerHTML = sector.innerHTML + tag;

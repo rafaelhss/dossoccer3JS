@@ -24,7 +24,8 @@
                 padding: 0;
                 background-color: #002200;
                 height: 100%; 
-                overflow: hidden;   
+                overflow: hidden;  
+                font-family: "Comic Sans MS", cursive, sans-serif;
             }
             .teamx{
                 color: blue;
@@ -46,9 +47,44 @@
                 text-align:center;
             }
             .score{
-                background-color: aqua;
-                height: 5%;
-                width: 100%;
+                height: 100%;
+                width: 80%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .scorenumber{
+                width: 10%;
+                font-size: 500%;   
+                text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+            }
+            .teamname{
+                width: 40%;
+                height: 50%;
+                font-size: 300%;
+                word-wrap:break-word;
+            }
+            #versus{
+                font-size: 300%;   
+                text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+            }
+            .time{
+                font-size: 800%;
+                width: 20%;
+                text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+            }
+            .panel{
+                height: 10%;
+                display: flex;
+                color: #CCCCCC;
+                background-image: linear-gradient(#002200, #339933, #002200);
+                
+            }
+            #opposingteamname{
+                text-shadow: 1px 1px 2px #FF0000, 0 0 25px #FF0000, 0 0 5px #FF0000;
+            }
+            #playerteamname{
+                text-shadow: 1px 1px 2px #0000FF, 0 0 25px #0000FF, 0 0 5px #0000FF;
             }
             #info {
                 width: 100%;
@@ -132,9 +168,8 @@
                 width: 100%;
                 height: 50%;
                 justify-content: center;
-                align-items: center;
                 display: flex;
-                font-size: 150%;
+                align-items: center;
             }
             .sectorunselect{
                 background-color: #009933;
@@ -151,7 +186,7 @@
                 background-color: #004d00;
                 height: 100%;
                 width: 33%;
-                border-radius: 5%;
+                border-radius: 10%;
             }
             .holderx{
                 box-shadow: inset 0 0 5em #0000FF;
@@ -207,6 +242,19 @@
                 background-color: chartreuse;
                 width: 40%;
             }
+            .player{
+                margin-right: 10%;
+                font: bold italic;
+                color: #CCCCCC;
+            }
+            
+            .playerx{
+                 text-shadow: 1px 1px 2px #0000FF, 0 0 25px #0000FF, 0 0 5px #0000FF;
+            }
+            .playero{
+                 text-shadow: 1px 1px 2px #FF0000, 0 0 25px #FF0000, 0 0 5px #FF0000;
+            }
+            
             
         </style>
 
@@ -229,8 +277,17 @@
                 
             </div>
             <div ng-show="gameon">
-                <div class ="area score">
-                    0 x 1
+                <div class ="area">
+                    <div class="panel">
+                        <div class="score">
+                            <div class="teamname" id="playerteamname">{{playerteamname}}</div>
+                            <div class="scorenumber" id="scorex">2</div>
+                            <div id="versus">x</div>
+                            <div class="scorenumber" id="scoreo">1</div>
+                            <div class="teamname" id="opposingteamname">{{opposingteamname}}</div>
+                        </div>
+                        <div class="time">22'</div>
+                    </div>
                 </div>
                 <div class="area">
                     <div id="info">
