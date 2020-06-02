@@ -1,6 +1,7 @@
 var ACTION_KICKOFF = "kickoff";
 var ACTION_GAMEOVER = "gameover";
 
+var GAME_DUR_MIN = 60;
 
 var ACTION_PASS = "pass";
 var ACTION_SHOT = "shot";

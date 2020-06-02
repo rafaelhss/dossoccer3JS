@@ -71,19 +71,12 @@ function applyActionResult(actionResult){
 
 function runCommand(evt, team){
     
-     if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
     if(evt.detail.cmd == "pass"){
        // console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
         
         actionResult = passProcess(team, evt.detail.axisx, evt.detail.axisy);
         
         applyActionResult(actionResult);
-        
-         if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
         
         return actionResult;
         
@@ -152,6 +145,8 @@ function createTestGame(){
     var versuskeeper =  JSON.parse(window.localStorage.getItem("versuskeeper"));
     game.keeper[versuskeeper.team] = versuskeeper;
     
+    
+    game.matchtime = GAME_DUR_MIN;
     
     return game;
 }

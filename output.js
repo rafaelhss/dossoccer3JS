@@ -119,23 +119,45 @@ function showChances(team, ballholderteam){
     }
 }
 
-function processActionResult(actionResult){
-     if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
+function updatescore(evt){
+  /*  if(evt.command == ACTION_SHOT){
+        if(evt.status == ACTION_SUCCESS){
+            if(evt.actor.team == TEAMX){
+                document.getElementById("scorex").style.opacity     
+            }
+            
         }
+    }*/
+    //soltar animacao
+    
+    document.getElementById("scorex").innerHTML = game.scorex;
+    document.getElementById("scoreo").innerHTML = game.scoreo;
+    
+}
+var matchtime = 90;
+
+document.addEventListener("matchtimetick", function(evt){
+    console.log("got");
+    var time = Number(evt.detail.time);
+    matchtime = Math.round((time * 90) / GAME_DUR_MIN);
+    if(matchtime < 0) {
+        matchtime = 0;
+    }
+    document.getElementById("matchtime").innerHTML = matchtime + "'";
+});
+
+
+function processActionResult(actionResult){
     
     updateField(game.ballholder);
-    
-         if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
+
     if(actionResult.events){
         actionResult.events.forEach(function(evt){
+            
+            updatescore(evt);
 
             var currentdate = new Date(); 
-            var datetime = currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+            var datetime = matchtime + "'";
 
             var spantag = "<span class=\"teamx\">";
             if(actionResult.team == TEAMO) {
@@ -165,9 +187,6 @@ function processActionResult(actionResult){
                 sucesstag; 
         })
     }
-     if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
 } 
 function getText(evt, action){
     var txt = "estou sem palavra";

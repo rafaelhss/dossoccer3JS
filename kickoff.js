@@ -15,6 +15,8 @@ function kickoff(){
                
     })
     
+    window.localStorage.setItem("scorex", 0)
+    window.localStorage.setItem("scoreo", 0)
     
     
     var actionResult = {};

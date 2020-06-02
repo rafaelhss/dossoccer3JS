@@ -16,4 +16,20 @@ function rungame(){
     setInterval(function(){
         processActionResult(tickOpponent());
     }, 1500);
+    
+    
+    setInterval(function(){
+            
+            game.matchtime = game.matchtime - 1;
+            document.dispatchEvent(new CustomEvent("matchtimetick", {detail:{"time":game.matchtime}}));
+            if(game.matchtime == 0 ) {
+                var actionResult = gameover(game);
+                processActionResult(actionResult);   
+                
+                setTimeout(function(){
+                    window.location.replace("gameover.html");
+                },3000)
+                
+            }
+        }, 1000 )
 }
