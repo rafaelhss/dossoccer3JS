@@ -5,73 +5,73 @@
   var passGetDestinationSector = function(sector, axisx, axisy) {
         
         if(sector == -1){
-            if(axisx >=0) {return 1}
+            if(axisy >=0) {return 1}
             else {return 0}            
         }
         if(sector == -2){
-            if(axisx >=0) {return 5}
+            if(axisy >=0) {return 5}
             else {return 4}            
         }
-        if(axisx > 0 && axisy > 0) {
+        if(axisx > 0 && axisy > 0) { //right down
             if(sector == 0) {return 3}
             if(sector == 2) {return 5}
         }
-        if(axisx == 0 && axisy > 0) {
-            if(sector == 0) {return 2}
-            if(sector == 1) {return 3}
-            if(sector == 2) {return 4}
-            if(sector == 3) {return 5}
-        }
-        if(axisx < 0 && axisy > 0) {
-            if(sector == 1) {return 2}
-            if(sector == 3) {return 4}
-        }
-        if(axisx < 0 && axisy == 0) {
-            if(sector == 1) {return 0}
-            if(sector == 3) {return 2}
-            if(sector == 5) {return 4}            
-        }
-        if(axisx < 0 && axisy < 0) {
-            if(sector == 3) {return 0}
-            if(sector == 5) {return 2}        
-        }
-        if(axisx == 0 && axisy < 0) {
-            if(sector == 2) {return 0}
-            if(sector == 3) {return 1}
-            if(sector == 4) {return 2}
-            if(sector == 5) {return 3}
-        }
-        if(axisx > 0 && axisy < 0) {
-            if(sector == 2) {return 1}
-            if(sector == 4) {return 3}
-        }
-        if(axisx > 0 && axisy == 0) {
+        if(axisx == 0 && axisy > 0) { // down
             if(sector == 0) {return 1}
             if(sector == 2) {return 3}
             if(sector == 4) {return 5}
+        }
+        if(axisx < 0 && axisy > 0) { //left down
+            if(sector == 2) {return 1}
+            if(sector == 4) {return 3}
+        }
+        if(axisx < 0 && axisy == 0) { //left
+            if(sector == 2) {return 0}
+            if(sector == 4) {return 2}
+            if(sector == 3) {return 1}
+            if(sector == 5) {return 3}
+        }
+        if(axisx < 0 && axisy < 0) { // left up
+            if(sector == 3) {return 0}
+            if(sector == 5) {return 2}        
+        }
+        if(axisx == 0 && axisy < 0) { //up
+            if(sector == 1) {return 0}
+            if(sector == 3) {return 2}
+            if(sector == 5) {return 4}
+        }
+        if(axisx > 0 && axisy < 0) { //right up
+            if(sector == 1) {return 2}
+            if(sector == 3) {return 4}
+        }
+        if(axisx > 0 && axisy == 0) { // right
+            if(sector == 0) {return 2}
+            if(sector == 2) {return 4}
+            if(sector == 1) {return 3}
+            if(sector == 3) {return 5}
         }
         return sector;        
     }
     
     var checkPassBoundaries = function(sector, axisx, axisy){
         //console.log("sector: " + sector + " axisx: " + axisx +" axisy: " + axisy)
-        if(axisx < 0){
-            if(sector == 0 || sector == 2 || sector == 4) {
-                return false;
-            }
-        }
-        if(axisx > 0){
-            if(sector == 1 || sector == 3 || sector == 5) {
-                return false;
-            }
-        }
-        if(axisy < 0){
+        if(axisx < 0){ //left
             if(sector == 0 || sector == 1) {
                 return false;
             }
         }
-        if(axisy > 0){
+        if(axisx > 0){ // right
             if(sector == 4 || sector == 5) {
+                return false;
+            }
+        }
+        if(axisy < 0){ // up
+            if(sector == 0 || sector == 2 || sector == 4) {
+                return false;
+            }
+        }
+        if(axisy > 0){ //down
+            if(sector == 1 || sector == 3 || sector == 5) {
                 return false;
             }
         }

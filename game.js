@@ -4,7 +4,7 @@ function rungame(){
     initcmd();
     
     document.addEventListener("cmdinput", function(evt){
-        var actionResult = runCommand(evt, TEAMX);
+        var actionResult = runCommand(evt, TEAMX);//jogador eh sempre o X
         processActionResult(actionResult);
     });
     

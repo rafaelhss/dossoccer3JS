@@ -5,6 +5,7 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
     
     
     //$scope.gameon = true;
+    $scope.sound = false;
     
     $scope.playerteamname = window.localStorage.getItem("playerteamname");
     $scope.opposingteamname =  window.localStorage.getItem("opposingteamname");
@@ -17,7 +18,6 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
     $scope.voice = function(voiceon){
         sound = voiceon;
         $scope.sound = voiceon;
-        console.log(voiceon)
     }
 })
    

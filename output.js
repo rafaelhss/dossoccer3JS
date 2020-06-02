@@ -2,11 +2,9 @@ var su = new SpeechSynthesisUtterance();
 su.lang = "pt";
     
 function speak(text){
-    console.log("sound: " + sound + " speechSynthesis.speaking: "+ speechSynthesis.speaking);
     if(sound && !speechSynthesis.speaking){
-        console.log("speak: " + text)
         su.text = text;
-        speechSynthesis.speak(su);    
+        //speechSynthesis.speak(su);    
         
     }
     
@@ -29,7 +27,7 @@ function updateField(ballholder){
     
     
     if(Number(ballholder.sector) < 0) {
-        if(ballholder.team = TEAMX){
+        if(ballholder.team == TEAMX){
             sector = "keeperx";   
         } else {
             sector = "keepero";    
@@ -61,11 +59,11 @@ function updateField(ballholder){
         sec.className = "sector sectorselect";
     }
             
-    var avatar = document.getElementById("avatar");
+    var holder = document.getElementById("holder");
     if(ballholder.team == TEAMX) {
-        avatar.className = "teamx";   
+        holder.className = "holderx";   
     } else {
-        avatar.className = "teamo";           
+        holder.className = "holdero";           
     } 
     
     document.getElementById("name").innerHTML = ballholder.name + " " + ballholder.number;
@@ -74,13 +72,63 @@ function updateField(ballholder){
     document.getElementById("pass").innerHTML = Number(ballholder.pass);
     
     
-    
+    showChances(TEAMX, ballholder.team);//jogador eh sempre X
             
 }
 
+function showChances(team, ballholderteam){
+    
+    var chances = [];
+    
+    chances.push({chance: Math.trunc(passProcess(team,-1,-1).chance * 99), img: "leftup"});
+    chances.push({chance: Math.trunc(passProcess(team,0,-1).chance * 99), img: "up"});
+    chances.push({chance: Math.trunc(passProcess(team,1,-1).chance * 99), img: "rightup"});
+    chances.push({chance: Math.trunc(passProcess(team,1,0).chance * 99), img: "right"});
+    chances.push({chance: Math.trunc(passProcess(team,1,1).chance * 99), img: "rightdown"});
+    chances.push({chance: Math.trunc(passProcess(team,0,1).chance * 99), img: "down"});
+    chances.push({chance: Math.trunc(passProcess(team,-1,1).chance * 99), img: "leftdown"});
+    chances.push({chance: Math.trunc(passProcess(team,-1,0).chance * 99), img: "left"});
+    chances.push({chance: Math.trunc(dibreProcess(team).chance * 99), img: "dibre"});
+    chances.push({chance: Math.trunc(shotProcess(team).chance * 99), img: "shot"});
+    
+    function compare( a, b ) {
+      if ( a.chance < b.chance ){
+        return 1;
+      }
+      if ( a.chance > b.chance ){
+        return -1;
+      }
+      return 0;
+    }
+    chances.sort( compare );
+    
+    document.getElementById("chance1").innerHTML = chances[0].chance + "%";
+    document.getElementById("imgchance1").setAttribute("src","img/" + chances[0].img + ".png");
+    
+    document.getElementById("chance2").innerHTML = chances[1].chance + "%";
+    document.getElementById("imgchance2").setAttribute("src","img/" + chances[1].img + ".png");
+    
+    document.getElementById("chance3").innerHTML = chances[2].chance + "%";
+    document.getElementById("imgchance3").setAttribute("src","img/" + chances[2].img + ".png");
+    
+    
+    if( team == ballholderteam){
+        document.getElementById("chances").style.opacity = "1";
+    } else {
+        document.getElementById("chances").style.opacity = "0.3";
+    }
+}
+
 function processActionResult(actionResult){
+     if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
+    
     updateField(game.ballholder);
     
+         if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
     if(actionResult.events){
         actionResult.events.forEach(function(evt){
 
@@ -117,6 +165,9 @@ function processActionResult(actionResult){
                 sucesstag; 
         })
     }
+     if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
 } 
 function getText(evt, action){
     var txt = "estou sem palavra";

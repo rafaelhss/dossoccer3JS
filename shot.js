@@ -29,6 +29,9 @@ function shotGetSectorsAhead(){
 }
 
 function shotProcess(team){
+     if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
         var actionResult = {"team":team};
         actionResult.events = [];
         actionResult.scoreo = game.scoreo;
@@ -90,6 +93,7 @@ function shotProcess(team){
         } else {
            // console.log("Voce nao esta com a bola e nao pode bater no gol");
         }
+
         return actionResult;
     }
  

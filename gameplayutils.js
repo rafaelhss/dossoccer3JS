@@ -49,6 +49,7 @@ function resetOffPlayers(){
 }
 
 function applyActionResult(actionResult){
+    
     if(actionResult.newBallholder){
         game.ballholder = actionResult.newBallholder;
     }
@@ -69,6 +70,10 @@ function applyActionResult(actionResult){
 }
 
 function runCommand(evt, team){
+    
+     if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
     if(evt.detail.cmd == "pass"){
        // console.log("cmdinput: " + team + " " + evt.detail.axisx + " " + evt.detail.axisy)
         
@@ -76,13 +81,21 @@ function runCommand(evt, team){
         
         applyActionResult(actionResult);
         
+         if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
+        
         return actionResult;
         
     } else if (evt.detail.cmd == "shot"){
         console.log("cmdinput shot: " + team)
         
         actionResult = shotProcess(team);
-        applyActionResult(actionResult)
+        applyActionResult(actionResult);
+        
+         if((game.keeper['x'].team == game.keeper['o'].team)){
+            console.log("XXXXXXXXXXXXXXXXXXXX")
+        }
         return actionResult;
         
     } else  if (evt.detail.cmd == "dibre"){
@@ -134,6 +147,7 @@ function createTestGame(){
     
     var playerkeeper =  JSON.parse(window.localStorage.getItem("playerkeeper"));
     game.keeper[playerkeeper.team] = playerkeeper;
+    
     
     var versuskeeper =  JSON.parse(window.localStorage.getItem("versuskeeper"));
     game.keeper[versuskeeper.team] = versuskeeper;
