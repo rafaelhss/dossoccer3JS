@@ -206,8 +206,7 @@
                 border-radius: 5%;
             }
             #holderinfo{
-                height: 70%;
-                width: auto; 
+                height: 70%; 
                 width: 100%;
                 padding-top: 10px;
                 display: flex;
@@ -215,38 +214,39 @@
                 align-items: center;
             }
             #avatar{
-                font-size: 1000%;
-                width: 40%;
+                width: 50%;
+                font-size: 1200%;
             }
-            .stats{
-                border-radius: 10%;
-                padding: 10px;
-                font-size: 100%;
-                justify-content: center;
-                align-items: center;
-                flex-grow: 0.7;
-                height: 50%;
+            #stats{
+                width: 25%;
+                height: inherit;
+                font-size: 170%;
             }
             .stat{
-                width: 100%;
-                height: 33%;
                 color: #CCCCCC;
-                text-shadow: 0 0 3px #777777;
-                font-size: 200%;
-                display: flex;
-                /*background-color: crimson;*/
-                justify-content: left;
-                align-items: center;
+                text-shadow: 0 0 3px #777777;  
+                
             }
             .statvalue{
-                background-color: chartreuse;
-                width: 40%;
+                background-color: #00FF99;
+                box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
+                border-radius: 10%
             }
             .player{
-                margin-right: 10%;
+                padding: 5px;
                 font: bold italic;
                 color: #CCCCCC;
+                font-size: 200%;
             }
+            
+            .playerdown{
+                margin-right: 10%;
+                font: bold italic;
+                opacity: 50%;
+                color: #222222;
+                text-decoration: line-through;
+            }
+            
             
             .playerx{
                  text-shadow: 1px 1px 2px #0000FF, 0 0 25px #0000FF, 0 0 5px #0000FF;
@@ -296,10 +296,13 @@
                                 <div id="avatar">
                                     <ion-icon name="walk"></ion-icon>
                                 </div>
-                                <div class="stats">
-                                    <div class="stat">attk: 8<div class="statvalue" id="att"></div></div>
-                                    <div class="stat">deff: 4<span id="def"></span></div>
-                                    <div class="stat">pass: 7<span id="pass"></span></div>
+                                <div id="stats">
+                                    <div class="stat">att</div>
+                                    <div class="statvalue" id="att">8</div>
+                                    <div class="stat">deff</div>
+                                    <div class="statvalue" id="def">5</div>
+                                    <div class="stat">pass</div>
+                                    <div class="statvalue" id="pass">2</div>
                                 </div>
                             </div>
                             <div id="name">Frubbao 2</div>
@@ -307,31 +310,31 @@
                         <div id="field" class="field">
                             <div class="keepercol" id="keeperx">.</div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector0"></div>
-                                <div class="sector sectorunselect" id="sector1"></div>
+                                <div class="sector sectorunselect" id="sector0"><div></div></div>
+                                <div class="sector sectorunselect" id="sector1"><div></div></div>
                             </div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector2"></div>
-                                <div class="sector sectorunselect" id="sector3"></div>
+                                <div class="sector sectorunselect" id="sector2"><div></div></div>
+                                <div class="sector sectorunselect" id="sector3"><div></div></div>
                             </div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector4"></div>
-                                <div class="sector sectorunselect" id="sector5"></div>
+                                <div class="sector sectorunselect" id="sector4"><div></div></div>
+                                <div class="sector sectorunselect" id="sector5"><div></div></div>
                             </div>
                             <div class="keepercol" id="keepero">.</div>
                         </div>
                         <div id="chances">
                             <div>
                                 <div class="chance">
-                                    <div><img src="img/move.png"  id="imgchance1"></div>
+                                    <div><img src="img/dibre.png"  id="imgchance1"></div>
                                     <div id="chance1" class="chancevalue">40%</div>
                                 </div>
                                 <div class="chance">
-                                    <div><img src="img/move2.png" id="imgchance2"></div>
+                                    <div><img src="img/dibre.png" id="imgchance2"></div>
                                     <div id="chance2" class="chancevalue">10%</div>
                                 </div>
                                 <div class="chance">
-                                    <div><img src="img/move3.png" id="imgchance3"></div>
+                                    <div><img src="img/dibre.png" id="imgchance3"></div>
                                     <div id="chance3" class="chancevalue">77%</div>
                                 </div>
                             </div>

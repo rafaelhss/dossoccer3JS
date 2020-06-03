@@ -9,6 +9,7 @@ function getPlayersSector(destSector, team){
     game.field.forEach(function(player){
         if(player.sector == destSector && player.team == team){
             var down = false;
+            //console.log("game.playersdown: " + game.playersdown.length)
             game.playersdown.forEach(function(playerdown){
                 if(playerdown.id == player.id){
                     down = true;
@@ -24,23 +25,18 @@ function getPlayersSector(destSector, team){
 
 function getPlayer(sector, team) {
     var destPlayer = false;
-    game.field.forEach(function(player){
-        if(player.sector == sector && player.team == team){
-            var down = false;
-            game.playersdown.forEach(function(playerdown){
-                if(playerdown.id == player.id){
-                    down = true;
-                }
-            })
-            if(!down){
-                destPlayer = player;    
-            }
-        }
-        
-       /* if(!destPlayer && player.sector == sector && player.team != team){
-            destPlayer = player;    
-        }*/
+    
+    
+    var players = game.field.filter(function(player) {
+        return !game.playersdown.includes(player) && 
+               player.sector == sector 
+               && player.team == team;
     });
+    
+    if(players.length > 0){
+        destPlayer = players[0];
+    }
+    
     return destPlayer;
 }
 
@@ -63,10 +59,18 @@ function applyActionResult(actionResult){
     }
         
     if(actionResult.playerdown){
+        console.log("agendando");
         game.playersdown.push(actionResult.playerdown);
-    } else {
-        resetOffPlayers();
-    }
+        setTimeout(function(){
+            waitdibre(actionResult.playerdown);
+        }, GAME_WAIT_DIBRE)
+    } 
+}
+
+function waitdibre(player){
+    console.log("Levantou: " + game.playersdown.length);
+    game.playersdown = game.playersdown.filter(function(el) { return el.id != player.id; }); 
+    console.log(game.playersdown.length);
 }
 
 function runCommand(evt, team){
@@ -81,18 +85,13 @@ function runCommand(evt, team){
         return actionResult;
         
     } else if (evt.detail.cmd == "shot"){
-        console.log("cmdinput shot: " + team)
         
         actionResult = shotProcess(team);
         applyActionResult(actionResult);
         
-         if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
         return actionResult;
         
     } else  if (evt.detail.cmd == "dibre"){
-        console.log("cmdinput dibre: " + team)
         
         actionResult = dibreProcess(team);
         

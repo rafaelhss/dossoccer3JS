@@ -93,7 +93,7 @@
                 if(destPlayer) {
                     if(destPlayer.team == game.ballholder.team){
                         var passerPass = game.ballholder.pass;
-                        var destPass= destPlayer.pass;
+                        var destPass = destPlayer.pass;
                         
                         var defenders = getPlayersSector(destSector, getOpposingTeam(game.ballholder.team));
                         var deff = 0;

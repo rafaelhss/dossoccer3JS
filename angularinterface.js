@@ -4,7 +4,10 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope/*, $interval*/) {
     
     
-    //$scope.gameon = true;
+    $scope.gameon = true;
+    rungame();
+    
+    
     $scope.sound = false;
     
     $scope.playerteamname = window.localStorage.getItem("playerteamname");

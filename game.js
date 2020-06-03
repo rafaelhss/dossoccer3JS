@@ -4,6 +4,8 @@ function rungame(){
     initcmd();
     
     document.addEventListener("cmdinput", function(evt){
+        //var actionResult = runCommand(evt, game.ballholder.team);//DEBUG
+        
         var actionResult = runCommand(evt, TEAMX);//jogador eh sempre o X
         processActionResult(actionResult);
     });
@@ -15,7 +17,7 @@ function rungame(){
     
     setInterval(function(){
         processActionResult(tickOpponent());
-    }, 1500);
+    }, GAME_IA_INTERVAL);
     
     
     setInterval(function(){

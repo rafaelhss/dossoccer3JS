@@ -1,10 +1,16 @@
 function kickoff(){
     
-    game.field.forEach(function(player){
+    game.field.forEach(function(player, index){
         var secname = "sector" + player.sector;
-        var sector = document.getElementById(secname);
+        var sector = document.getElementById(secname).firstChild;
         //var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
-        var tag = "<span class=\"player @@CLASS@@\" name=\"person\">"+ player.number +"</span><p>";
+        var tag = "<span class=\"player @@CLASS@@\" name=\"person\" id=\"player"+ player.id +"\">"+ player.number +"</span>";
+        
+        if((index > 0) && ((index % 2) == 0)){
+            tag += "</div><div>"
+        }
+        
+        
         if(player.team == TEAMX){
            tag = tag.replace("@@CLASS@@","playerx");
         } else {

@@ -3,7 +3,9 @@ var minShotChance = 0.4;
 
 
 function tickOpponent(){
+   
     var team = getOpposingTeam(game.playerteam);
+   
    // console.log("ia para time "+ team)
     var actionresult = dibreProcess(team);
     if(actionresult.chance > minDibreChance){
@@ -27,6 +29,8 @@ function tickOpponent(){
         //    console.log(actionresult);
         }
     }
+    
+
     applyActionResult(actionresult);
     return(actionresult);
 }

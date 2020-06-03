@@ -14,11 +14,6 @@ function dibreProcess(team){
                 actionResult.chance = chance;
                 var random = Math.random();
                 var success = (random < chance);
-                //console.log("deff: " + deff)
-                //console.log("att: " + att)
-                //console.log("chance: " + chance)
-                //console.log("random: " + random)
-                //console.log("passou: " + (random < chance))
                 
                 if(success) {
                     actionResult.playerdown = defender;

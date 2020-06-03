@@ -29,9 +29,7 @@ function shotGetSectorsAhead(){
 }
 
 function shotProcess(team){
-     if((game.keeper['x'].team == game.keeper['o'].team)){
-            console.log("XXXXXXXXXXXXXXXXXXXX")
-        }
+
         var actionResult = {"team":team};
         actionResult.events = [];
         actionResult.scoreo = game.scoreo;

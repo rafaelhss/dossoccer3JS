@@ -137,14 +137,24 @@ function updatescore(evt){
 var matchtime = 90;
 
 document.addEventListener("matchtimetick", function(evt){
-    console.log("got");
     var time = Number(evt.detail.time);
     matchtime = Math.round((time * 90) / GAME_DUR_MIN);
     if(matchtime < 0) {
         matchtime = 0;
     }
     document.getElementById("matchtime").innerHTML = matchtime + "'";
+    updateDownPlayers();
 });
+
+function updateDownPlayers(){
+    [].forEach.call(document.getElementsByClassName("player"),function(player){
+        player.classList.remove("playerdown");        
+    });
+    game.playersdown.forEach(function(player){
+        document.getElementById("player" + player.id).classList.add("playerdown");        
+    });
+};
+
 
 
 function processActionResult(actionResult){

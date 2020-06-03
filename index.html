@@ -16,7 +16,7 @@
         function rand(n){
             return Math.floor(Math.random() * n);
         } 
-        function choseteam(team){
+        function choseteamrand(team){
             var field = [];
             for (let i = 2; i <= 11; ++i){
                 var player2 = { 
@@ -87,13 +87,294 @@
             
             window.location.replace("gamemobile.html");
         }
+        
+        
+        function getJPJr(team){
+            var field = [];
+            
+            field.push({ 
+                        name: "Roma",
+                        number: 2,
+                        defense:6, 
+                        pass:6, 
+                        attack:4, 
+                        team: team, 
+                        sector:5,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Davi",
+                        number: 3,
+                        defense:4, 
+                        pass:4, 
+                        attack:2, 
+                        team: team, 
+                        sector:5,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Tuca",
+                        number: 4,
+                        defense:6, 
+                        pass:8, 
+                        attack:5, 
+                        team: team, 
+                        sector:4,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Oreia",
+                        number: 6,
+                        defense:5, 
+                        pass:5, 
+                        attack:7, 
+                        team: team, 
+                        sector:4,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Junilza",
+                        number: 8,
+                        defense:8, 
+                        pass:9, 
+                        attack:7, 
+                        team: team, 
+                        sector:3,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Renato Amaral",
+                        number: 10,
+                        defense:4, 
+                        pass:6, 
+                        attack:6, 
+                        team: team, 
+                        sector:3,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Gut",
+                        number: 11,
+                        defense:6, 
+                        pass:7, 
+                        attack:8, 
+                        team: team, 
+                        sector:2,
+                        id: rand(100)*rand(100)
+                        }); 
+            field.push({ 
+                        name: "Panda",
+                        number: 5,
+                        defense:4, 
+                        pass:4, 
+                        attack:4, 
+                        team: team, 
+                        sector:2,
+                        id: rand(100)*rand(100)
+                        }); 
+            field.push({ 
+                        name: "Bolinha",
+                        number: 7,
+                        defense:4, 
+                        pass:5, 
+                        attack:6, 
+                        team: team, 
+                        sector:1,
+                        id: rand(100)*rand(100)
+                        });     
+            field.push({ 
+                        name: "Rafinha",
+                        number: 9,
+                        defense:4, 
+                        pass:5, 
+                        attack:5, 
+                        team: team, 
+                        sector:0,
+                        id: rand(100)*rand(100)
+                        });             
+            
+    
+            return field;
+        }
+    
+        
+        function getJPSr(team){
+            var field = [];
+            
+            field.push({ 
+                        name: "Frubbao",
+                        number: 2,
+                        defense:6, 
+                        pass:6, 
+                        attack:4, 
+                        team: team, 
+                        sector:1,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Leite",
+                        number: 3,
+                        defense:4, 
+                        pass:4, 
+                        attack:2, 
+                        team: team, 
+                        sector:1,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Remo",
+                        number: 4,
+                        defense:6, 
+                        pass:8, 
+                        attack:5, 
+                        team: team, 
+                        sector:0,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "IgorTog",
+                        number: 6,
+                        defense:5, 
+                        pass:5, 
+                        attack:7, 
+                        team: team, 
+                        sector:0,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Rosca",
+                        number: 8,
+                        defense:8, 
+                        pass:9, 
+                        attack:7, 
+                        team: team, 
+                        sector:2,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Fred",
+                        number: 10,
+                        defense:4, 
+                        pass:6, 
+                        attack:6, 
+                        team: team, 
+                        sector:2,
+                        id: rand(100)*rand(100)
+                        });
+            field.push({ 
+                        name: "Brunao",
+                        number: 11,
+                        defense:6, 
+                        pass:7, 
+                        attack:8, 
+                        team: team, 
+                        sector:3,
+                        id: rand(100)*rand(100)
+                        }); 
+            field.push({ 
+                        name: "kaka",
+                        number: 5,
+                        defense:4, 
+                        pass:4, 
+                        attack:4, 
+                        team: team, 
+                        sector:3,
+                        id: rand(100)*rand(100)
+                        }); 
+            field.push({ 
+                        name: "Tokin",
+                        number: 7,
+                        defense:4, 
+                        pass:5, 
+                        attack:6, 
+                        team: team, 
+                        sector:4,
+                        id: rand(100)*rand(100)
+                        });     
+            field.push({ 
+                        name: "Marcelao",
+                        number: 9,
+                        defense:4, 
+                        pass:5, 
+                        attack:5, 
+                        team: team, 
+                        sector:5,
+                        id: rand(100)*rand(100)
+                        });             
+            
+    
+            return field;
+        }
+        
+        
+        function choseteamrand(team){
+            
+          /*  for (let i = 2; i <= 11; ++i){
+                var player2 = { 
+                                    name: "joao" + i,
+                                    number: i,
+                                    defense:rand(10), 
+                                    pass:rand(10), 
+                                    attack:rand(10), 
+                                    team: team, 
+                                    sector:rand(6),
+                                    id: rand(100)*rand(100)
+                                };
+                field.push(player2);
+            }*/
+            var field = getJPSr(team);
+            window.localStorage.setItem("playerfield", JSON.stringify(field));
+            
+            field = []; 
+            var oposingTeam = getOpposingTeam(team);
+            field = getJPJr(oposingTeam);
+            
+            window.localStorage.setItem("versusfield", JSON.stringify(field));
+            
+            window.localStorage.setItem("playerkeeper",JSON.stringify( 
+                                                            { 
+                                                                name: 1,
+                                                                number: 1,
+                                                                pass: 10,
+                                                                attack:0,
+                                                                defense:rand(10), 
+                                                                team: team, 
+                                                                sector:-1,
+                                                                id: rand(100)*rand(100)                            
+                                                            })
+                                       );
+            
+            window.localStorage.setItem("versuskeeper",JSON.stringify( 
+                                                            { 
+                                                                name: 1,
+                                                                number: 1,
+                                                                pass: 10,
+                                                                attack:0,
+                                                                defense:rand(10), 
+                                                                team: oposingTeam, 
+                                                                sector:-2,
+                                                                id: rand(100)*rand(100)                            
+                                                            })
+                                       );
+            
+            
+            
+            
+            
+            
+            
+            window.localStorage.setItem("playerteamname","Jotape Senior");
+            window.localStorage.setItem("opposingteamname","Jotape Junior");
+            
+            window.location.replace("gamemobile.html");
+        }
     </script>
     <h1>Escolha seu time</h1>
     <center>
-        <button class="teamo" onclick="choseteam('o')">
+        <button class="teamo" onclick="choseteamrand('o')">
             TEAM O
         </button>
-        <button class="teamx" onclick="choseteam('x')">
+        <button class="teamx" onclick="choseteamrand('x')">
             TEAM X
         </button>
     </center>
