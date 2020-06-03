@@ -16,7 +16,11 @@ function rungame(){
     processActionResult(actionResult);
     
     setInterval(function(){
-        processActionResult(tickOpponent());
+        var actionresult = tickOpponent();
+        if(actionresult != undefined){
+            applyActionResult(actionresult);
+            processActionResult(actionresult);   
+        }
     }, GAME_IA_INTERVAL);
     
     

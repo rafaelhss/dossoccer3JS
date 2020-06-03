@@ -254,6 +254,35 @@
             .playero{
                  text-shadow: 1px 1px 2px #FF0000, 0 0 25px #FF0000, 0 0 5px #FF0000;
             }
+            #goal{
+                display: none;
+                background-image: linear-gradient(#002200, #339933, #002200);
+                width: 103%;
+            }
+            #goaltext{
+                font-size: 1300%;   
+                text-shadow: 10px 10px 20px #CCCC00, 25px 25px 25px #FFFF00, 20px -20px 5px #FFCC00;
+                color: #FFFF66;
+                -webkit-text-stroke: 5px #EEEEEE;
+                animation: shake 0.6s;
+                animation-iteration-count: infinite;
+                
+                
+            }
+
+            @keyframes shake {
+                  0% { transform: translate(1px, 1px) rotate(0deg); }
+                  10% { transform: translate(-1px, -2px) rotate(-2deg); }
+                  20% { transform: translate(-3px, 0px) rotate(2deg); }
+                  30% { transform: translate(3px, 2px) rotate(0deg); }
+                  40% { transform: translate(1px, -1px) rotate(2deg); }
+                  50% { transform: translate(-1px, 2px) rotate(-2deg); }
+                  60% { transform: translate(-3px, 1px) rotate(0deg); }
+                  70% { transform: translate(3px, 1px) rotate(-2deg); }
+                  80% { transform: translate(-1px, -1px) rotate(2deg); }
+                  90% { transform: translate(1px, 2px) rotate(0deg); }
+                  100% { transform: translate(1px, -2px) rotate(-2deg); }
+                }
             
             
         </style>
@@ -305,7 +334,7 @@
                                     <div class="statvalue" id="pass">2</div>
                                 </div>
                             </div>
-                            <div id="name">Frubbao 2</div>
+                            <div id="name"></div>
                         </div>
                         <div id="field" class="field">
                             <div class="keepercol" id="keeperx">.</div>
@@ -342,6 +371,10 @@
                         </div>
                     </div>    
                 </div>
+                <div class="area" id="goal">
+                    <div id="goaltext">GoOoOoL</div>                
+                </div>
+                
                 <div class="area">
                     <div id="terminal">
                         <div class="actionmsgtable" id="actionmsgtable1"></div>

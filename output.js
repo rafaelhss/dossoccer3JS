@@ -120,18 +120,21 @@ function showChances(team, ballholderteam){
 }
 
 function updatescore(evt){
-  /*  if(evt.command == ACTION_SHOT){
+    if(evt.command == ACTION_SHOT){
         if(evt.status == ACTION_SUCCESS){
-            if(evt.actor.team == TEAMX){
-                document.getElementById("scorex").style.opacity     
-            }
-            
+            var goal = document.getElementById("goal")
+            goal.style.display = "block";
+            setTimeout(function(){
+                document.getElementById("goal").style.display = "none";
+            },GAME_GOAL_DUR);
         }
-    }*/
+    }
     //soltar animacao
     
     document.getElementById("scorex").innerHTML = game.scorex;
     document.getElementById("scoreo").innerHTML = game.scoreo;
+    
+
     
 }
 var matchtime = 90;

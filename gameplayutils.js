@@ -59,7 +59,6 @@ function applyActionResult(actionResult){
     }
         
     if(actionResult.playerdown){
-        console.log("agendando");
         game.playersdown.push(actionResult.playerdown);
         setTimeout(function(){
             waitdibre(actionResult.playerdown);
@@ -68,9 +67,7 @@ function applyActionResult(actionResult){
 }
 
 function waitdibre(player){
-    console.log("Levantou: " + game.playersdown.length);
     game.playersdown = game.playersdown.filter(function(el) { return el.id != player.id; }); 
-    console.log(game.playersdown.length);
 }
 
 function runCommand(evt, team){

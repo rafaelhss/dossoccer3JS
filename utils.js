@@ -16,19 +16,4 @@ var getchances = function(team){
                       ]
     }
 
-var getActions = function(team){
-    return [passProcess(team,-1,-1),
-            passProcess(team,0,-1),
-            passProcess(team,1,-1),
-            passProcess(team,-1,0),
 
-            dibreProcess(team),
-
-            passProcess(team,1,0),
-            passProcess(team,-1,1),
-            passProcess(team,0,1),
-            passProcess(team,1,1),
-
-            shotProcess(team,-1,0)
-          ]
-}
