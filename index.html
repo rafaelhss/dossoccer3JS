@@ -1,10 +1,16 @@
 <html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="js/consts.js"></script>
     <script src="js/gameplayutils.js"></script>
     <script src="js/teams/jotapejr.js"></script>
     <script src="js/teams/jotapesr.js"></script>
+    
+    <script src="js/escenarios/escenarios.js"></script>
+    <script src="js/menu/angularmenuescenarios.js"></script>
+    
     <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    
         
     
     <style>
@@ -61,13 +67,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
         .scorenumber{
-            width: 10%;
             font-size: 500%;   
             text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
         }
         .teamname{
+            
             width: 40%;
             font-size: 300%;
             word-wrap:break-word;
@@ -91,238 +98,42 @@
         }
     </style>    
     <script>
-        function invertSectors(team){
-            var newfield = [];
-            team.field.forEach(function(player){
-                if(player.sector == 0){player.sector = 5}
-                else if(player.sector == 1){player.sector = 4}
-                else if(player.sector == 2){player.sector = 3}
-                else if(player.sector == 3){player.sector = 2}
-                else if(player.sector == 4){player.sector = 1}
-                else if(player.sector == 5){player.sector = 0}
-                newfield.push(player);
-            });
-            team.field = newfield;
-            return team;
-        }
-        
-        function setTeams(teamx, teamo){
-            
-            teamo = invertSectors(teamo);
-            
-            
-            window.localStorage.setItem("playerfield", JSON.stringify(teamx.field));
-            window.localStorage.setItem("playerkeeper",JSON.stringify(teamx.keeper));
-            
-            window.localStorage.setItem("versusfield", JSON.stringify(teamo.field));
-            window.localStorage.setItem("versuskeeper",JSON.stringify(teamo.keeper));
-            
-            
-            window.localStorage.setItem("playerteamname",teamx.name);
-            window.localStorage.setItem("opposingteamname",teamo.name);
-            
-        }
-        
-        function chose(team){
-            
-            var teamx = {}; 
-            var teamo = {};
-            if(team == 'sr'){
-                teamx = getJPSr(TEAMX);
-                teamo = getJPJr(getOpposingTeam(TEAMX));
-            } else {
-                teamx = getJPJr(TEAMX);
-                teamo = getJPSr(getOpposingTeam(TEAMX));
-            }
-            
-            setTeams(teamx, teamo);
-            
-            window.location.replace("gamemobile.html");
-        }
     </script>
     <div id="logo">
         <div class="logotxt">DosSoccer</div> <div class="logotxt" id="logo3">3</div>
     </div>
     <div id="sublogotxt">Escenarios Editon</div>
-    
-    <div id="escenarios">
-        <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div id="escenarios">
+            <div class="escenario" ng-repeat="escenario in escenarios">
+                <div class="panel">
+                    <div class="score">
+                        <div class="teamname" id="playerteamname">{{escenario.playerteamname}}</div>
+                        <div class="scorenumber" id="scorex">{{escenario.scorex}}</div>
+                        <div class="versus">x</div>
+                        <div class="scorenumber" id="scoreo">{{escenario.scoreo}}</div>
+                        <div class="teamname" id="opposingteamname">{{escenario.opposingteamname}}</div>
                     </div>
+                    <div class="matchtime">{{escenario.matchtime}}'</div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-                <div class="escenario">
-            <div class="panel">
-                <div class="score">
-                    <div class="teamname" id="playerteamname">Jotape Junior</div>
-                    <div class="scorenumber" id="scorex">0</div>
-                    <div class="versus">x</div>
-                    <div class="scorenumber" id="scoreo">0</div>
-                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
-                </div>
-                <div class="matchtime">90'</div>
-            </div>
-            
-            <div class="panel">
-                <div class="escenariotxt">2007 - JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
-                <div class="playbox">
-                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                    <div class="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
-                        <ion-icon name="star-outline"></ion-icon>
+
+                <div class="panel">
+                    <div class="escenariotxt">{{escenario.year}} - {{escenario.txt}}</div>
+                    <div class="playbox">
+                        <div class="playbtn" ng-click="chose(escenario)"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                        
+                        <div class="stars">
+                            <ion-icon name="star" ng-show="escenario.star1"></ion-icon>
+                            <ion-icon name="star-outline" ng-hide="escenario.star1"></ion-icon>
+                            <ion-icon name="star" ng-show="escenario.star2"></ion-icon>
+                            <ion-icon name="star-outline" ng-hide="escenario.star2"></ion-icon>
+                            <ion-icon name="star" ng-show="escenario.star3"></ion-icon>
+                            <ion-icon name="star-outline" ng-hide="escenario.star3"></ion-icon>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <h1>Escolha seu time</h1>
-    <center>
-        <button onclick="chose('jr')">
-            JUNIOR
-        </button>
-        <button onclick="chose('sr')">
-            SENIOR
-        </button>
-    </center>
+    
 </html>

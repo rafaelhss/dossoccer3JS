@@ -106,19 +106,17 @@ function runCommand(evt, team){
 function rand(n){
     return Math.floor(Math.random() * n);
 }  
-function createTestGame(){
+function createGame(escenario){
     
     
     var field = [];
     
-    var playerfield = window.localStorage.getItem("playerfield");
-    playerfield = JSON.parse(playerfield);
+    var playerfield = escenario.teamx.field;
     playerfield.forEach(function(player2){
                             field.push(player2);
                         })   
     
-    var versusfield = window.localStorage.getItem("versusfield");
-    versusfield = JSON.parse(versusfield);
+    var versusfield = escenario.teamo.field;
     versusfield.forEach(function(player2){
                             field.push(player2);
                         })   
@@ -128,21 +126,21 @@ function createTestGame(){
     game.playersdown = [];
     game.ballholder = field[rand(20)];
     game.field = field;
-    game.scorex = 0;
-    game.scoreo = 0;
+    game.scorex = escenario.scorex;
+    game.scoreo = escenario.scoreo;
     window.localStorage.setItem("scorex", game.scorex)
     window.localStorage.setItem("scoreo", game.scoreo)
     game.keeper = [];
     
-    var playerkeeper =  JSON.parse(window.localStorage.getItem("playerkeeper"));
+    var playerkeeper =  escenario.teamx.keeper;
     game.keeper[playerkeeper.team] = playerkeeper;
     
     
-    var versuskeeper =  JSON.parse(window.localStorage.getItem("versuskeeper"));
+    var versuskeeper =  escenario.teamo.keeper;
     game.keeper[versuskeeper.team] = versuskeeper;
     
     
-    game.matchtime = GAME_DUR_MIN;
+    game.matchtime = escenario.matchtime * 60 / 90;
     
     return game;
 }

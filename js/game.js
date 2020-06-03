@@ -10,7 +10,10 @@ function rungame(){
         processActionResult(actionResult);
     });
     
-    game = createTestGame();  
+    var escenario = JSON.parse(window.localStorage.getItem("escenario"));
+    console.log(escenario);
+    
+    game = createGame(escenario);  
         
     var actionResult = kickoff(game);
     processActionResult(actionResult);
@@ -26,8 +29,9 @@ function rungame(){
      
     setInterval(function(){
             
-            game.matchtime = game.matchtime - 1;
+            game.matchtime = Math.floor(game.matchtime - 1);
             document.dispatchEvent(new CustomEvent("matchtimetick", {detail:{"time":game.matchtime}}));
+            
             if(game.matchtime == 0 ) {
                 var actionResult = gameover(game);
                 processActionResult(actionResult);   
@@ -35,7 +39,6 @@ function rungame(){
                 setTimeout(function(){
                     window.location.replace("gameover.html");
                 },3000)
-                
             }
         }, 1000 )
 }

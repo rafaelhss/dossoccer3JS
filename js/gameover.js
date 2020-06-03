@@ -1,4 +1,13 @@
-function gameover(){
+function gameover(game){
+    
+    
+    
+    var result ={};
+    result.scorex = game.scorex;
+    result.scoreo = game.scoreo;
+    
+    window.localStorage.setItem("result", JSON.stringify(result));
+    
     var actionResult = {};
     actionResult.events = [];
     actionResult.chance = 1;

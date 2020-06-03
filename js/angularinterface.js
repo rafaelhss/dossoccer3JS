@@ -10,8 +10,11 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
     
     $scope.sound = false;
     
-    $scope.playerteamname = window.localStorage.getItem("playerteamname");
-    $scope.opposingteamname =  window.localStorage.getItem("opposingteamname");
+    var escenario = JSON.parse(window.localStorage.getItem("escenario"));
+
+    
+    $scope.playerteamname = escenario.playerteamname;
+    $scope.opposingteamname =  escenario.opposingteamname;
     
     
     $scope.go = function(){

@@ -1,43 +1,172 @@
 <html>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>    
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/escenarios/escenarios.js"></script>
+    
+    
     <style>
-        .teamx{
-            color: blue;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #002200;
+            font-family: "Comic Sans MS", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
         }
-        .teamo{
-            color: red;
+        #conteiner{
+            height: 100%;
+            width: 100%;
+            text-align: center;
         }
-        .playeroff {
-            text-decoration: line-through;
+        #conteiner div{
+            margin-top: 20px;
+        }
+        #timeup{
+            background-image: linear-gradient(#002200, #339933, #002200);
+            height: 100%;
+            width: 100%;
+        }
+        #timeuptxt{
+            font-size: 1000%;   
+            text-shadow: 5px 5px 10px #CCCC00, 15px 15px 15px #FFFF00, 10px -10px 5px #FFCC00;
+            color: #FFFF66;
+            -webkit-text-stroke: 5px #EEEEEE;
+            animation: shake 0.6s;
+            animation-iteration-count: infinite;
+        }
+        .score{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .scorenumber{
+            font-size: 500%;   
+            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+        }
+        .teamname{
+            width: 40%;
+            font-size: 500%;
+            word-wrap:break-word;
+        }
+        .versus{
+            font-size: 300%;   
+            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+        }
+        .panel{
+            height: 10%;
+            display: flex;
+            color: #CCCCCC;
+        }
+        #txt{
+            width: 100%;
+            font-size: 250%;
+            color: #DDDD00;
+            text-align: justify
+        }
+        
+        .stars{
+            font-size: 900%;
+            color: #DDDD00;
+        }
+        #continue{
+            font-size: 300%;   
+            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+        }
+                /* unvisited link */
+        a:link {
+          color: #DDDD00;
+            text-decoration: none;
+        }
+
+        /* visited link */
+        a:visited {
+          color: #DDDD00;
+            text-decoration: none;
+        }
+
+        /* mouse over link */
+        a:hover {
+          color: #DDDD00;
+            text-decoration: none;
+        }
+
+        /* selected link */
+        a:active {
+          color: #DDDD00;
+            text-decoration: none;
         }
     </style> 
-    <h1>GAME OVER</h1>
-    <div ng-app="myApp" ng-controller="myCtrl">
-        <div>
-            <h1>
-                <table border="0">
-                    <tr>
-                    <td class="teamx">Team X</td>
-                    <td>{{scorex}}</td>
-                    <td>X</td>
-                    <td>{{scoreo}}</td>
-                    <td class="teamo">Team O</td>
-                    </tr>
-                </table>
-            </h1>
+    <div id="conteiner">
+        <div id="timeup">
+            <div id="timeuptxt">TimeUp</div> 
         </div>
+        <div ng-app="myApp" ng-controller="myCtrl">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">{{escenario.playerteamname}}</div>
+                    <div class="scorenumber" id="scorex">{{result.scorex}}</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">{{result.scoreo}}</div>
+                    <div class="teamname" id="opposingteamname">{{escenario.opposingteamname}}</div>
+                </div>
+            </div>
+            <div>
+                <div id="txt">{{text}}</div>
+            </div>
+            <div class="stars">
+                <ion-icon name="star"></ion-icon>
+                
+                <ion-icon name="star" ng-show="star2"></ion-icon>
+                <ion-icon name="star-outline" ng-hide="star2"></ion-icon>
+                
+                <ion-icon name="star" ng-show="star3"></ion-icon>
+                <ion-icon name="star-outline" ng-hide="star3"></ion-icon>
+        
+            </div>
+        </div>
+        <div id="continue">
+            <a href="index.html">Continue</a>
+        </div>
+        
     </div>
-    <a href="index.html">novo</a>
     <script>    
     
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope/*, $interval*/) {
             
-            $scope.scorex = window.localStorage.getItem("scorex");
-            $scope.scoreo = window.localStorage.getItem("scoreo");
+            $scope.escenario = JSON.parse(window.localStorage.getItem("escenario"));
+            $scope.result = JSON.parse(window.localStorage.getItem("result"));
             
-            window.localStorage.setItem("scoreo",0);
-            window.localStorage.setItem("scorex",0);
+            var stars = 1;
+            if($scope.result.scorex > $scope.result.scoreo){
+                $scope.text = $scope.escenario.txtwin;
+                $scope.star2 = true;
+                $scope.star3 = true;
+                stars = 3;
+            } else if ($scope.result.scorex < $scope.result.scoreo) {
+                $scope.text = $scope.escenario.txtloss;
+                $scope.star2 = false;
+                $scope.star3 = false;
+                stars = 1;
+            } else {
+                $scope.text = $scope.escenario.txtdraw;
+                $scope.star2 = true;
+                $scope.star3 = false;
+                stars = 2;
+            }
+            
+            var oldstars = window.localStorage.getItem(getescenariokey($scope.escenario));
+
+            if(stars > oldstars) {
+                window.localStorage.setItem(getescenariokey($scope.escenario),stars);
+            }
+            
+            
             
         });
    
