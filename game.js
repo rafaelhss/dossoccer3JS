@@ -16,14 +16,14 @@ function rungame(){
     processActionResult(actionResult);
     
     setInterval(function(){
-        var actionresult = tickOpponent();
+        var actionresult = tickOpponent(TEAMO);
         if(actionresult != undefined){
             applyActionResult(actionresult);
             processActionResult(actionresult);   
         }
     }, GAME_IA_INTERVAL);
     
-    
+     
     setInterval(function(){
             
             game.matchtime = game.matchtime - 1;

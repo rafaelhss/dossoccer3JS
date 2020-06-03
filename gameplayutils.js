@@ -34,7 +34,8 @@ function getPlayer(sector, team) {
     });
     
     if(players.length > 0){
-        destPlayer = players[0];
+        var i = Math.floor((Math.random() * players.length))
+        destPlayer = players[i];
     }
     
     return destPlayer;

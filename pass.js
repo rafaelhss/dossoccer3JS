@@ -172,7 +172,7 @@
                     "detail":[ACTION_PASS_OFFBOUNDS]
                 });
                 actionResult.newBallholder = game.keeper[getOpposingTeam(game.ballholder.team)];
-                console.log("Passe pra fora do campo: " + axisx + axisy);
+            //    console.log("Passe pra fora do campo: " + axisx + axisy);
             }
         } else {
          //   console.log("Nao posso passar pq nao estou com a bola. game.ballholder.team: " + game.ballholder.team + " team: "+team);
