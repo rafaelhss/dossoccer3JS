@@ -1,381 +1,328 @@
 <html>
-    <script src="consts.js"></script>
-    <script src="gameplayutils.js"></script>
+    <script src="js/consts.js"></script>
+    <script src="js/gameplayutils.js"></script>
+    <script src="js/teams/jotapejr.js"></script>
+    <script src="js/teams/jotapesr.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+        
+    
     <style>
-        .teamx{
-            color: blue;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #002200;
+            font-family: "Comic Sans MS", sans-serif;
         }
-        .teamo{
-            color: red;
+        #logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(#002200, #339933, #002200);
         }
-        .playeroff {
-            text-decoration: line-through;
+        .logotxt{
+            font-size: 1000%;   
+            text-shadow: 10px 10px 20px #CCCC00, 25px 25px 25px #FFFF00, 20px -20px 5px #FFCC00;
+            color: #CCCC00;
+            -webkit-text-stroke: 1px #FFFF4D;
+            font-weight: 999;
+        }
+        #logo3{
+            color: #FFFF66;
+            font-size: 1300%;
+            transform: skewY(20deg);             
+        }
+        #sublogotxt{
+            font-size: 300%;
+            color: #DDDD00;
+            text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+            text-align: right;
+        }
+        
+        .stars{
+            font-size: 300%;
+            color: #DDDD00;
+        }
+        .playbtn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 800%;
+            color: #DDDD00;
+
+        }
+        .escenariotxt{
+            width: 80%;
+            font-size: 250%;
+            color: #DDDD00;
+        }
+        .score{
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .scorenumber{
+            width: 10%;
+            font-size: 500%;   
+            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+        }
+        .teamname{
+            width: 40%;
+            font-size: 300%;
+            word-wrap:break-word;
+        }
+        .versus{
+            font-size: 300%;   
+            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+        }
+        .matchtime{
+            font-size: 700%;
+            text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+        }
+        .panel{
+            height: 10%;
+            display: flex;
+            color: #CCCCCC;
+        }
+        .escenario{
+            margin-top: 50px;
+            background-image: linear-gradient(#002200, #339933, #002200);
         }
     </style>    
     <script>
-        function rand(n){
-            return Math.floor(Math.random() * n);
-        } 
-        function choseteamrand(team){
-            var field = [];
-            for (let i = 2; i <= 11; ++i){
-                var player2 = { 
-                                    name: "joao" + i,
-                                    number: i,
-                                    defense:rand(10), 
-                                    pass:rand(10), 
-                                    attack:rand(10), 
-                                    team: team, 
-                                    sector:rand(6),
-                                    id: rand(100)*rand(100)
-                                };
-                field.push(player2);
+        function invertSectors(team){
+            var newfield = [];
+            team.field.forEach(function(player){
+                if(player.sector == 0){player.sector = 5}
+                else if(player.sector == 1){player.sector = 4}
+                else if(player.sector == 2){player.sector = 3}
+                else if(player.sector == 3){player.sector = 2}
+                else if(player.sector == 4){player.sector = 1}
+                else if(player.sector == 5){player.sector = 0}
+                newfield.push(player);
+            });
+            team.field = newfield;
+            return team;
+        }
+        
+        function setTeams(teamx, teamo){
+            
+            teamo = invertSectors(teamo);
+            
+            
+            window.localStorage.setItem("playerfield", JSON.stringify(teamx.field));
+            window.localStorage.setItem("playerkeeper",JSON.stringify(teamx.keeper));
+            
+            window.localStorage.setItem("versusfield", JSON.stringify(teamo.field));
+            window.localStorage.setItem("versuskeeper",JSON.stringify(teamo.keeper));
+            
+            
+            window.localStorage.setItem("playerteamname",teamx.name);
+            window.localStorage.setItem("opposingteamname",teamo.name);
+            
+        }
+        
+        function chose(team){
+            
+            var teamx = {}; 
+            var teamo = {};
+            if(team == 'sr'){
+                teamx = getJPSr(TEAMX);
+                teamo = getJPJr(getOpposingTeam(TEAMX));
+            } else {
+                teamx = getJPJr(TEAMX);
+                teamo = getJPSr(getOpposingTeam(TEAMX));
             }
-            window.localStorage.setItem("playerfield", JSON.stringify(field));
             
-            field = []; 
-            var oposingTeam = getOpposingTeam(team);
-            for (let i = 2; i <= 11; ++i){
-                var player2 = { 
-                                    name: "jose" + i,
-                                    number: i,
-                                    defense:rand(10), 
-                                    pass:rand(10), 
-                                    attack:rand(10), 
-                                    team: oposingTeam, 
-                                    sector:rand(6),
-                                    id: rand(100)*rand(100)
-                                };
-                field.push(player2);
-            }
-            window.localStorage.setItem("versusfield", JSON.stringify(field));
-            
-            window.localStorage.setItem("playerkeeper",JSON.stringify( 
-                                                            { 
-                                                                name: 1,
-                                                                number: 1,
-                                                                pass: 10,
-                                                                attack:0,
-                                                                defense:rand(10), 
-                                                                team: team, 
-                                                                sector:-1,
-                                                                id: rand(100)*rand(100)                            
-                                                            })
-                                       );
-            
-            window.localStorage.setItem("versuskeeper",JSON.stringify( 
-                                                            { 
-                                                                name: 1,
-                                                                number: 1,
-                                                                pass: 10,
-                                                                attack:0,
-                                                                defense:rand(10), 
-                                                                team: oposingTeam, 
-                                                                sector:-1,
-                                                                id: rand(100)*rand(100)                            
-                                                            })
-                                       );
-            
-            
-            
-            
-            
-            
-            
-            window.localStorage.setItem("playerteamname","Jotape Senior");
-            window.localStorage.setItem("opposingteamname","Jotape Junior");
-            
-            window.location.replace("gamemobile.html");
-        }
-        
-        
-        function getJPJr(team){
-            var field = [];
-            
-            field.push({ 
-                        name: "Roma",
-                        number: 2,
-                        defense:6, 
-                        pass:6, 
-                        attack:4, 
-                        team: team, 
-                        sector:5,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Davi",
-                        number: 3,
-                        defense:4, 
-                        pass:4, 
-                        attack:2, 
-                        team: team, 
-                        sector:5,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Tuca",
-                        number: 4,
-                        defense:6, 
-                        pass:8, 
-                        attack:5, 
-                        team: team, 
-                        sector:4,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Oreia",
-                        number: 6,
-                        defense:5, 
-                        pass:5, 
-                        attack:7, 
-                        team: team, 
-                        sector:4,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Junilza",
-                        number: 8,
-                        defense:8, 
-                        pass:9, 
-                        attack:7, 
-                        team: team, 
-                        sector:3,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Renato Amaral",
-                        number: 10,
-                        defense:4, 
-                        pass:6, 
-                        attack:6, 
-                        team: team, 
-                        sector:3,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Gut",
-                        number: 11,
-                        defense:6, 
-                        pass:7, 
-                        attack:8, 
-                        team: team, 
-                        sector:2,
-                        id: rand(100)*rand(100)
-                        }); 
-            field.push({ 
-                        name: "Gutoca",
-                        number: 5,
-                        defense:4, 
-                        pass:4, 
-                        attack:4, 
-                        team: team, 
-                        sector:2,
-                        id: rand(100)*rand(100)
-                        }); 
-            field.push({ 
-                        name: "Bolinha",
-                        number: 7,
-                        defense:4, 
-                        pass:5, 
-                        attack:6, 
-                        team: team, 
-                        sector:1,
-                        id: rand(100)*rand(100)
-                        });     
-            field.push({ 
-                        name: "Rafinha",
-                        number: 9,
-                        defense:4, 
-                        pass:5, 
-                        attack:5, 
-                        team: team, 
-                        sector:0,
-                        id: rand(100)*rand(100)
-                        });             
-            
-    
-            return field;
-        }
-    
-        
-        function getJPSr(team){
-            var field = [];
-            
-            field.push({ 
-                        name: "Frubbao",
-                        number: 2,
-                        defense:6, 
-                        pass:6, 
-                        attack:4, 
-                        team: team, 
-                        sector:1,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Leite",
-                        number: 3,
-                        defense:4, 
-                        pass:4, 
-                        attack:2, 
-                        team: team, 
-                        sector:1,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Remo",
-                        number: 4,
-                        defense:6, 
-                        pass:8, 
-                        attack:5, 
-                        team: team, 
-                        sector:0,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "IgorTog",
-                        number: 6,
-                        defense:5, 
-                        pass:5, 
-                        attack:7, 
-                        team: team, 
-                        sector:0,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Rosca",
-                        number: 8,
-                        defense:8, 
-                        pass:9, 
-                        attack:7, 
-                        team: team, 
-                        sector:2,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Fred",
-                        number: 10,
-                        defense:4, 
-                        pass:6, 
-                        attack:6, 
-                        team: team, 
-                        sector:2,
-                        id: rand(100)*rand(100)
-                        });
-            field.push({ 
-                        name: "Brunao",
-                        number: 11,
-                        defense:6, 
-                        pass:7, 
-                        attack:8, 
-                        team: team, 
-                        sector:3,
-                        id: rand(100)*rand(100)
-                        }); 
-            field.push({ 
-                        name: "kaka",
-                        number: 5,
-                        defense:4, 
-                        pass:4, 
-                        attack:4, 
-                        team: team, 
-                        sector:3,
-                        id: rand(100)*rand(100)
-                        }); 
-            field.push({ 
-                        name: "Tokin",
-                        number: 7,
-                        defense:4, 
-                        pass:5, 
-                        attack:6, 
-                        team: team, 
-                        sector:4,
-                        id: rand(100)*rand(100)
-                        });     
-            field.push({ 
-                        name: "Marcelao",
-                        number: 9,
-                        defense:4, 
-                        pass:5, 
-                        attack:5, 
-                        team: team, 
-                        sector:5,
-                        id: rand(100)*rand(100)
-                        });             
-            
-    
-            return field;
-        }
-        
-        
-        function choseteamrand(team){
-            
-          /*  for (let i = 2; i <= 11; ++i){
-                var player2 = { 
-                                    name: "joao" + i,
-                                    number: i,
-                                    defense:rand(10), 
-                                    pass:rand(10), 
-                                    attack:rand(10), 
-                                    team: team, 
-                                    sector:rand(6),
-                                    id: rand(100)*rand(100)
-                                };
-                field.push(player2);
-            }*/
-            var field = getJPSr(team);
-            window.localStorage.setItem("playerfield", JSON.stringify(field));
-            
-            field = []; 
-            var oposingTeam = getOpposingTeam(team);
-            field = getJPJr(oposingTeam);
-            
-            window.localStorage.setItem("versusfield", JSON.stringify(field));
-            
-            window.localStorage.setItem("playerkeeper",JSON.stringify( 
-                                                            { 
-                                                                name: "Thomas",
-                                                                number: 1,
-                                                                pass: 10,
-                                                                attack:0,
-                                                                defense:rand(10), 
-                                                                team: team, 
-                                                                sector:-1,
-                                                                id: rand(100)*rand(100)                            
-                                                            })
-                                       );
-            
-            window.localStorage.setItem("versuskeeper",JSON.stringify( 
-                                                            { 
-                                                                name: "Panda",
-                                                                number: 1,
-                                                                pass: 10,
-                                                                attack:0,
-                                                                defense:rand(10), 
-                                                                team: oposingTeam, 
-                                                                sector:-2,
-                                                                id: rand(100)*rand(100)                            
-                                                            })
-                                       );
-            
-            
-            
-            
-            
-            
-            
-            window.localStorage.setItem("playerteamname","Jotape Senior");
-            window.localStorage.setItem("opposingteamname","Jotape Junior");
+            setTeams(teamx, teamo);
             
             window.location.replace("gamemobile.html");
         }
     </script>
+    <div id="logo">
+        <div class="logotxt">DosSoccer</div> <div class="logotxt" id="logo3">3</div>
+    </div>
+    <div id="sublogotxt">Escenarios Editon</div>
+    
+    <div id="escenarios">
+        <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="escenario">
+            <div class="panel">
+                <div class="score">
+                    <div class="teamname" id="playerteamname">Jotape Junior</div>
+                    <div class="scorenumber" id="scorex">0</div>
+                    <div class="versus">x</div>
+                    <div class="scorenumber" id="scoreo">0</div>
+                    <div class="teamname" id="opposingteamname">Jotape Sr</div>
+                </div>
+                <div class="matchtime">90'</div>
+            </div>
+            
+            <div class="panel">
+                <div class="escenariotxt">2007 - JotaPe Junior vem cheio de marra, falando que os Senior sao gordos. Clima tenso. Seniors dizem que os junior so batem punheta.</div>
+                <div class="playbox">
+                    <div class="playbtn" onclick="chose('sr')"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+                    <div class="stars">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h1>Escolha seu time</h1>
     <center>
-        <button class="teamo" onclick="choseteamrand('o')">
-            TEAM O
+        <button onclick="chose('jr')">
+            JUNIOR
         </button>
-        <button class="teamx" onclick="choseteamrand('x')">
-            TEAM X
+        <button onclick="chose('sr')">
+            SENIOR
         </button>
     </center>
 </html>

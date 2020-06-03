@@ -108,7 +108,6 @@ function rand(n){
 }  
 function createTestGame(){
     
-
     
     var field = [];
     
