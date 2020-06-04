@@ -1,7 +1,7 @@
 function getBrasilUruguai93(){
     
     var escenario = {
-        "year":"1989",
+        "year":"1993",
         "playerteamname":"Brasil",
         "opposingteamname":"Uruguai",
         "scorex":0,
