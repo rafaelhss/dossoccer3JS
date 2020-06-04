@@ -37,8 +37,8 @@ function kickoff(){
                     "status": ACTION_SUCCESS,
                     "actor":game.keeper[game.ballholder.team],
                     "actor2": game.keeper[getOpposingTeam(game.ballholder.team)],
-                    "detail": [window.localStorage.getItem("playerteamname"),
-                               window.localStorage.getItem("opposingteamname")]
+                    "detail": [game.playerteamname,
+                               game.opposingteamname]
                 });
     
     return actionResult;

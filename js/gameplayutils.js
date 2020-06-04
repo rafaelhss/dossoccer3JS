@@ -142,6 +142,10 @@ function createGame(escenario){
     
     game.matchtime = escenario.matchtime * 60 / 90;
     
+    game.playerteamname = escenario.playerteamname;
+    game.opposingteamname = escenario.opposingteamname;
+    
+    
     return game;
 }
 
