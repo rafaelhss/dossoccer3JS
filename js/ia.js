@@ -20,7 +20,6 @@ function tickOpponent(team){
                 var maxchance = 0;
                 actionresult = actionResults[0];
                 actionResults.forEach(function(item){
-                    console.log("item.chance: " + item.chance)
                     if(item.chance > maxchance)  {
                         maxchance = item.chance;
                         actionresult = item;

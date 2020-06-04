@@ -11,7 +11,6 @@ function rungame(){
     });
     
     var escenario = JSON.parse(window.localStorage.getItem("escenario"));
-    console.log(escenario);
     
     game = createGame(escenario);  
         

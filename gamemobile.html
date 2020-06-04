@@ -15,7 +15,8 @@
         <script src="js/utils.js"></script>  
         <script src="js/gameover.js"></script>
         <script src="js/game.js"></script>
-        <script src="js/angularinterface.js"></script>
+
+        
         
         
         <style>
@@ -73,7 +74,7 @@
                 width: 20%;
                 text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
             }
-            .panel{
+            #panel{
                 height: 10%;
                 display: flex;
                 color: #CCCCCC;
@@ -266,8 +267,6 @@
                 -webkit-text-stroke: 5px #EEEEEE;
                 animation: shake 0.6s;
                 animation-iteration-count: infinite;
-                
-                
             }
 
             @keyframes shake {
@@ -283,7 +282,19 @@
                   90% { transform: translate(1px, 2px) rotate(0deg); }
                   100% { transform: translate(1px, -2px) rotate(-2deg); }
                 }
-            
+            #help{
+                box-shadow: inset 0 0 2em #777777, 0 0 2em #777777;
+                border-bottom: gray solid 2px;
+                border-top: white solid 2px;
+                border-radius: 2px; 
+                padding: 2%;
+                height: min-content;
+                width: 80%;
+                position: absolute;
+                left: 10%;
+                background-color: beige;
+                font-size: 350%
+            }
             
         </style>
 
@@ -307,7 +318,7 @@
             </div>
             <div ng-show="gameon">
                 <div class ="area">
-                    <div class="panel">
+                    <div id="panel">
                         <div class="score">
                             <div class="teamname" id="playerteamname">{{playerteamname}}</div>
                             <div class="scorenumber" id="scorex">0</div>
@@ -395,7 +406,12 @@
                 <ion-icon name="volume-high" ng-click="voice(false)" ng-show="sound"></ion-icon>
                 <ion-icon name="volume-mute" ng-click="voice(true)" ng-hide="sound"></ion-icon>
             </div>
+            <div ng-click="nexthelp()" id="help">
+                
+            </div>
         </div>
+        
+
         
         <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
@@ -410,5 +426,9 @@
             canvas.height = window.innerHeight * 0.45;
 
         </script>
+        <script src="js/help.js"></script>
+        <script src="js/angularinterface.js"></script>
     </body>
+    
+        
 </html>
