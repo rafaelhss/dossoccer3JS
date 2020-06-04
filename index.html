@@ -1,34 +1,71 @@
-<html>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="js/consts.js"></script>
-    <script src="js/gameplayutils.js"></script>
-    <script src="js/teams/jotapejr.js"></script>
-    <script src="js/teams/jotapesr.js"></script>
-    
-    <script src="js/teams/brasil93.js"></script>
-    <script src="js/teams/liverpool05.js"></script>
-    <script src="js/teams/vasco2000.js"></script>
-    
-    <script src="js/escenarios/escenarios.js"></script>
-    <script src="js/menu/angularmenuescenarios.js"></script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
-    
-        
-    
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/splash.css">  
     <style>
+        
         body {
             margin: 0;
             padding: 0;
             background-color: #002200;
             font-family: "Comic Sans MS", sans-serif;
         }
-        #logo{
-            display: flex;
+        
+        .load {
+          color: #DDDDDD;
+          border-style: solid; 
+          background-color: black;
+        }
+        
+        .anim{
+            position: absolute;
+            top: 30%;
+            visibility: hidden;
+            width: 100%;
+        }
+        .animlogo{
+            position: absolute;
+            top: 30%;
+        }
+        
+        #terminal{
+            width: 100%;
+            height: 30%;
+        }
+        #winbar{
+            border-bottom: gray solid 2px;
+            border-top: white solid 2px;
+            background-image: linear-gradient(to right, #0033CC, #0099FF);
+            width: 100%;
+            height: 10%;
+            text-align: left;
+            color: aliceblue;
+            font-size: 200%;
+        }
+        
+        #blackscreen{
+            display: inline-block;
+            margin:0px;
+            width: 100%;
+            height: 90%;
+            background: black;
+        }
+        .term{
+            color: aliceblue;
+            font-size: 250%;
+        }
+        .text{
+            width: 100%;
+            text-align: center;
+            font-size: 1250%;
+        }
+        
+       .logo{
+            visibility: visible;
             justify-content: center;
             align-items: center;
             background-image: linear-gradient(#002200, #339933, #002200);
+           
+            display: block;
         }
         .logotxt{
             font-size: 1000%;   
@@ -36,11 +73,17 @@
             color: #CCCC00;
             -webkit-text-stroke: 1px #FFFF4D;
             font-weight: 999;
+            width: 100%;
+            text-align: center;
         }
         #logo3{
             color: #FFFF66;
-            font-size: 1300%;
-            transform: skewY(20deg);             
+            font-size: 2300%;
+            transform: skewY(20deg); 
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 35%;
         }
         #sublogotxt{
             font-size: 300%;
@@ -48,96 +91,108 @@
             text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
             text-align: right;
         }
+        .term1{
+            width: 100%;
+            height: 30%;
+        }
         
-        .stars{
-            font-size: 300%;
-            color: #DDDD00;
-        }
-        .playbtn{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 800%;
-            color: #DDDD00;
+     
+        
+    </style>
+</head>
+<body>
+    
 
-        }
-        .escenariotxt{
-            width: 80%;
-            font-size: 250%;
-            color: #DDDD00;
-        }
-        .score{
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .scorenumber{
-            font-size: 500%;   
-            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
-        }
-        .teamname{
-            
-            width: 40%;
-            font-size: 300%;
-            word-wrap:break-word;
-        }
-        .versus{
-            font-size: 300%;   
-            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
-        }
-        .matchtime{
-            font-size: 700%;
-            text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
-        }
-        .panel{
-            height: 10%;
-            display: flex;
-            color: #CCCCCC;
-        }
-        .escenario{
-            margin-top: 50px;
-            background-image: linear-gradient(#002200, #339933, #002200);
-        }
-    </style>    
-    <script>
-    </script>
-    <div id="logo">
-        <div class="logotxt">DosSoccer</div> <div class="logotxt" id="logo3">3</div>
-    </div>
-    <div id="sublogotxt">Escenarios Editon</div>
-    <div ng-app="myApp" ng-controller="myCtrl">
-        <div id="escenarios">
-            <div class="escenario" ng-repeat="escenario in escenarios">
-                <div class="panel">
-                    <div class="score">
-                        <div class="teamname" id="playerteamname">{{escenario.playerteamname}}</div>
-                        <div class="scorenumber" id="scorex">{{escenario.scorex}}</div>
-                        <div class="versus">x</div>
-                        <div class="scorenumber" id="scoreo">{{escenario.scoreo}}</div>
-                        <div class="teamname" id="opposingteamname">{{escenario.opposingteamname}}</div>
-                    </div>
-                    <div class="matchtime">{{escenario.matchtime}}'</div>
-                </div>
 
-                <div class="panel">
-                    <div class="escenariotxt">{{escenario.year}} - {{escenario.txt}}</div>
-                    <div class="playbox">
-                        <div class="playbtn" ng-click="chose(escenario)"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                        
-                        <div class="stars">
-                            <ion-icon name="star" ng-show="escenario.star1"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star1"></ion-icon>
-                            <ion-icon name="star" ng-show="escenario.star2"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star2"></ion-icon>
-                            <ion-icon name="star" ng-show="escenario.star3"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star3"></ion-icon>
+    <div class="container">
+        <div>
+            <div>
+                <a href="escenarios.html">
+
+                    <div class="frame-1 anim">
+                        <div class="load term1">
+                            <pre class="term" id="term1">c:) Doss</pre>
                         </div>
                     </div>
-                </div>
+                    <div class="frame-2 anim text">
+                        Lembra?
+                    </div>
+                    <div id="terminal" class="frame-3 anim">
+                        <div id="winbar">
+                            DosSoccer.exe
+                        </div>
+                        <div class="load">
+                                <pre class="term" id="term">Seedorf domina a bola no meio. <br>Ronaldo livre na area.<br>1 - Bater no gol.<br>2 - Tentar o passe para Ronaldo.<br>:2_<br>Belo passe!<br></pre>
+                        </div>
+                    </div>
+                    <div class="frame-4 anim text">
+                        Ele voltou!
+                    </div>
+                    <div class="logo">
+                        <div class="logotxt animlogo frame-5">DosSoccer</div> 
+                        <div class="logotxt animlogo frame-6" id="logo3">3</div>
+                    </div> 
+                    <div class="frame-7 animlogo text" id="sublogotxt">
+                        Escenarios Edition
+                    </div>
+                </a>
             </div>
         </div>
+               <!--
+            <div  id="logo">
+                <div class="logotxt">
+ 
+                </div> 
+            </div>
+            <div class="frame-2" id="logo">
+                <div class="logotxt" id="logo3">3</div>
+            </div>
+            <div class="frame-3" id="sublogotxt">Escenarios Editon</div>
+          
+         
+            <h2 class="frame-1">This is CSS3</h2>
+            <h2 class="frame-2">No Javascript, No Flash</h2>
+            <h2 class="frame-3">You can stop using pointless amounts of script</h2>
+            <h2 class="frame-4">Now!</h2>
+            <h2 class="frame-5">
+                <span>Save the browser.</span> 
+                <span>Save Bandwidth.</span> 
+                <span>Love CSS3.</span>
+            </h2>
+-->
+        
     </div>
-    
+    <script>
+        
+    type("term1", 'occer.exe');
+    type("term", 'Ronaldo cara a cara com o goleiro @ 1 - bater colocado @ 2 - encher o pe');
+        
+    function type(elem, text){
+        
+        var textarea = document.getElementById(elem);
+        var speed = 50; //Writing speed in milliseconds
+        
+
+        var i = 0;
+
+        runner();
+
+        function runner() {
+          textarea.innerHTML = textarea.innerHTML + (text.charAt(i));
+          i++;
+          setTimeout(
+            function() {
+              if (text.charAt(i) != "@")
+                runner();
+              else {
+                textarea.innerHTML = textarea.innerHTML + "<br>";
+                i++;
+                runner();  
+              }
+            }, Math.floor(Math.random() * 220) + 50);
+        }
+    }
+
+</script>
+</body>
 </html>

@@ -1,26 +1,26 @@
-function getVascoPalmeiras2000(){
+function getBrasilAlemanha2014(){
     
     var escenario = {
-        "year":"2000",
-        "playerteamname":"Vasco",
-        "opposingteamname":"Palmeiras",
-        "scorex":1,
-        "scoreo":3,
-        "matchtime":30,
-        "txt":"Final da copa mercossul, Tuta faz o terceiro para o Palmeiras no final do primeiro tempo. Na volta, Romario desconta de penalti. Vasco empolgado acredita na virada.",
-        "txtloss":"O Vascao nao consegue superar o inicio fulmnante do Palmeiras e amarga mais um vice.",
-        "txtdraw":"O Empate leva a decisao da copa mercossul para os penaltis. O Vasco foi guerreiro e conquista a chance de levar o titulo nos penaltis.",
-        "txtwin":"Isso e Vasco! O gigante da colina nao desistiu e consegue, heroicamente, mais um titulo internacional.!",
-        "teamx":getVasco(TEAMX),
-        "teamo":getPalmeiras(getOpposingTeam(TEAMX))
+        "year":"2014",
+        "playerteamname":"Brasil",
+        "opposingteamname":"Alemanha",
+        "scorex":0,
+        "scoreo":7,
+        "matchtime":20,
+        "txt":"Semi final de copa do mundo, em casa, o Brasil toma o setimo gol no meio do segundo tempo. Mas o brasileiro nao desiste nunca!",
+        "txtloss":"O Brasil amarga pior vexame da historia da selecao.",
+        "txtdraw":"Empate heroico do Brasil, que chegou a perder por sete gols de diferenca. Mas como a fase eh negra, vai perder nos penaltis, quer ver?!",
+        "txtwin":"Em video game todo sonho pode virar realidade. Parabens!",
+        "teamx":getBrasil(TEAMX),
+        "teamo":getAlemanha(getOpposingTeam(TEAMX))
     }
     
     
-    function getVasco(team){
+    function getBrasil(team){
     
         function getKeeper(team){
             return  { 
-                        name: "Helton",
+                        name: "Julio Cesar",
                         number: 1,
                         pass: 10,
                         attack:0,
@@ -35,7 +35,7 @@ function getVascoPalmeiras2000(){
                 var field = [];
 
                 field.push({ 
-                            name: "Jorgnho",
+                            name: "Maicon",
                             number: 2,
                             defense:6, 
                             pass:6, 
@@ -45,7 +45,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Junior Baiano",
+                            name: "Dante",
                             number: 3,
                             defense:4, 
                             pass:4, 
@@ -55,7 +55,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Odvan",
+                            name: "Davi Luiz",
                             number: 4,
                             defense:6, 
                             pass:8, 
@@ -65,7 +65,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Clebson",
+                            name: "Marcelo",
                             number: 6,
                             defense:5, 
                             pass:5, 
@@ -75,7 +75,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Juninho Paulista",
+                            name: "Fernandinho",
                             number: 8,
                             defense:8, 
                             pass:9, 
@@ -85,7 +85,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Nasa",
+                            name: "Luiz Gustavo",
                             number: 5,
                             defense:4, 
                             pass:6, 
@@ -95,8 +95,8 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });
                 field.push({ 
-                            name: "Jorginho Paulista",
-                            number: 9,
+                            name: "Hulk",
+                            number: 7,
                             defense:6, 
                             pass:7, 
                             attack:8, 
@@ -105,7 +105,7 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             }); 
                 field.push({ 
-                            name: "Juninho Pernambucano",
+                            name: "Oscar",
                             number: 10,
                             defense:4, 
                             pass:4, 
@@ -115,8 +115,8 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             }); 
                 field.push({ 
-                            name: "Euller",
-                            number: 7,
+                            name: "Bernard",
+                            number: 21,
                             defense:4, 
                             pass:5, 
                             attack:6, 
@@ -125,8 +125,8 @@ function getVascoPalmeiras2000(){
                             id: Math.floor(Math.random() * 10000)
                             });     
                 field.push({ 
-                            name: "Romario",
-                            number: 11,
+                            name: "Fred",
+                            number: 9,
                             defense:4, 
                             pass:5, 
                             attack:5, 
@@ -140,15 +140,15 @@ function getVascoPalmeiras2000(){
             }
         var field = getPlayers(team);
         var keeper = getKeeper(team);
-        return {"field":field, "keeper":keeper, "name":"Vasco"}
+        return {"field":field, "keeper":keeper, "name":"Brasil"}
     }
     
-    function getPalmeiras(team){
+    function getAlemanha(team){
     
          
         function getKeeper(team){
             return  { 
-                        name: "Sergio",
+                        name: "Neuer",
                         number: 1,
                         pass: 10,
                         attack:0,
@@ -164,7 +164,7 @@ function getVascoPalmeiras2000(){
                     var field = [];
 
                     field.push({ 
-                                name: "Arce",
+                                name: "Lahm",
                                 number: 2,
                                 defense:6, 
                                 pass:6, 
@@ -174,7 +174,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Gilmar",
+                                name: "Boateng",
                                 number: 3,
                                 defense:4, 
                                 pass:4, 
@@ -184,7 +184,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Fernando",
+                                name: "Hummels",
                                 number: 4,
                                 defense:6, 
                                 pass:8, 
@@ -194,7 +194,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Galeano",
+                                name: "Howedes",
                                 number: 6,
                                 defense:5, 
                                 pass:5, 
@@ -204,7 +204,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Flavio Luis",
+                                name: "Khedira",
                                 number: 8,
                                 defense:8, 
                                 pass:9, 
@@ -214,7 +214,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Magrao",
+                                name: "Schweinsteiger",
                                 number: 10,
                                 defense:4, 
                                 pass:6, 
@@ -224,7 +224,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });
                     field.push({ 
-                                name: "Rodrigo taddei",
+                                name: "Kroos",
                                 number: 11,
                                 defense:6, 
                                 pass:7, 
@@ -234,7 +234,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 }); 
                     field.push({ 
-                                name: "Tiago Siva",
+                                name: "Ozil",
                                 number: 5,
                                 defense:4, 
                                 pass:4, 
@@ -244,7 +244,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 }); 
                     field.push({ 
-                                name: "Juninho",
+                                name: "Muller",
                                 number: 7,
                                 defense:4, 
                                 pass:5, 
@@ -254,7 +254,7 @@ function getVascoPalmeiras2000(){
                                 id: Math.floor(Math.random() * 10000)
                                 });     
                     field.push({ 
-                                name: "Tuta",
+                                name: "Klose",
                                 number: 9,
                                 defense:4, 
                                 pass:5, 
@@ -269,7 +269,7 @@ function getVascoPalmeiras2000(){
                 }
             var field = getPlayers(team);
             var keeper = getKeeper(team);
-            return {"field":field, "keeper":keeper, "name":"Palmeiras"}
+            return {"field":field, "keeper":keeper, "name":"Alemanha"}
 
         }   
     return escenario;

@@ -13,6 +13,7 @@ function getescenarios(){
     escenarios.push(getBrasilUruguai93());
     escenarios.push(getLiverpoolMilan05());
     escenarios.push(getVascoPalmeiras2000());
+    escenarios.push(getBrasilAlemanha2014());
     
     
     escenarios.push({
