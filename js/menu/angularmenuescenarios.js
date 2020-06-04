@@ -4,7 +4,6 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
     $scope.escenarios = getescenarios();
     $scope.escenarios.forEach(function(escenario){
         var stars = window.localStorage.getItem(getescenariokey(escenario));
-        console.log("stars: " + stars)
 
         if(stars < 1) {
             escenario.star1 = false;
@@ -36,6 +35,8 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
                 else if(player.sector == 3){player.sector = 2}
                 else if(player.sector == 4){player.sector = 1}
                 else if(player.sector == 5){player.sector = 0}
+                else if(player.sector == -1){player.sector = -2}
+                else if(player.sector == -2){player.sector = -1}
                 newfield.push(player);
             });
             team.field = newfield;
