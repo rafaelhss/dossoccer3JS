@@ -8,7 +8,7 @@ function getVascoPalmeiras2000(){
         "scoreo":3,
         "matchtime":30,
         "txt":"Final da copa mercossul, Tuta faz o terceiro para o Palmeiras no final do primeiro tempo. Na volta, Romario desconta de penalti. Vasco empolgado acredita na virada.",
-        "txtkickoff":"Goool de Romario. O baixinho nao desperdica o penalti e reascende a esperanca cruzmaltina.",
+        "txtkickoff":"Goool de Romario. O baixinho nao desperdica o penalti e reacende a esperanca cruzmaltina.",
         "txtloss":"O Vascao nao consegue superar o inicio fulmnante do Palmeiras e amarga mais um vice.",
         "txtdraw":"O Empate leva a decisao da copa mercossul para os penaltis. O Vasco foi guerreiro e conquista a chance de levar o titulo nos penaltis.",
         "txtwin":"Isso e Vasco! O gigante da colina nao desistiu e consegue, heroicamente, mais um titulo internacional.!",
