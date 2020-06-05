@@ -34,6 +34,8 @@ app.controller('myCtrl', function($scope) {
             $scope.currenthelp = $scope.currenthelp + 1;
             showhelp($scope.currenthelp);
         }    
+    } else {
+        hidehelp();
     }
 })
    

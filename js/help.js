@@ -54,6 +54,11 @@ function autoplay(){
     
 var autoplaying = undefined;
     
+function hidehelp(){
+    
+        document.getElementById("help").style.visibility = "hidden";
+}    
+    
 function showhelp(number){
     
     if(!autoplaying){

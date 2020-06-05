@@ -48,11 +48,8 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
             escenario.teamo = invertSectors(escenario.teamo);
             
             window.localStorage.setItem("escenario",JSON.stringify(escenario));
-            if(escenario.tutorial){
-                window.location.replace("gamemobile.html?help");
-            } else {
-                window.location.replace("gamemobile.html");    
-            }
+            
+            window.location.replace("lineup.html");
             
         }
 

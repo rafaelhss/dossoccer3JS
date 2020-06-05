@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>    
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%; 
+                overflow: hidden;  
+                font-family: "Comic Sans MS", sans-serif;
+            background-color: #002200;
+            }
+            
+            .background-image {
+              position: fixed;
+              left: 0;
+              right: 0;
+              z-index: 1;
+              display: block;
+              background-image: url("scenes/vascopalmeiras.png");
+              width: 100%;
+              height: 100%;
+              background-size:100% 100%;  
+              filter: sepia(75%) opacity(30%);
+            }
+
+            #container{
+                
+              position: fixed;
+              left: 0;
+              right: 0;
+              z-index: 9999;
+              margin-left: 20px;
+              margin-right: 20px;
+
+                height: 100%;
+                width: 100%;                
+            }
+            #header{
+                height: 20%;
+               /* background-color: aliceblue;*/
+                margin-top: 10%;        
+
+            }
+            .yellowtext{
+                height: 20%;  
+                font-size: 400%;
+                color: #DDDD00;
+                text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+                text-align: center;
+            }
+            
+            #footer{
+                height: 25%;
+                /*background-color: antiquewhite;*/
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #field{
+                height: 50%;
+               /* background-color: aqua;*/
+                display: flex;
+                
+                filter: sepia(0%); 
+            }
+            .teamside{
+                height: 100%;
+                width: 50%;
+            }
+            #teamxside{
+                /*background-color: aquamarine;*/
+            }
+            #teamoside{
+                /*background-color: blue;*/
+            }
+            .playername{
+                z-index: 10;
+                height: 9%;
+                width: 100%;
+                font-size: 300%;
+                text-align: center;
+                font: bold italic;
+                color: #CCCCCC;
+                filter: blur(100%);
+            }
+            
+            .playerx{
+                 text-shadow: 1px 1px 2px #0000FF, 0 0 25px #0000FF, 0 0 5px #0000FF;
+            }
+            .playero{
+                 text-shadow: 1px 1px 2px #FF0000, 0 0 25px #FF0000, 0 0 5px #FF0000;
+            }
+            
+
+
+        </style>
+    </head>
+    <body>
+        <div class="background-image"></div>
+        <div id="container"  ng-app="myApp" ng-controller="myCtrl">
+            <div id="header">
+                <div class="yellowtext" id="tournament">{{e.tournament}}</div>
+                <div class="yellowtext" id="stadium">{{e.stadium}}</div>                
+                <div class="yellowtext" id="year">{{e.year}}</div>
+            </div>
+            <div id="field">
+                <div id="teamxside" class="teamside">
+                    <div class="playername playerx" ng-repeat="p in e.teamx.field">{{p.name}}</div>
+                </div>
+                <div id="teamoside" class="teamside">
+                    <div class="playername playero" ng-repeat="p in e.teamo.field">{{p.name}}</div>
+                </div>
+            </div>
+            <div id="footer">
+                <div class="yellowtext" ng-click="continue(e)">
+                    Continue
+                </div>
+            </div>
+        </div>
+    <script>    
+    
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            
+            $scope.e = JSON.parse(window.localStorage.getItem("escenario"));
+            
+            $scope.continue = function(escenario){
+                if(escenario.tutorial){
+                    window.location.replace("gamemobile.html?help");
+                } else {
+                    window.location.replace("gamemobile.html");    
+                }    
+            }
+            
+            
+        });
+   
+    </script>
+    </body>
+</html>
