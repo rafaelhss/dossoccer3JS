@@ -36,7 +36,7 @@ function rungame(){
                 processActionResult(actionResult);   
                 
                 setTimeout(function(){
-                    window.location.replace("gameover.html");
+                    window.location.assign("gameover.html");
                 },3000)
             }
         }, 1000 )

@@ -49,7 +49,7 @@ app.controller('myCtrl', function($scope/*, $interval*/) {
             
             window.localStorage.setItem("escenario",JSON.stringify(escenario));
             
-            window.location.replace("lineup.html");
+            window.location.assign("lineup.html");
             
         }
 
