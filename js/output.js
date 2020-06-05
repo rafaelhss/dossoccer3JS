@@ -182,9 +182,9 @@ function processActionResult(actionResult){
             
             var datetime = matchtime + "'";
 
-            var spantag = "<span class=\"teamx\">";
+            var spantag = "<span class=\"actionteamx\">";
             if(actionResult.team == TEAMO) {
-                spantag = "<span class=\"teamo\">";
+                spantag = "<span class=\"actionteamo\">";
             }
 
             var sucesstag = "";
