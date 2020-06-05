@@ -8,6 +8,7 @@ function getBrasilUruguai93(){
         "scoreo":0,
         "matchtime":90,
         "txt":"Brasil faz campanha irregular nas eliminatorias. Ultimo jogo. Precisa vencer para nao ficar de fora das copas pela primeira vez em sua historia.",
+        "txtkickoff":"Comeca o jogo. Todos os coracoes Brasileiros acompanham esse jogo decisivo.",
         "txtloss":"Brasil perde o jogo e esta fora das copas do mundo pela primeira vez em sua historia.",
         "txtdraw":"Brasil lutou heroicamente e conseguiu um empate. Nao foi suficiente para se classificar para a copa.",
         "txtwin":"Brasil vence e se classifica para a copa do mundo de 1994",

@@ -32,13 +32,19 @@ function kickoff(){
     actionResult.scorex = 0;
     //actionResult.newBallholder = game.ballholder;
 
+    
+    var escenario = JSON.parse(window.localStorage.getItem("escenario"));
+            
+    
     actionResult.events.push({
                     "command": ACTION_KICKOFF,
                     "status": ACTION_SUCCESS,
                     "actor":game.keeper[game.ballholder.team],
                     "actor2": game.keeper[getOpposingTeam(game.ballholder.team)],
                     "detail": [game.playerteamname,
-                               game.opposingteamname]
+                               game.opposingteamname,
+                               escenario.txtkickoff,
+                              escenario.matchtime]
                 });
     
     return actionResult;

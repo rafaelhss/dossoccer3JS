@@ -8,6 +8,7 @@ function getLiverpoolMilan05(){
         "scoreo":3,
         "matchtime":45,
         "txt":"Liverpool toma um gol no primeiro minuto de jogo, se abala e leva mais dois. Tem 45 minutos para reverter e conquistar a Europa.",
+        "txtkickoff":"Recomeca o jogo! O Milan precisa segurar mais 45 minutos de um jogo tranquilo para conquistar a Europa.",
         "txtloss":"Infelizmente o Liverpool nao teve forca para reagir e a camisa do Milan pesou.",
         "txtdraw":"O Empate leva a decisao da Champions para os penaltis. Sera que o Liverpool saira da fila apos vinte anos ou morrera na praia?",
         "txtwin":"Liverpool consegue uma virada historica e leva a Champions depois de duas decadas!",

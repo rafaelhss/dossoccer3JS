@@ -8,6 +8,7 @@ function getBrasilAlemanha2014(){
         "scoreo":7,
         "matchtime":20,
         "txt":"Semi final de copa do mundo, em casa, o Brasil toma o setimo gol no meio do segundo tempo. Mas o brasileiro nao desiste nunca!",
+        "txtkickoff":"La vem eles de novo! Virou passeio!!",
         "txtloss":"O Brasil amarga pior vexame da historia da selecao.",
         "txtdraw":"Empate heroico do Brasil, que chegou a perder por sete gols de diferenca. Mas como a fase eh negra, vai perder nos penaltis, quer ver?!",
         "txtwin":"Em video game todo sonho pode virar realidade. Parabens!",

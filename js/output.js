@@ -137,7 +137,8 @@ function updatescore(evt){
 
     
 }
-var matchtime = 90;
+
+var matchtime = 0;
 
 document.addEventListener("matchtimetick", function(evt){
     var time = Number(evt.detail.time);
@@ -170,6 +171,15 @@ function processActionResult(actionResult){
             updatescore(evt);
 
             var currentdate = new Date(); 
+            
+            if(evt.command == ACTION_KICKOFF){
+                if(evt.detail){
+                    if(evt.detail[3]){
+                        matchtime = evt.detail[3];
+                    } 
+                }
+            }
+            
             var datetime = matchtime + "'";
 
             var spantag = "<span class=\"teamx\">";
@@ -221,7 +231,7 @@ function getText(evt, action){
                     txt = "A bola vai direto para os pés de " + evt.actor2.name + ". Nenhum jogador do " + evt.actor.team + " nesse setor.";
                 }
                 if(dtl == ACTION_PASS_NOBODY){
-                    txt = "Nenhum jogador nessa area do campo. " + evt.actor.name + " desperdiça a posse de bola.";
+                    txt = "Nenhum jogador nessa area do campo. " + evt.actor.name + " desperdica a posse de bola.";
                 }
                 if(dtl == ACTION_PASS_OFFBOUNDS){
                     txt = "a tentativa de passe de " + evt.actor.name + " vai para a lateral. O time " + evt.actor.team + " perde a posse de bola.";
@@ -232,27 +242,29 @@ function getText(evt, action){
     
     if(evt.command == ACTION_SHOT){
         if(evt.status == ACTION_SUCCESS){
-            txt = "Que Gô ô ô ô ô ô ô ô ô ôôôôôôôôôl!! Gôôôôôôl de " + evt.actor.name + " pro " + evt.actor.team + "!";
+            txt = "Que Gooooool de " + evt.actor.name + " pro " + evt.actor.team + "!";
         } else {
-            txt = "Dêêê ê ê êê ê ê ê êêêêfende o chute! O " + evt.actor2.name + " ta pegando tudo hoje!";
+            txt = "Deeeeefende o chute! O " + evt.actor2.name + " ta pegando tudo hoje!";
         }
     }
     
     if(evt.command == ACTION_KICKOFF){
-        var txtteams = "";
         if(evt.detail){
-            txtteams = "Hoje joga " + evt.detail[0] + " contra " + evt.detail[1] + "!";
+            if(evt.detail[2]){
+                txt = evt.detail[2];
+            } else {
+                txt = "Vai. comecar a peleja! Hoje joga " + evt.detail[0] + " contra " + evt.detail[1] + "!";
+            }
         }
-        txt = "Vai comecar a peleja!" + txtteams;
     }
     
     if(evt.command == ACTION_GAMEOVER){
-        txt = "Nao ha tempo pra mais na a a a a da!";
+        txt = "Nao ha tempo pra mais naaaada!";
     }    
     
     if(evt.command == ACTION_DIBRE){
         if(evt.status == ACTION_SUCCESS){
-            txt = "ô ô ô ô ô lê ê ê!! " + evt.actor.name + " deixa " + evt.actor2.name + " no chao!";
+            txt = "oooooooollleeeee! " + evt.actor.name + " deixa " + evt.actor2.name + " no chao!";
         } else {
             if(evt.detail){
                 evt.detail.forEach(function(dtl){
