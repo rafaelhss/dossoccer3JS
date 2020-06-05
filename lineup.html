@@ -8,16 +8,16 @@
                 height: 100%; 
                 overflow: hidden;  
                 font-family: "Comic Sans MS", sans-serif;
-            background-color: #002200;
+                background-color: #002200;
             }
             
-            .background-image {
+            #background-image {
               position: fixed;
               left: 0;
               right: 0;
               z-index: 1;
               display: block;
-              background-image: url("scenes/vascopalmeiras.png");
+              /*background-image: url("scenes/vascopalmeiras.png");*/
               width: 100%;
               height: 100%;
               background-size:100% 100%;  
@@ -97,7 +97,7 @@
         </style>
     </head>
     <body>
-        <div class="background-image"></div>
+        <div id="background-image"></div>
         <div id="container"  ng-app="myApp" ng-controller="myCtrl">
             <div id="header">
                 <div class="yellowtext" id="tournament">{{e.tournament}}</div>
@@ -124,6 +124,8 @@
         app.controller('myCtrl', function($scope) {
             
             $scope.e = JSON.parse(window.localStorage.getItem("escenario"));
+            
+            document.getElementById("background-image").style.backgroundImage="url(" + $scope.e.image +")";
             
             $scope.continue = function(escenario){
                 if(escenario.tutorial){

@@ -12,7 +12,8 @@ function getVascoPalmeiras2000(){
         "txtdraw":"O Empate leva a decisao da copa mercossul para os penaltis. O Vasco foi guerreiro e conquista a chance de levar o titulo nos penaltis.",
         "txtwin":"Isso e Vasco! O gigante da colina nao desistiu e consegue, heroicamente, mais um titulo internacional.!",
         "teamx":getVasco(TEAMX),
-        "teamo":getPalmeiras(getOpposingTeam(TEAMX))
+        "teamo":getPalmeiras(getOpposingTeam(TEAMX)),
+        "image":"scenes/vascopalmeiras.png"
     }
     
     

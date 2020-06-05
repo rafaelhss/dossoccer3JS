@@ -12,7 +12,8 @@ function getLiverpoolMilan05(){
         "txtdraw":"O Empate leva a decisao da Champions para os penaltis. Sera que o Liverpool saira da fila apos vinte anos ou morrera na praia?",
         "txtwin":"Liverpool consegue uma virada historica e leva a Champions depois de duas decadas!",
         "teamx":getLiverpool(TEAMX),
-        "teamo":getMilan(getOpposingTeam(TEAMX))
+        "teamo":getMilan(getOpposingTeam(TEAMX)),
+        "image":"scenes/liverpool05.png"
     }
     
     

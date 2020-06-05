@@ -12,7 +12,8 @@ function getBrasilUruguai93(){
         "txtdraw":"Brasil lutou heroicamente e conseguiu um empate. Nao foi suficiente para se classificar para a copa.",
         "txtwin":"Brasil vence e se classifica para a copa do mundo de 1994",
         "teamx":getBrasil(TEAMX),
-        "teamo":getUruguai(getOpposingTeam(TEAMX))
+        "teamo":getUruguai(getOpposingTeam(TEAMX)),
+        "image":"scenes/brasil93.png"
     }
     
     

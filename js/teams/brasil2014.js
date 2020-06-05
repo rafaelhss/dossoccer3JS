@@ -12,7 +12,8 @@ function getBrasilAlemanha2014(){
         "txtdraw":"Empate heroico do Brasil, que chegou a perder por sete gols de diferenca. Mas como a fase eh negra, vai perder nos penaltis, quer ver?!",
         "txtwin":"Em video game todo sonho pode virar realidade. Parabens!",
         "teamx":getBrasil(TEAMX),
-        "teamo":getAlemanha(getOpposingTeam(TEAMX))
+        "teamo":getAlemanha(getOpposingTeam(TEAMX)),
+        "image":"scenes/brasil2014.png"
     }
     
     
