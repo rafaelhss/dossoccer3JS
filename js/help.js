@@ -36,6 +36,7 @@ function highlight(tagname, showhelp){
     
 var helps =[
     {"helppos":"down", "tag":"field", "text":"Nessa area voce ve o campo. o setor destacado eh onde esta a bola. Se um jogador for driblado fica fora de jogo por alguns segundos."},
+    {"helppos":"down", "tag":"field", "text":"Se quiser reposicionar um jogador, clique no setor at seleciona-lo e clique depois no setor de destino."},
     {"helppos":"down", "tag":"holder", "text":"Nessa area voce ve atributos do jogador que esta com a bola. A cor indica o time. Azul significa que a bola esta com voce e os comandos desenhados no canvas serao executados."},
     {"helppos":"down", "tag":"chances", "text":"Nessa area voce ve os tres movimentos com mais chance de dar certo com base nas habilidades do seu jogador e dos adversarios envolvidos."},
     {"helppos":"down", "tag":"terminal", "text":"Nessa area aparecem os lances da partida."},

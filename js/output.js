@@ -20,9 +20,9 @@ function updateField(ballholder){
     });
     
     
-    var keeperrows = document.getElementsByClassName("keeperrow");
-    Array.from(keeperrows).forEach((el) => {
-        el.className = "keeperrow sectorunselect";
+    var keepercols = document.getElementsByClassName("keepercol");
+    Array.from(keepercols).forEach((el) => {
+        el.className = "keepercol sectorunselect";
     });
     
     
@@ -33,7 +33,7 @@ function updateField(ballholder){
             sector = "keepero";    
         }
         var sec = document.getElementById(sector);
-        sec.className = "keeperrow sectorselect";
+        sec.className = "keepercol sectorselect";
     } else {
             switch (Number(ballholder.sector)) {
               case  0:
