@@ -72,51 +72,70 @@ function updateField(ballholder){
     document.getElementById("pass").innerHTML = Number(ballholder.pass);
     
     
-    showChances(TEAMX, ballholder.team);//jogador eh sempre X
+    showChances(TEAMX, ballholder);//jogador eh sempre X
             
 }
 
-function showChances(team, ballholderteam){
+function showselect(playerid){
+    hideselect();
     
-    var chances = [];
-    
-    chances.push({chance: Math.trunc(passProcess(team,-1,-1).chance * 99), img: "leftup"});
-    chances.push({chance: Math.trunc(passProcess(team,0,-1).chance * 99), img: "up"});
-    chances.push({chance: Math.trunc(passProcess(team,1,-1).chance * 99), img: "rightup"});
-    chances.push({chance: Math.trunc(passProcess(team,1,0).chance * 99), img: "right"});
-    chances.push({chance: Math.trunc(passProcess(team,1,1).chance * 99), img: "rightdown"});
-    chances.push({chance: Math.trunc(passProcess(team,0,1).chance * 99), img: "down"});
-    chances.push({chance: Math.trunc(passProcess(team,-1,1).chance * 99), img: "leftdown"});
-    chances.push({chance: Math.trunc(passProcess(team,-1,0).chance * 99), img: "left"});
-    chances.push({chance: Math.trunc(dibreProcess(team).chance * 99), img: "dibre"});
-    chances.push({chance: Math.trunc(shotProcess(team).chance * 99), img: "shot"});
-    
-    function compare( a, b ) {
-      if ( a.chance < b.chance ){
-        return 1;
-      }
-      if ( a.chance > b.chance ){
-        return -1;
-      }
-      return 0;
-    }
-    chances.sort( compare );
-    
-    document.getElementById("chance1").innerHTML = chances[0].chance + "%";
-    document.getElementById("imgchance1").setAttribute("src","img/" + chances[0].img + ".png");
-    
-    document.getElementById("chance2").innerHTML = chances[1].chance + "%";
-    document.getElementById("imgchance2").setAttribute("src","img/" + chances[1].img + ".png");
-    
-    document.getElementById("chance3").innerHTML = chances[2].chance + "%";
-    document.getElementById("imgchance3").setAttribute("src","img/" + chances[2].img + ".png");
+    document.getElementById("player" + playerid).classList.add("playerselected");
+}
+function hideselect(){
+      [].forEach.call(document.getElementsByClassName("player"),function(player){
+        player.classList.remove("playerselected");  
+    });  
+}
+
+
+function showChances(team, ballholder){
     
     
-    if( team == ballholderteam){
+    if( team == ballholder.team){
         document.getElementById("chances").style.opacity = "1";
+    
+        document.getElementById("chance1").innerHTML = Math.trunc(shotProcess(team).chance * 99) + "%";
+        document.getElementById("imgchance1").setAttribute("src","img/shot.png");
+
+        document.getElementById("chance2").innerHTML = Math.trunc(dibreProcess(team).chance * 99) + "%";
+        document.getElementById("imgchance2").setAttribute("src","img/dibre.png");
+
+
+        var chances = [];
+
+        chances.push({chance: Math.trunc(passProcess(team,1,-1).chance * 99), img: "rightup"});
+        chances.push({chance: Math.trunc(passProcess(team,1,0).chance * 99), img: "right"});
+        chances.push({chance: Math.trunc(passProcess(team,1,1).chance * 99), img: "rightdown"});
+        chances.push({chance: Math.trunc(passProcess(team,0,-1).chance * 99), img: "up"});
+        chances.push({chance: Math.trunc(passProcess(team,0,1).chance * 99), img: "down"});
+        
+        /*
+        //movimentos pra tras nao
+        chances.push({chance: Math.trunc(passProcess(team,-1,-1).chance * 99), img: "leftup"});
+        
+        chances.push({chance: Math.trunc(passProcess(team,-1,1).chance * 99), img: "leftdown"});
+        chances.push({chance: Math.trunc(passProcess(team,-1,0).chance * 99), img: "left"});
+*/
+
+        function compare( a, b ) {
+          if ( a.chance < b.chance ){
+            return 1;
+          }
+          if ( a.chance > b.chance ){
+            return -1;
+          }
+          return 0;
+        }
+        chances.sort( compare );
+
+        document.getElementById("chance3").innerHTML = chances[2].chance + "%";
+        document.getElementById("imgchance3").setAttribute("src","img/" + chances[2].img + ".png");
     } else {
         document.getElementById("chances").style.opacity = "0.3";
     }
+    
+    
+    
 }
 
 function updatescore(evt){
@@ -159,6 +178,38 @@ function updateDownPlayers(){
     });
 };
 
+function updatefieldsectors(){
+    
+    var sectors = document.getElementsByClassName("sector");
+    Array.from(sectors).forEach((el) => {
+        console.log( el.firstChild)
+        el.firstChild.innerHTML = "";
+    });
+    
+    
+    
+    game.field.forEach(function(player, index){
+        
+        var secname = "sector" + player.sector;
+        var sector = document.getElementById(secname).firstChild;
+        //var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
+        var tag = "<span class=\"player @@CLASS@@\" name=\"person\" id=\"player"+ player.id +"\">"+ player.number +"</span>";
+        
+        if((index > 0) && ((index % 2) == 0)){
+            tag += "</div><div>"
+        }
+        
+        
+        if(player.team == TEAMX){
+           tag = tag.replace("@@CLASS@@","playerx");
+        } else {
+            tag = tag.replace("@@CLASS@@","playero");
+        }
+        
+        sector.innerHTML = sector.innerHTML + tag;
+               
+    })
+}
 
 
 function processActionResult(actionResult){

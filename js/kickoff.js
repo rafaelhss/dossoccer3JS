@@ -1,25 +1,6 @@
 function kickoff(){
     
-    game.field.forEach(function(player, index){
-        var secname = "sector" + player.sector;
-        var sector = document.getElementById(secname).firstChild;
-        //var tag = "<ion-icon class=\"@@CLASS@@\" name=\"person\"></ion-icon>";
-        var tag = "<span class=\"player @@CLASS@@\" name=\"person\" id=\"player"+ player.id +"\">"+ player.number +"</span>";
-        
-        if((index > 0) && ((index % 2) == 0)){
-            tag += "</div><div>"
-        }
-        
-        
-        if(player.team == TEAMX){
-           tag = tag.replace("@@CLASS@@","playerx");
-        } else {
-            tag = tag.replace("@@CLASS@@","playero");
-        }
-        
-        sector.innerHTML = sector.innerHTML + tag;
-               
-    })
+    updatefieldsectors();
     
     window.localStorage.setItem("scorex", 0)
     window.localStorage.setItem("scoreo", 0)

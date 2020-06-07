@@ -23,6 +23,15 @@ function getPlayersSector(destSector, team){
     return players;
 }
 
+function moveplayer(playerid, sector){
+    game.field.forEach(function(player){
+        if(player.id == playerid){
+            player.sector = sector;
+        }
+    });
+}
+
+
 function getPlayer(sector, team) {
     var destPlayer = false;
     

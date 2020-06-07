@@ -1,7 +1,7 @@
 <html>
     <head>
-        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript" src="angular/jquery.min.js"></script>
+        <script src="angular/angular.min.js"></script>
         <script src="js/consts.js"></script>    
         <script src="js/gameplayutils.js"></script>
         <script src="js/output.js"></script>
@@ -303,6 +303,14 @@
                 font-size: 350%;
             }
             
+            
+            .playerselected{  
+                color: #FFFF66;
+                -webkit-text-stroke: 5px #EEEEEE;
+                animation: shakes 500s;
+                animation-iteration-count: infinite;
+                
+            }
         </style>
 
     </head>
@@ -357,16 +365,16 @@
                         <div id="field" class="field">
                             <div class="keepercol" id="keeperx">.</div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector0"><div></div></div>
-                                <div class="sector sectorunselect" id="sector1"><div></div></div>
+                                <div class="sector sectorunselect" id="sector0" ng-click="clicksector(0)"><div></div></div>
+                                <div class="sector sectorunselect" id="sector1" ng-click="clicksector(1)"><div></div></div>
                             </div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector2"><div></div></div>
-                                <div class="sector sectorunselect" id="sector3"><div></div></div>
+                                <div class="sector sectorunselect" id="sector2" ng-click="clicksector(2)"><div></div></div>
+                                <div class="sector sectorunselect" id="sector3" ng-click="clicksector(3)"><div></div></div>
                             </div>
                             <div class="fieldcol">
-                                <div class="sector sectorunselect" id="sector4"><div></div></div>
-                                <div class="sector sectorunselect" id="sector5"><div></div></div>
+                                <div class="sector sectorunselect" id="sector4" ng-click="clicksector(4)"><div></div></div>
+                                <div class="sector sectorunselect" id="sector5" ng-click="clicksector(5)"><div></div></div>
                             </div>
                             <div class="keepercol" id="keepero">.</div>
                         </div>
