@@ -13,8 +13,8 @@
     <script src="js/escenarios/escenarios.js"></script>
     <script src="js/menu/angularmenuescenarios.js"></script>
     
-    <script type="module" src="angular/ionicons.esm.js"></script>
-    <script nomodule="" src="angular/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
     
         
     
@@ -125,7 +125,7 @@
                 <div class="panel">
                     <div class="escenariotxt">{{escenario.year}} - {{escenario.txt}}</div>
                     <div class="playbox">
-                        <div class="playbtn" ng-click="chose(escenario)">s<ion-icon name="arrow-forward-circle"></ion-icon></div>
+                        <div class="playbtn" ng-click="chose(escenario)"><ion-icon name="arrow-forward-circle"></ion-icon></div>
                         
                         <div class="stars">
                             <ion-icon name="star" ng-show="escenario.star1"></ion-icon>
