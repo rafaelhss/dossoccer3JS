@@ -100,7 +100,12 @@
                         defenders.forEach(function(defender){
                             deff += defender.defense;
                         })
-                        var chance = (passerPass + destPass)/(passerPass + destPass + deff)
+                        //um passe pelo menos 50% de chance.
+                        var passchancefix = 0.5;
+                        //os outros 50% sao proporcionais a quantidade de defensores no setorde destivo versus a qualidade do passador e do recebedor.
+                        var passchancevar = (1-passchancefix) * ((passerPass + destPass)/(passerPass + destPass + deff));
+                        
+                        var chance = passchancevar + passchancefix;
                         actionResult.chance = chance;
                         var random = Math.random();
                         var success = (random < chance);

@@ -101,22 +101,24 @@ function showChances(team, ballholder){
         document.getElementById("imgchance2").setAttribute("src","img/dibre.png");
 
 
-        var chances = [];
+       // var chances = [];
 
-        chances.push({chance: Math.trunc(passProcess(team,1,-1).chance * 99), img: "rightup"});
-        chances.push({chance: Math.trunc(passProcess(team,1,0).chance * 99), img: "right"});
-        chances.push({chance: Math.trunc(passProcess(team,1,1).chance * 99), img: "rightdown"});
-        chances.push({chance: Math.trunc(passProcess(team,0,-1).chance * 99), img: "up"});
-        chances.push({chance: Math.trunc(passProcess(team,0,1).chance * 99), img: "down"});
+        //chances.push({chance: Math.trunc(passProcess(team,1,-1).chance * 99), img: "rightup"});
         
-        /*
-        //movimentos pra tras nao
-        chances.push({chance: Math.trunc(passProcess(team,-1,-1).chance * 99), img: "leftup"});
         
-        chances.push({chance: Math.trunc(passProcess(team,-1,1).chance * 99), img: "leftdown"});
-        chances.push({chance: Math.trunc(passProcess(team,-1,0).chance * 99), img: "left"});
-*/
+        
+        
+        
+        document.getElementById("chanceleftup").innerHTML = Math.trunc(passProcess(team,-1,-1).chance * 99) + "%";
+        document.getElementById("chanceup").innerHTML = Math.trunc(passProcess(team,0,-1).chance * 99) + "%";
+        document.getElementById("chancerightup").innerHTML = Math.trunc(passProcess(team,1,-1).chance * 99) + "%";
+        document.getElementById("chanceright").innerHTML = Math.trunc(passProcess(team,1,0).chance * 99) + "%";
+        document.getElementById("chancerightdown").innerHTML = Math.trunc(passProcess(team,1,1).chance * 99) + "%";
+        document.getElementById("chancedown").innerHTML = Math.trunc(passProcess(team,0,1).chance * 99) + "%";
+        document.getElementById("chanceleftdown").innerHTML = Math.trunc(passProcess(team,-1,1).chance * 99) + "%";
+        document.getElementById("chanceleft").innerHTML = Math.trunc(passProcess(team,-1,0).chance * 99) + "%";
 
+/*
         function compare( a, b ) {
           if ( a.chance < b.chance ){
             return 1;
@@ -127,9 +129,9 @@ function showChances(team, ballholder){
           return 0;
         }
         chances.sort( compare );
-
-        document.getElementById("chance3").innerHTML = chances[2].chance + "%";
-        document.getElementById("imgchance3").setAttribute("src","img/" + chances[2].img + ".png");
+*/
+        //document.getElementById("chance3").innerHTML = chances[2].chance + "%";
+       // document.getElementById("imgchance3").setAttribute("src","img/" + chances[2].img + ".png");
     } else {
         document.getElementById("chances").style.opacity = "0.3";
     }

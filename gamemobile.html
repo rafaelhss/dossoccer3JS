@@ -140,23 +140,40 @@
                 height: 100%;
                 width: 20%;
                 border-radius: 5%;
+                display: flex;
                 justify-content: center;
                 align-items: center;
-                display: flex;
             }
             #chances img{
                 width: 60%;
                 box-shadow: inset 0 0 1em #2a8000, 0 0 1em #2a8000;
                 border-radius: 20%;
             }
-            .chance{  
-                font-size: 300%;
-                display: flex;
-            }
             .chancevalue{
                 color: #DDDDDD;    
                 text-shadow: 1px 1px 2px #FFFF99, 0 0 25px #666666, 0 0 5px #333333;
                 font: bold italic;
+                text-align: center;
+                
+                
+            }
+            .chancerow{
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                width: 100%;
+            }
+            .chancerowshotdibre{
+                font-size: 300%;   
+            }
+            .chancerowpass{
+                font-size: 150%;
+            }
+            .chancerowpass .chancevalue{
+                border: solid;
+                border-color: 2a6600;
+                width: 33%;
+                
             }
             .field{
                 background-color: #2a6600;
@@ -382,17 +399,34 @@
                         </div>
                         <div id="chances">
                             <div>
-                                <div class="chance">
-                                    <div><img src="img/dibre.png"  id="imgchance1"></div>
-                                    <div id="chance1" class="chancevalue">40%</div>
+                                <div class="chancerow chancerowshotdibre">
+                                    <div class="chance">
+                                        <div><img src="img/dibre.png"  id="imgchance1"></div>
+                                        <div id="chance1" class="chancevalue">40%</div>
+                                    </div>
+                                    <div class="chance">
+                                        <div><img src="img/dibre.png" id="imgchance2"></div>
+                                        <div id="chance2" class="chancevalue">10%</div>
+                                    </div>
                                 </div>
-                                <div class="chance">
-                                    <div><img src="img/dibre.png" id="imgchance2"></div>
-                                    <div id="chance2" class="chancevalue">10%</div>
-                                </div>
-                                <div class="chance">
-                                    <div><img src="img/dibre.png" id="imgchance3"></div>
-                                    <div id="chance3" class="chancevalue">77%</div>
+                                <div class="chance chancepass">
+                                    <div class="chancerow chancerowpass">
+                                        <div id="chanceleftup" class="chancevalue">77%</div>
+                                        <div id="chanceup" class="chancevalue">77%</div>
+                                        <div id="chancerightup" class="chancevalue">77%</div>
+                                    </div>
+                                    <div class="chancerow chancerowpass">
+                                        <div id="chanceleft" class="chancevalue">77%</div>
+                                        <div class="chancevalue">
+                                            <img src="img/dibre.png" id="imgchance3">
+                                        </div>
+                                        <div id="chanceright" class="chancevalue">77%</div>
+                                    </div>
+                                    <div class="chancerow chancerowpass">
+                                        <div id="chanceleftdown" class="chancevalue">77%</div>
+                                        <div id="chancedown" class="chancevalue">77%</div>
+                                        <div id="chancerightdown" class="chancevalue">77%</div>
+                                    </div>
                                 </div>
                             </div>
                             

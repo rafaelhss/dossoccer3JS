@@ -53,7 +53,7 @@ function shotProcess(team){
         //    console.log(team);
             var att = game.ballholder.attack;
 
-            var chance = (att)/(att + keeperDeff + keeperDeff + deff)
+            var chance = (att)/(att + keeperDeff  + deff)
             actionResult.chance = chance;
             var random = Math.random();
             var success = (random < chance);
