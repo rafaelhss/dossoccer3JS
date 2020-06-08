@@ -18,7 +18,7 @@ function getescenarios(){
         "opposingteamname":"Tutorial",
         "scorex":0,
         "scoreo":0,
-        "matchtime":900,
+        "matchtime":90,
         "txt":"Aprenda os comandos basicos do jogo.",
         "txtloss":"Tutorial concluido.",
         "txtdraw":"Tutorial concluido.",
