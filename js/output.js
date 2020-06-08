@@ -264,13 +264,37 @@ function processActionResult(actionResult){
         })
     }
 } 
+
+
+
 function getText(evt, action){
+    
+    function getteamname(team){
+        if(team == TEAMX){
+            return game.playerteamname;
+        } else {
+            return game.opposingteamname;
+        }
+    }
+    
     var txt = "estou sem palavra";
     
     var text = "";
     if (evt.command == ACTION_PASS){
         if(evt.status == ACTION_SUCCESS){
-            txt = "Belo passe de " + evt.actor.name + " pro " + evt.actor2.name + "!";
+            var rand = Math.floor(Math.random()*5);
+            switch (rand) {
+                case 0: txt = "Belo passe de " + evt.actor.name + " pro " + evt.actor2.name + "!";
+                break;
+                case 1: txt = "Vai trabalhando a jogada o " +getteamname(evt.actor.team) + ", " + evt.actor2.name + " recebe o passe de " + evt.actor.name;
+                break;
+                case 2: txt = evt.actor.name + " toca para " + evt.actor2.name; 
+                break;
+                case 3: txt = evt.actor2.name + " recebe de " + evt.actor.name;
+                break;
+                case 4: txt = "Troca de passes entre " + evt.actor.name + " e " + evt.actor2.name;
+                break;
+            }
         }   
     
     
@@ -278,16 +302,27 @@ function getText(evt, action){
         if(evt.detail){
             evt.detail.forEach(function(dtl){
                 if(dtl == ACTION_PASS_INTERCEPTED){
-                    txt = evt.actor.name + " do " + evt.actor.team + " tenta o passe mas " + evt.actor2.name + " intercepta! Bola do time " + evt.actor.team ;
+                    var rand = Math.floor(Math.random()*4);
+                    switch (rand) {
+                        case 0: txt = evt.actor.name + " do " + getteamname(evt.actor.team) + " tenta o passe mas " + evt.actor2.name + " intercepta! Bola do " + getteamname(getOpposingTeam(evt.actor.team));
+                        break;
+                        case 1: txt = evt.actor2.name +  " esta um gigante na marcacao. o passe de " + evt.actor.name + " do " + getteamname(evt.actor.team) + " nao chega ao seu destino";
+                        break;
+                        case 2: txt = "Mais um passe interceptado por " + evt.actor2.name + ", frustrando os esforcos de " + evt.actor.name + " do " + getteamname(evt.actor.team);
+                        break;
+                        case 3: txt = "Esse " + evt.actor.name + ", nao acerta uma! a bola para nos pes de " + evt.actor2.name + " do " + getteamname(getOpposingTeam(evt.actor.team));
+                        break;
+                                
+                    }                    
                 }
                 if(dtl == ACTION_PASS_NOTEAMATE){
-                    txt = "A bola vai direto para os pés de " + evt.actor2.name + ". Nenhum jogador do " + evt.actor.team + " nesse setor.";
+                    txt = "A bola vai direto para os pés de " + evt.actor2.name + ". Nenhum jogador do " + getteamname(evt.actor.team) + " nesse setor.";
                 }
                 if(dtl == ACTION_PASS_NOBODY){
                     txt = "Nenhum jogador nessa area do campo. " + evt.actor.name + " desperdica a posse de bola.";
                 }
                 if(dtl == ACTION_PASS_OFFBOUNDS){
-                    txt = "a tentativa de passe de " + evt.actor.name + " vai para a lateral. O time " + evt.actor.team + " perde a posse de bola.";
+                    txt = "a tentativa de passe de " + evt.actor.name + " vai para a lateral. " + getteamname(evt.actor.team) + " perde a posse de bola.";
                 }
             });
         }
@@ -295,9 +330,22 @@ function getText(evt, action){
     
     if(evt.command == ACTION_SHOT){
         if(evt.status == ACTION_SUCCESS){
-            txt = "Que Gooooool de " + evt.actor.name + " pro " + evt.actor.team + "!";
+            txt = "Que Gooooool de " + evt.actor.name + " pro " + getteamname(evt.actor.team) + "!";
         } else {
-            txt = "Deeeeefende o chute! O " + evt.actor2.name + " ta pegando tudo hoje!";
+            var rand = Math.floor(Math.random()*5);
+            switch (rand) {
+                case 0: txt = "Deeeeefende o chute! O " + evt.actor2.name + " ta pegando tudo hoje!";
+                break;
+                case 1: txt = evt.actor.name +  " bate forte mas " + evt.actor2.name + " bem posicionado faz a defesa";
+                break;
+                case 2: txt = "Milaaagre de " + evt.actor2.name + " na batida colocada de " + evt.actor.name;
+                break;
+                case 3: txt = "Pra fora! A tentativa de " + evt.actor.name + " vai pelo canto direto da meta";
+                break;
+                case 4: txt = "Na traaave! Por pouco " + evt.actor.name + " nao marca para o " + getteamname(evt.actor.team);
+                break;        
+            }  
+            
         }
     }
     
@@ -317,7 +365,20 @@ function getText(evt, action){
     
     if(evt.command == ACTION_DIBRE){
         if(evt.status == ACTION_SUCCESS){
-            txt = "oooooooollleeeee! " + evt.actor.name + " deixa " + evt.actor2.name + " no chao!";
+            var rand = Math.floor(Math.random()*5);
+            switch (rand) {
+                case 0: txt = "oooooooollleeeee! " + evt.actor.name + " deixa " + evt.actor2.name + " no chao!";
+                break;
+                case 1: txt = evt.actor.name +  " sassarica de um lado pro outro e dibra " + evt.actor2.name;
+                break;
+                case 2: txt = "Corte na habilidade de " + evt.actor.name + " para superar a marcacao de " + evt.actor2.name;
+                break;
+                case 3: txt = "Na jogada individual " + evt.actor.name + " neutraliza " + evt.actor2.name;
+                break;
+                case 4: txt = "Por debaixo das canetas " + evt.actor.name + " deixa " + evt.actor2.name + " na saudade";
+                break; 
+            }
+            
         } else {
             if(evt.detail){
                 evt.detail.forEach(function(dtl){
@@ -326,10 +387,21 @@ function getText(evt, action){
                     }
                 });
             } else {
-                txt = "Esse " + evt.actor.name + " ta de sacanagem. Foi fazer uma gracinha na frente do " + evt.actor2.name + " e perdeu a bola!";    
+                var rand = Math.floor(Math.random()*4);
+                switch (rand) {
+                    case 0:  txt = "Esse " + evt.actor.name + " ta de sacanagem. Foi fazer uma gracinha na frente do " + evt.actor2.name + " e perdeu a bola!";
+                    break;
+                    case 1: txt = evt.actor.name +  " se atrapalha com a tentativa de dibre e perde a posse de bola pra " + evt.actor2.name;
+                    break;
+                    case 2: txt = "Perde a bola " + evt.actor.name + " no bote de " + evt.actor2.name;
+                    break;
+                    case 3: txt = "Faz o simples, " + evt.actor.name + "!! perde a bola pro" + evt.actor2.name;
+                    break;
+                }
             }
-            
         }
     }
+    
+    if(txt == "estou sem palavra") {console.log(evt)}
     return txt;
 }
