@@ -395,7 +395,7 @@ function getText(evt, action){
                     break;
                     case 2: txt = "Perde a bola " + evt.actor.name + " no bote de " + evt.actor2.name;
                     break;
-                    case 3: txt = "Faz o simples, " + evt.actor.name + "!! perde a bola pro" + evt.actor2.name;
+                    case 3: txt = "Faz o simples, " + evt.actor.name + "!! tentou o que nao sabe e perdeu a bola pro " + evt.actor2.name;
                     break;
                 }
             }
