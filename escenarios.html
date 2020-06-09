@@ -1,144 +1,157 @@
 <html>
-    <script src="angular/angular.min.js"></script>
-    <script src="js/consts.js"></script>
-    <script src="js/gameplayutils.js"></script>
-    <script src="js/teams/jotapejr.js"></script>
-    <script src="js/teams/jotapesr.js"></script>
-    
-    <script src="js/teams/brasil93.js"></script>
-    <script src="js/teams/liverpool05.js"></script>
-    <script src="js/teams/vasco2000.js"></script>
-    <script src="js/teams/brasil2014.js"></script>
-    
-    <script src="js/escenarios/escenarios.js"></script>
-    <script src="js/menu/angularmenuescenarios.js"></script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
-    
-        
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #002200;
-            font-family: "Comic Sans MS", sans-serif;
-        }
-        #logo{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: linear-gradient(#002200, #339933, #002200);
-        }
-        .logotxt{
-            font-size: 1000%;   
-            text-shadow: 10px 10px 20px #CCCC00, 25px 25px 25px #FFFF00, 20px -20px 5px #FFCC00;
-            color: #CCCC00;
-            -webkit-text-stroke: 1px #FFFF4D;
-            font-weight: 999;
-        }
-        #logo3{
-            color: #FFFF66;
-            font-size: 1300%;
-            transform: skewY(20deg);             
-        }
-        #sublogotxt{
-            font-size: 300%;
-            color: #DDDD00;
-            text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
-            text-align: right;
-        }
-        
-        .stars{
-            font-size: 300%;
-            color: #DDDD00;
-        }
-        .playbtn{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 800%;
-            color: #DDDD00;
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168900921-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-        }
-        .escenariotxt{
-            width: 80%;
-            font-size: 250%;
-            color: #DDDD00;
-        }
-        .score{
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .scorenumber{
-            font-size: 500%;   
-            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
-        }
-        .teamname{
-            
-            width: 40%;
-            font-size: 300%;
-            word-wrap:break-word;
-        }
-        .versus{
-            font-size: 300%;   
-            text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
-        }
-        .matchtime{
-            font-size: 700%;
-            text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
-        }
-        .panel{
-            height: 10%;
-            display: flex;
-            color: #CCCCCC;
-        }
-        .escenario{
-            margin-top: 15%;
-            background-image: linear-gradient(#002200, #339933, #002200);
-        }
-    </style>    
-    <script>
-    </script>
-    <div id="logo">
-        <div class="logotxt">DosSoccer</div> <div class="logotxt" id="logo3">3</div>
-    </div>
-    <div id="sublogotxt">Escenarios Editon</div>
-    <div ng-app="myApp" ng-controller="myCtrl">
-        <div id="escenarios">
-            <div class="escenario" ng-repeat="escenario in escenarios">
-                <div class="panel">
-                    <div class="score">
-                        <div class="teamname" id="playerteamname">{{escenario.playerteamname}}</div>
-                        <div class="scorenumber" id="scorex">{{escenario.scorex}}</div>
-                        <div class="versus">x</div>
-                        <div class="scorenumber" id="scoreo">{{escenario.scoreo}}</div>
-                        <div class="teamname" id="opposingteamname">{{escenario.opposingteamname}}</div>
+          gtag('config', 'UA-168900921-1');
+        </script>
+
+        <script src="angular/angular.min.js"></script>
+        <script src="js/consts.js"></script>
+        <script src="js/gameplayutils.js"></script>
+        <script src="js/teams/jotapejr.js"></script>
+        <script src="js/teams/jotapesr.js"></script>
+
+        <script src="js/teams/brasil93.js"></script>
+        <script src="js/teams/liverpool05.js"></script>
+        <script src="js/teams/vasco2000.js"></script>
+        <script src="js/teams/brasil2014.js"></script>
+
+        <script src="js/escenarios/escenarios.js"></script>
+        <script src="js/menu/angularmenuescenarios.js"></script>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+
+
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #002200;
+                font-family: "Comic Sans MS", sans-serif;
+            }
+            #logo{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: linear-gradient(#002200, #339933, #002200);
+            }
+            .logotxt{
+                font-size: 1000%;   
+                text-shadow: 10px 10px 20px #CCCC00, 25px 25px 25px #FFFF00, 20px -20px 5px #FFCC00;
+                color: #CCCC00;
+                -webkit-text-stroke: 1px #FFFF4D;
+                font-weight: 999;
+            }
+            #logo3{
+                color: #FFFF66;
+                font-size: 1300%;
+                transform: skewY(20deg);             
+            }
+            #sublogotxt{
+                font-size: 300%;
+                color: #DDDD00;
+                text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+                text-align: right;
+            }
+
+            .stars{
+                font-size: 300%;
+                color: #DDDD00;
+            }
+            .playbtn{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 800%;
+                color: #DDDD00;
+
+            }
+            .escenariotxt{
+                width: 80%;
+                font-size: 250%;
+                color: #DDDD00;
+            }
+            .score{
+                width: 80%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .scorenumber{
+                font-size: 500%;   
+                text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+            }
+            .teamname{
+
+                width: 40%;
+                font-size: 300%;
+                word-wrap:break-word;
+            }
+            .versus{
+                font-size: 300%;   
+                text-shadow: 1px 1px 2px #FFFF00, 0 0 25px #FFFF00, 0 0 5px #FFFF00;
+            }
+            .matchtime{
+                font-size: 700%;
+                text-shadow: 1px 1px 2px #CCCC00, 0 0 25px #CCCC00, 0 0 5px #CCCC00;
+            }
+            .panel{
+                height: 10%;
+                display: flex;
+                color: #CCCCCC;
+            }
+            .escenario{
+                margin-top: 15%;
+                background-image: linear-gradient(#002200, #339933, #002200);
+            }
+        </style>    
+        <script>
+        </script>
+    </head>
+    <body>
+        <div id="logo">
+            <div class="logotxt">DosSoccer</div> <div class="logotxt" id="logo3">3</div>
+        </div>
+        <div id="sublogotxt">Escenarios Editon</div>
+        <div ng-app="myApp" ng-controller="myCtrl">
+            <div id="escenarios">
+                <div class="escenario" ng-repeat="escenario in escenarios">
+                    <div class="panel">
+                        <div class="score">
+                            <div class="teamname" id="playerteamname">{{escenario.playerteamname}}</div>
+                            <div class="scorenumber" id="scorex">{{escenario.scorex}}</div>
+                            <div class="versus">x</div>
+                            <div class="scorenumber" id="scoreo">{{escenario.scoreo}}</div>
+                            <div class="teamname" id="opposingteamname">{{escenario.opposingteamname}}</div>
+                        </div>
+                        <div class="matchtime">{{escenario.matchtime}}'</div>
                     </div>
-                    <div class="matchtime">{{escenario.matchtime}}'</div>
-                </div>
 
-                <div class="panel">
-                    <div class="escenariotxt">{{escenario.year}} - {{escenario.txt}}</div>
-                    <div class="playbox">
-                        <div class="playbtn" ng-click="chose(escenario)"><ion-icon name="arrow-forward-circle"></ion-icon></div>
-                        
-                        <div class="stars">
-                            <ion-icon name="star" ng-show="escenario.star1"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star1"></ion-icon>
-                            <ion-icon name="star" ng-show="escenario.star2"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star2"></ion-icon>
-                            <ion-icon name="star" ng-show="escenario.star3"></ion-icon>
-                            <ion-icon name="star-outline" ng-hide="escenario.star3"></ion-icon>
+                    <div class="panel">
+                        <div class="escenariotxt">{{escenario.year}} - {{escenario.txt}}</div>
+                        <div class="playbox">
+                            <div class="playbtn" ng-click="chose(escenario)"><ion-icon name="arrow-forward-circle"></ion-icon></div>
+
+                            <div class="stars">
+                                <ion-icon name="star" ng-show="escenario.star1"></ion-icon>
+                                <ion-icon name="star-outline" ng-hide="escenario.star1"></ion-icon>
+                                <ion-icon name="star" ng-show="escenario.star2"></ion-icon>
+                                <ion-icon name="star-outline" ng-hide="escenario.star2"></ion-icon>
+                                <ion-icon name="star" ng-show="escenario.star3"></ion-icon>
+                                <ion-icon name="star-outline" ng-hide="escenario.star3"></ion-icon>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    </body>
 </html>
